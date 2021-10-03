@@ -3,6 +3,7 @@ import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_profile.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 
 import 'companies_view_model.dart';
 
@@ -11,53 +12,53 @@ class CompaniesPresenter extends BasePresenter<CompaniesViewModel> {
 
   List<Company> companies = [
     Company(
-        name: "Apple Inc.",
-        logo: "assets/icons/apple_logo.svg",
-        oneMonth: 65,
-        threeMonth: 155,
-        sixMonth: 456),
+      name: "Apple Inc.",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/apple_logo.svg",
+      prices: {"1 month": 65, "3 month": 155, "6 month": 456},
+    ),
     Company(
-        name: "Tesla Motors",
-        logo: "assets/icons/tesla_motors_logo.svg",
-        oneMonth: 80,
-        threeMonth: 200,
-        sixMonth: 560),
+      name: "Tesla Motors",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/tesla_motors_logo.svg",
+      prices: {"1 month": 80, "3 month": 200, "6 month": 560},
+    ),
     Company(
-        name: "Coca-Cola",
-        logo: "assets/icons/coca_cola_logo.svg",
-        oneMonth: 55,
-        threeMonth: 134,
-        sixMonth: 452),
+      name: "Coca-Cola",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/coca_cola_logo.svg",
+      prices: {"1 month": 55, "3 month": 134, "6 month": 452},
+    ),
     Company(
-        name: "Amazon Inc.",
-        logo: "assets/icons/amazon_logo.svg",
-        oneMonth: 35,
-        threeMonth: 155,
-        sixMonth: 406),
+      name: "Amazon Inc.",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/amazon_logo.svg",
+      prices: {"1 month": 35, "3 month": 155, "6 month": 406},
+    ),
     Company(
-        name: "Harley Davidson",
-        logo: "assets/icons/harley_davidson_logo.svg",
-        oneMonth: 45,
-        threeMonth: 195,
-        sixMonth: 696),
+      name: "Harley Davidson",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/harley_davidson_logo.svg",
+      prices: {"1 month": 45, "3 month": 195, "6 month": 696},
+    ),
     Company(
-        name: "Bitcoin",
-        logo: "assets/icons/bitcoin_logo.svg",
-        oneMonth: 1,
-        threeMonth: 2,
-        sixMonth: 9999),
+      name: "Bitcoin",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/bitcoin_logo.svg",
+      prices: {"1 month": 1, "3 month": 2, "6 month": 999},
+    ),
     Company(
-        name: "Bitcoin",
-        logo: "assets/icons/bitcoin_logo.svg",
-        oneMonth: 1,
-        threeMonth: 2,
-        sixMonth: 9999),
+      name: "Bitcoin",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/bitcoin_logo.svg",
+      prices: {"1 month": 1, "3 month": 2, "6 month": 999},
+    ),
     Company(
-        name: "Bitcoin",
-        logo: "assets/icons/bitcoin_logo.svg",
-        oneMonth: 1,
-        threeMonth: 2,
-        sixMonth: 9999),
+      name: "Bitcoin",
+      description: lorem(words: 60, paragraphs: 2),
+      logo: "assets/icons/bitcoin_logo.svg",
+      prices: {"1 month": 1, "3 month": 2, "6 month": 999},
+    ),
   ];
 
   void onCompanyClick(Company company) {

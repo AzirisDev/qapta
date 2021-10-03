@@ -2,6 +2,7 @@ import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/custom_textfield.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
+import 'package:ad_drive/presentation/components/main_icon.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,15 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    _presenter.selectedCity = _presenter.cities[0];
     super.initState();
-  }
-
-  String? validateText(String text) {
-    if (text.isEmpty) {
-      return "Enter your name";
-    }
-    return null;
   }
 
   @override
@@ -69,21 +62,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Container(
-                                width: 50,
-                                height: 50,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.black,
-                                ),
-                              ),
+                              MainIcon(width: 100),
                             ],
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 20,
                           ),
                           const Text(
-                            "Sign up",
+                            "Verification",
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w700,
@@ -91,62 +77,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 10),
-                            child: Text("Fill out the fields",
+                            child: Text("Phone Number",
                                 style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w300,
                                 )),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: FormField<String>(
-                              builder: (FormFieldState<String> state) {
-                                return InputDecorator(
-                                  decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.black, fontSize: 17.0),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                  ),
-                                  isEmpty: _presenter.selectedCity == '',
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      value: _presenter.selectedCity,
-                                      isDense: true,
-                                      onChanged: (value) {
-                                        if (value != null) _presenter.onChanged(value);
-                                      },
-                                      items: _presenter.cities.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
                           ),
                           Form(
                             key: _presenter.formKey,
                             child: Column(
                               children: [
                                 CustomTextField(
-                                  controller: _presenter.fullNameController,
-                                  hint: "full name",
-                                  validator: (text) {
-                                    if (text == null || text.isEmpty) {
-                                      return "Enter your name";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                CustomTextField(
                                   controller: _presenter.phoneNumberController,
-                                  hint: "phone number",
+                                  hint: "+7 ___ ___ __ __",
                                   validator: (text) {
-                                    if (text == null || text.isEmpty) {
+                                    if (text == null || text.isEmpty || text.length < 16) {
                                       return "Enter your phone number";
                                     }
                                     return null;
@@ -158,12 +103,41 @@ class _LoginScreenState extends State<LoginScreen> {
                                   keyboardType: TextInputType.number,
                                   maxLength: 16,
                                 ),
+                                if (_presenter.isCodeSent)
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 10),
+                                    child: Text("Code",
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w300,
+                                        )),
+                                  ),
+                                if (_presenter.isCodeSent)
+                                  CustomTextField(
+                                    controller: _presenter.codeController,
+                                    hint: "code",
+                                    validator: (text) {
+                                      if (text == null || text.isEmpty || text.length < 8) {
+                                        return "Enter your code";
+                                      }
+                                      return null;
+                                    },
+                                    formatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                      _presenter.codeFormatter,
+                                    ],
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    maxLength: 8,
+                                  )
                               ],
                             ),
                           ),
                           CustomButton(
-                            title: "Send code",
-                            onClick: _presenter.verifyPhoneNumber,
+                            title: "Let's go",
+                            onClick: _presenter.isCodeSent
+                                ? _presenter.startSignInWithPhoneAuthCredential
+                                : _presenter.verifyPhoneNumber,
                             showLoading: _presenter.model.sendingCode,
                           ),
                         ],

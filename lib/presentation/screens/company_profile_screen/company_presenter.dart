@@ -3,4 +3,13 @@ import 'package:ad_drive/presentation/screens/company_profile_screen/company_vie
 
 class CompanyPresenter extends BasePresenter<CompanyViewModel> {
   CompanyPresenter(CompanyViewModel model) : super(model);
+
+  int index = 2;
+
+  void onTapInfoContainer(int currentIndex) {
+    index = currentIndex;
+    print("Im pressed");
+    print(currentIndex);
+    updateView();
+  }
 }

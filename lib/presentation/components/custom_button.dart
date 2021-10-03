@@ -1,3 +1,5 @@
+import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/presentation/components/main_icon.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -34,13 +36,8 @@ class CustomButton extends StatelessWidget {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
-                        child: Container(
-                          height: 20,
-                          width: 20,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
+                        child: MainIcon(
+                          width: 30,
                         ),
                       ),
                       Text(
@@ -57,7 +54,7 @@ class CustomButton extends StatelessWidget {
                       height: 25,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: Colors.black,
+                        color: AppColors.PRIMARY_BLUE,
                       ),
                     ),
                   )

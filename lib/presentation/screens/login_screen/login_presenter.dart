@@ -1,8 +1,7 @@
 import 'package:ad_drive/data/firebase.dart';
-import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart';
-import 'package:ad_drive/presentation/screens/verification_screen/verification.dart';
+import 'package:ad_drive/presentation/screens/registration_screen/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +10,9 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
   LoginPresenter(LoginViewModel model) : super(model);
 
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController fullNameController = TextEditingController();
+  TextEditingController codeController = TextEditingController();
+
+  final codeFormatter = CodeTextInputFormatter();
 
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
@@ -21,13 +22,9 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
 
   final mobileFormatter = NumberTextInputFormatter();
 
-  var cities = [
-    "Almaty",
-    "Nur-Sultan",
-    "Shymkent",
-  ];
+  late final String verificationCode;
 
-  var selectedCity;
+  bool isCodeSent = false;
 
   Future verifyPhoneNumber() async {
     if (formKey.currentState!.validate()) {
@@ -42,16 +39,10 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
                   .showSnackBar(SnackBar(content: Text(verificationFailed.message!)));
             },
             codeSent: (verificationId, resendingToken) async {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => VerificationScreen(
-                            verificationId: verificationId,
-                            user: UserData(
-                                city: selectedCity,
-                                username: fullNameController.text,
-                                phoneNumber: phoneNumberController.text),
-                          )));
+              isCodeSent = true;
+              model.sendingCode = false;
+              verificationCode = verificationId;
+              updateView();
             },
             codeAutoRetrievalTimeout: (verificationId) async {});
       } catch (e) {}
@@ -59,8 +50,30 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
     }
   }
 
-  void onChanged(String newValue) {
-    selectedCity = newValue;
+  void startSignInWithPhoneAuthCredential() {
+    model.sendingCode = true;
+    if (formKey.currentState!.validate()) {
+      PhoneAuthCredential phoneCredential = PhoneAuthProvider.credential(
+          verificationId: verificationCode, smsCode: codeController.text.replaceAll("-", ""));
+      signWithPhoneAuthCredential(phoneCredential);
+    }
+  }
+
+  void signWithPhoneAuthCredential(PhoneAuthCredential phoneCredential) async {
+    updateView();
+    try {
+      final authCredential = await auth.signInWithCredential(phoneCredential);
+      if (authCredential.user != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (builder) => RegistrationScreen(),
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(e.message!)));
+    }
     updateView();
   }
 }
@@ -91,6 +104,30 @@ class NumberTextInputFormatter extends TextInputFormatter {
     if (newTextLength >= 10) {
       newText.write(newValue.text.substring(7, usedSubstringIndex = 9) + ' ');
       if (newValue.selection.end >= 10) selectionIndex += 1;
+    }
+    if (newTextLength >= usedSubstringIndex)
+      newText.write(newValue.text.substring(usedSubstringIndex));
+    return TextEditingValue(
+      text: newText.toString(),
+      selection: TextSelection.collapsed(offset: selectionIndex),
+    );
+  }
+}
+
+class CodeTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    final int newTextLength = newValue.text.length;
+    int selectionIndex = newValue.selection.end;
+    int usedSubstringIndex = 0;
+    final StringBuffer newText = StringBuffer();
+    if (newTextLength >= 2) {
+      newText.write(newValue.text.substring(0, usedSubstringIndex = 2) + '-');
+      if (newValue.selection.end >= 2) selectionIndex += 1;
+    }
+    if (newTextLength >= 5) {
+      newText.write(newValue.text.substring(2, usedSubstringIndex = 4) + '-');
+      if (newValue.selection.end >= 5) selectionIndex += 1;
     }
     if (newTextLength >= usedSubstringIndex)
       newText.write(newValue.text.substring(usedSubstringIndex));

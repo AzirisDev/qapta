@@ -1,3 +1,4 @@
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_view_model.dart';
@@ -14,6 +15,7 @@ class OnboardingPresenter extends BasePresenter<OnboardingViewModel> {
     return SvgPicture.asset(
       "assets/icons/$assetName",
       width: width,
+      color: AppColors.PRIMARY_BLUE,
     );
   }
 

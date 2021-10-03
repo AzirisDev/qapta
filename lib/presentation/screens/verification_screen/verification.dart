@@ -3,6 +3,7 @@ import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/custom_textfield.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
+import 'package:ad_drive/presentation/components/main_icon.dart';
 import 'package:ad_drive/presentation/screens/verification_screen/verification_presenter.dart';
 import 'package:ad_drive/presentation/screens/verification_screen/verification_view_model.dart';
 import 'package:flutter/material.dart';
@@ -51,18 +52,13 @@ class _VerificationScreenState extends State<VerificationScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Spacer(),
+              const Spacer(
+                flex: 2,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.black,
-                    ),
-                  ),
+                  MainIcon(width: 100),
                 ],
               ),
               const Spacer(),
@@ -106,7 +102,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 onClick: _presenter.startSignInWithPhoneAuthCredential,
                 showLoading: _presenter.model.verifyCode,
               ),
-              const Spacer(),
+              const Spacer(flex: 2),
             ],
           ),
         ),

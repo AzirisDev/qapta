@@ -1,15 +1,13 @@
 class Company {
   String name;
-  int oneMonth;
-  int threeMonth;
-  int sixMonth;
+  String description;
+  Map<String, int> prices;
   String logo;
 
   Company({
     required this.name,
+    required this.description,
     required this.logo,
-    required this.oneMonth,
-    required this.sixMonth,
-    required this.threeMonth,
+    required this.prices,
   });
 }

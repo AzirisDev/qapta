@@ -36,6 +36,7 @@ class CustomTextField extends StatelessWidget {
         cursorWidth: 1.5,
         validator: validator,
         decoration: InputDecoration(
+          counterText: "",
           border: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
             borderRadius: BorderRadius.all(
