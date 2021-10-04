@@ -1,3 +1,4 @@
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/helper/bottom_nav_bar_provider.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen_presenter.dart';
@@ -26,32 +27,40 @@ class _MainScreenState extends State<MainScreen> {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
       body: _presenter.currentTab[provider.currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: provider.currentIndex,
-        onTap: (index) {
-          provider.currentIndex = index;
-        },
-        selectedItemColor: Colors.black,
-        selectedFontSize: 0,
-        unselectedFontSize: 0,
-        selectedIconTheme: IconThemeData(
-          size: 30,
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          borderRadius:
+              BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
         ),
-        unselectedItemColor: Colors.grey,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_alt_rounded),
-            label: '',
+        clipBehavior: Clip.hardEdge,
+        child: BottomNavigationBar(
+          backgroundColor: AppColors.PRIMARY_BLUE,
+          currentIndex: provider.currentIndex,
+          onTap: (index) {
+            provider.currentIndex = index;
+          },
+          selectedItemColor: AppColors.MONO_WHITE,
+          selectedFontSize: 0,
+          unselectedFontSize: 0,
+          selectedIconTheme: IconThemeData(
+            size: 30,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.gps_fixed_rounded),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '',
-          )
-        ],
+          unselectedItemColor: AppColors.MONO_WHITE.withOpacity(0.5),
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list_alt_rounded),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.gps_fixed_rounded),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '',
+            )
+          ],
+        ),
       ),
     );
   }

@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../app_colors.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -62,7 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              MainIcon(width: 100),
+                              MainIcon(
+                                width: 100,
+                                color: AppColors.PRIMARY_BLUE,
+                              ),
                             ],
                           ),
                           const SizedBox(

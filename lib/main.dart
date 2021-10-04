@@ -1,5 +1,6 @@
 import 'package:ad_drive/data/firebase.dart';
 import 'package:ad_drive/model/user_model.dart';
+import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding.dart';
 import 'package:ad_drive/presentation/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -32,13 +33,15 @@ class MyApp extends StatelessWidget {
           create: (_) => BottomNavigationBarProvider(),
         ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          accentColor: Colors.white,
+      child: UserScope(
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            accentColor: Colors.white,
+          ),
+          home: initScreen == null ? OnboardingScreen() : Wrapper(),
         ),
-        home: initScreen == null ? OnboardingScreen() : Wrapper(),
       ),
     );
   }

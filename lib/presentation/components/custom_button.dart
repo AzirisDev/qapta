@@ -18,11 +18,7 @@ class CustomButton extends StatelessWidget {
       child: Container(
         height: 48,
         decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.grey,
-            width: 1,
-          ),
+          color: AppColors.PRIMARY_BLUE,
           borderRadius: BorderRadius.circular(12),
         ),
         child: InkWell(
@@ -38,12 +34,16 @@ class CustomButton extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 10),
                         child: MainIcon(
                           width: 30,
+                          color: AppColors.MONO_WHITE,
                         ),
                       ),
                       Text(
                         title,
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500, fontFamily: 'Roboto'),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            fontFamily: 'Roboto',
+                            color: AppColors.MONO_WHITE),
                       ),
                     ],
                   ),
@@ -54,7 +54,7 @@ class CustomButton extends StatelessWidget {
                       height: 25,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: AppColors.PRIMARY_BLUE,
+                        color: AppColors.MONO_WHITE,
                       ),
                     ),
                   )

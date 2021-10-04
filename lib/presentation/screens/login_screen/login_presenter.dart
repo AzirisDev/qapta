@@ -67,7 +67,9 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (builder) => RegistrationScreen(),
+            builder: (builder) => RegistrationScreen(
+              phoneNumber: phoneNumberController.text.replaceAll(" ", ""),
+            ),
           ),
         );
       }

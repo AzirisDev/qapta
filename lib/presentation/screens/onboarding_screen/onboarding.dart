@@ -1,3 +1,4 @@
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_presenter.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_view_model.dart';
@@ -85,17 +86,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding:
           kIsWeb ? const EdgeInsets.all(12.0) : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-      dotsDecorator: const DotsDecorator(
+      dotsDecorator: DotsDecorator(
         size: Size(10.0, 10.0),
-        color: Color(0xFFBDBDBD),
-        activeColor: Colors.white,
+        color: AppColors.MONO_WHITE.withOpacity(0.5),
+        activeColor: AppColors.MONO_WHITE,
         activeSize: Size(22.0, 10.0),
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
       dotsContainerDecorator: const ShapeDecoration(
-        color: Colors.black87,
+        color: AppColors.PRIMARY_BLUE,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
         ),

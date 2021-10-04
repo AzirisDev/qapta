@@ -7,8 +7,11 @@ import 'package:ad_drive/presentation/screens/registration_screen/registration_p
 import 'package:ad_drive/presentation/screens/registration_screen/registration_view_model.dart';
 import 'package:flutter/material.dart';
 
+import '../../../app_colors.dart';
+
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  final String phoneNumber;
+  const RegistrationScreen({Key? key, required this.phoneNumber}) : super(key: key);
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -19,6 +22,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   void didChangeDependencies() {
+    _presenter.phoneNumber = widget.phoneNumber;
     _presenter.initWithContext(context);
     super.didChangeDependencies();
   }
@@ -60,7 +64,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              MainIcon(width: 100),
+                              MainIcon(
+                                width: 100,
+                                color: AppColors.PRIMARY_BLUE,
+                              ),
                             ],
                           ),
                           const SizedBox(
