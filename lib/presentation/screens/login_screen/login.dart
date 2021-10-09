@@ -138,12 +138,15 @@ class _LoginScreenState extends State<LoginScreen> {
                               ],
                             ),
                           ),
-                          CustomButton(
-                            title: "Let's go",
-                            onClick: _presenter.isCodeSent
-                                ? _presenter.startSignInWithPhoneAuthCredential
-                                : _presenter.verifyPhoneNumber,
-                            showLoading: _presenter.model.sendingCode,
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: CustomButton(
+                              title: "Let's go",
+                              onClick: _presenter.isCodeSent
+                                  ? _presenter.startSignInWithPhoneAuthCredential
+                                  : _presenter.verifyPhoneNumber,
+                              showLoading: _presenter.model.sendingCode,
+                            ),
                           ),
                         ],
                       ),

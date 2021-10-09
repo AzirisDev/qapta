@@ -1,0 +1,9 @@
+import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/screens/change_profile_screen/change_profile_view_model.dart';
+import 'package:flutter/cupertino.dart';
+
+class ChangeProfilePresenter extends BasePresenter<ChangeProfileViewModel> {
+  ChangeProfilePresenter(ChangeProfileViewModel model) : super(model);
+
+  TextEditingController nameController = TextEditingController();
+}

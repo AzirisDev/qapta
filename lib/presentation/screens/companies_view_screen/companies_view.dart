@@ -1,3 +1,4 @@
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
@@ -29,15 +30,24 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: Text(
-            "Compaines",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
+          automaticallyImplyLeading: false,
+          title: Container(
+            width: 200,
+            padding: EdgeInsets.symmetric(vertical: 8),
+            decoration: BoxDecoration(
+                color: AppColors.PRIMARY_BLUE, borderRadius: BorderRadius.circular(12)),
+            child: Center(
+              child: Text(
+                "Companies",
+                style: TextStyle(
+                  color: AppColors.MONO_WHITE,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.MONO_WHITE,
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

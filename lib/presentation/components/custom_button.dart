@@ -6,20 +6,36 @@ class CustomButton extends StatelessWidget {
   final String title;
   final void Function() onClick;
   final showLoading;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final Color? borderColor;
+  final IconData? icon;
+  final bool? isSettings;
 
-  const CustomButton(
-      {Key? key, required this.title, required this.onClick, this.showLoading = false})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    required this.title,
+    required this.onClick,
+    this.showLoading = false,
+    this.backgroundColor = AppColors.PRIMARY_BLUE,
+    this.textColor = AppColors.MONO_WHITE,
+    this.borderColor = AppColors.PRIMARY_BLUE,
+    this.icon,
+    this.isSettings,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.only(top: 5, bottom: 5),
       child: Container(
         height: 48,
         decoration: BoxDecoration(
-          color: AppColors.PRIMARY_BLUE,
+          color: backgroundColor,
           borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: borderColor!,
+          ),
         ),
         child: InkWell(
             onTap: onClick,
@@ -27,25 +43,42 @@ class CustomButton extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 if (!showLoading)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: MainIcon(
-                          width: 30,
-                          color: AppColors.MONO_WHITE,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: isSettings ?? false
+                          ? MainAxisAlignment.spaceBetween
+                          : MainAxisAlignment.center,
+                      children: [
+                        if (isSettings != null ? !isSettings! : true)
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: icon == null
+                                ? MainIcon(
+                                    width: 30,
+                                    color: textColor!,
+                                  )
+                                : Icon(
+                                    icon,
+                                    color: textColor,
+                                  ),
+                          ),
+                        Text(
+                          title,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              fontFamily: 'Roboto',
+                              color: textColor),
                         ),
-                      ),
-                      Text(
-                        title,
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'Roboto',
-                            color: AppColors.MONO_WHITE),
-                      ),
-                    ],
+                        isSettings ?? false
+                            ? Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: textColor,
+                              )
+                            : Container()
+                      ],
+                    ),
                   ),
                 if (showLoading)
                   Center(
@@ -54,7 +87,7 @@ class CustomButton extends StatelessWidget {
                       height: 25,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
-                        color: AppColors.MONO_WHITE,
+                        color: textColor,
                       ),
                     ),
                   )

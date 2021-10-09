@@ -132,10 +132,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               },
                             ),
                           ),
-                          CustomButton(
-                            title: "Continue",
-                            onClick: _presenter.addUserToDatabase,
-                            showLoading: _presenter.model.entering,
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: CustomButton(
+                              title: "Continue",
+                              onClick: _presenter.addUserToDatabase,
+                              showLoading: _presenter.model.entering,
+                            ),
                           ),
                         ],
                       ),

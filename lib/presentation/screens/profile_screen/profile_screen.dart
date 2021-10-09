@@ -3,7 +3,6 @@ import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/components/main_icon.dart';
-import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_presenter.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_view_model.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
-    if (UserScope.of(context).user != null) _presenter.model.userData = UserScope.of(context).user!;
     super.didChangeDependencies();
   }
 
@@ -31,38 +29,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //TODO: make avatar
-                    MainIcon(width: 100, color: AppColors.PRIMARY_BLUE),
-                    Text(
-                      _presenter.model.userData.username,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+              appBar: AppBar(
+                backgroundColor: AppColors.PRIMARY_BLUE,
+                elevation: 0,
+                automaticallyImplyLeading: false,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 200,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+                      color: AppColors.PRIMARY_BLUE,
                     ),
-                    Text(
-                      _presenter.model.userData.city,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Spacer(
+                          flex: 1,
+                        ),
+                        //TODO: make avatar
+                        MainIcon(width: 100, color: AppColors.MONO_WHITE),
+                        Container(
+                          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                          decoration: BoxDecoration(
+                            color: AppColors.PRIMARY_BLUE,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Text(
+                            _presenter.model.userData.username,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.MONO_WHITE,
+                            ),
+                          ),
+                        ),
+                        Spacer(
+                          flex: 2,
+                        ),
+                      ],
                     ),
-                    Text(
-                      _presenter.model.userData.phoneNumber,
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: CustomButton(
+                      title: "Sign out",
+                      onClick: _presenter.signOut,
+                      backgroundColor: AppColors.PRIMARY_BLUE,
+                      textColor: AppColors.MONO_WHITE,
+                      borderColor: AppColors.PRIMARY_BLUE,
+                      icon: Icons.exit_to_app_rounded,
                     ),
-                    CustomButton(title: "Sign out", onClick: _presenter.signOut),
-                  ],
-                ),
+                  ),
+                ],
               ),
               backgroundColor: Colors.white);
         });

@@ -33,33 +33,39 @@ class _MainScreenState extends State<MainScreen> {
               BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
         ),
         clipBehavior: Clip.hardEdge,
-        child: BottomNavigationBar(
-          backgroundColor: AppColors.PRIMARY_BLUE,
-          currentIndex: provider.currentIndex,
-          onTap: (index) {
-            provider.currentIndex = index;
-          },
-          selectedItemColor: AppColors.MONO_WHITE,
-          selectedFontSize: 0,
-          unselectedFontSize: 0,
-          selectedIconTheme: IconThemeData(
-            size: 30,
+        child: Theme(
+          data: Theme.of(context).copyWith(canvasColor: AppColors.PRIMARY_BLUE),
+          child: BottomNavigationBar(
+            currentIndex: provider.currentIndex,
+            onTap: (index) {
+              provider.currentIndex = index;
+            },
+            selectedItemColor: AppColors.MONO_WHITE,
+            selectedFontSize: 0,
+            unselectedFontSize: 0,
+            selectedIconTheme: IconThemeData(
+              size: 30,
+            ),
+            unselectedItemColor: AppColors.MONO_WHITE.withOpacity(0.5),
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list_alt_rounded),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.gps_fixed_rounded),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: '',
+              )
+            ],
           ),
-          unselectedItemColor: AppColors.MONO_WHITE.withOpacity(0.5),
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt_rounded),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.gps_fixed_rounded),
-              label: '',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: '',
-            )
-          ],
         ),
       ),
     );

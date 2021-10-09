@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^2.5.3
   flutter_lorem: ^2.0.0
   shared_preferences: ^2.0.7
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:

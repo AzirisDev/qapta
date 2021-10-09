@@ -1,3 +1,4 @@
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -10,15 +11,15 @@ class CompanyListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
         onTap: onClick,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.MONO_WHITE,
             border: Border.all(
-              color: Colors.grey,
+              color: AppColors.PRIMARY_BLUE,
               width: 1,
             ),
             borderRadius: BorderRadius.circular(12),
@@ -42,7 +43,7 @@ class CompanyListItem extends StatelessWidget {
                 width: 1,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: Colors.grey,
+                  color: AppColors.PRIMARY_BLUE,
                 ),
               ),
               Expanded(
