@@ -16,8 +16,8 @@ class ChangeProfileScreen extends StatefulWidget {
 }
 
 class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
-  ChangeProfilePresenter _presenter =
-      ChangeProfilePresenter(ChangeProfileViewModel(ScreenState.None));
+  final ChangeProfilePresenter _presenter =
+      ChangeProfilePresenter(ChangeProfileViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -33,7 +33,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
           return GeneralScaffold(
             appBar: CustomAppBar("Personal information"),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,7 +56,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                     },
                   ),
                   Padding(
-                      padding: EdgeInsets.only(top: 5),
+                      padding: const EdgeInsets.only(top: 5),
                       child: CustomButton(title: "Change", onClick: () {}))
                 ],
               ),

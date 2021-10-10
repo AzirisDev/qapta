@@ -1,17 +1,17 @@
-enum ScreenState { Loading, Updating, Error, Done, Reading, Uploading, None }
+enum ScreenState { loading, updating, error, done, reading, uploading, none }
 
 extension ScreenStateExt on ScreenState {
-  bool get isLoading => this == ScreenState.Loading;
+  bool get isLoading => this == ScreenState.loading;
 
-  bool get isUpdating => this == ScreenState.Updating;
+  bool get isUpdating => this == ScreenState.updating;
 
-  bool get isDone => this == ScreenState.Done;
+  bool get isDone => this == ScreenState.done;
 
-  bool get isError => this == ScreenState.Error;
+  bool get isError => this == ScreenState.error;
 
-  bool get isReading => this == ScreenState.Reading;
+  bool get isReading => this == ScreenState.reading;
 
-  bool get isUploading => this == ScreenState.Uploading;
+  bool get isUploading => this == ScreenState.uploading;
 
-  bool get isNone => this == ScreenState.None;
+  bool get isNone => this == ScreenState.none;
 }

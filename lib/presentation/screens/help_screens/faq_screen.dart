@@ -10,10 +10,10 @@ class FAQScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GeneralScaffold(
         appBar: CustomAppBar("FAQ"),
-        child: Container(
+        child: SizedBox(
           height: double.infinity,
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (context, index) {
@@ -39,7 +39,7 @@ class FAQScreen extends StatelessWidget {
 }
 
 class QuestionCard extends StatefulWidget {
-  QuestionCard({
+  const QuestionCard({
     Key? key,
     required this.question,
     required this.answer,
@@ -64,23 +64,21 @@ class _QuestionCardState extends State<QuestionCard> {
         });
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: Text(
-                    widget.question,
-                    style: TextStyle(fontSize: 18),
-                  ),
+                Text(
+                  widget.question,
+                  style: const TextStyle(fontSize: 18),
                 ),
                 isTapped
-                    ? Icon(
+                    ? const Icon(
                         Icons.keyboard_arrow_up_rounded,
                       )
-                    : Icon(
+                    : const Icon(
                         Icons.keyboard_arrow_down_rounded,
                       )
               ],
@@ -89,15 +87,13 @@ class _QuestionCardState extends State<QuestionCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    child: Text(
-                      widget.answer,
-                      style: TextStyle(fontSize: 18),
-                    ),
+                  Text(
+                    widget.answer,
+                    style: const TextStyle(fontSize: 18),
                   ),
                 ],
               ),
-            Divider(
+            const Divider(
               indent: 30,
             )
           ],

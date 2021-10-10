@@ -15,7 +15,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  ProfilePresenter _presenter = ProfilePresenter(ProfileViewModel(ScreenState.None));
+  final ProfilePresenter _presenter = ProfilePresenter(ProfileViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -49,27 +49,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Spacer(
+                        const Spacer(
                           flex: 1,
                         ),
                         //TODO: make avatar
-                        MainIcon(width: 100, color: AppColors.MONO_WHITE),
+                        const MainIcon(width: 100, color: AppColors.MONO_WHITE),
                         Container(
-                          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
                           decoration: BoxDecoration(
                             color: AppColors.PRIMARY_BLUE,
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Text(
                             _presenter.model.userData.username,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               color: AppColors.MONO_WHITE,
                             ),
                           ),
                         ),
-                        Spacer(
+                        const Spacer(
                           flex: 2,
                         ),
                       ],

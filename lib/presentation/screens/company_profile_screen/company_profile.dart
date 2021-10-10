@@ -18,7 +18,7 @@ class CompanyProfile extends StatefulWidget {
 }
 
 class _CompanyProfileState extends State<CompanyProfile> {
-  CompanyPresenter _presenter = CompanyPresenter(CompanyViewModel(ScreenState.None));
+  final CompanyPresenter _presenter = CompanyPresenter(CompanyViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -43,7 +43,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_rounded,
                         color: Colors.black,
                       ),
@@ -51,20 +51,20 @@ class _CompanyProfileState extends State<CompanyProfile> {
                     expandedHeight: 200.0,
                     flexibleSpace: FlexibleSpaceBar(
                       centerTitle: true,
-                      titlePadding: EdgeInsets.symmetric(vertical: 5),
+                      titlePadding: const EdgeInsets.symmetric(vertical: 5),
                       title: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Text(
                           company.name,
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                       ),
                       background: Container(
-                        padding: EdgeInsets.all(70),
+                        padding: const EdgeInsets.all(70),
                         child: SvgPicture.asset(
                           company.logo,
                           clipBehavior: Clip.hardEdge,
@@ -78,27 +78,27 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             "About",
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                           ),
-                          Divider(
+                          const Divider(
                             height: 40,
                           ),
                           Text(
                             company.description,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16,
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             height: 40,
                           ),
-                          Image(image: AssetImage("assets/main_images/ad_example.png")),
-                          Divider(
+                          const Image(image: AssetImage("assets/main_images/ad_example.png")),
+                          const Divider(
                             height: 40,
                           ),
-                          Container(
+                          SizedBox(
                             height: 70,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -121,8 +121,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                               _presenter.index == index ? Colors.blue : Colors.grey,
                                           width: 1),
                                     ),
-                                    margin: EdgeInsets.only(right: 5, left: 5),
-                                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                    margin: const EdgeInsets.only(right: 5, left: 5),
+                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
@@ -153,9 +153,11 @@ class _CompanyProfileState extends State<CompanyProfile> {
                               },
                             ),
                           ),
-                          CustomButton(title: "Subscribe", onClick: () {}),
-                          SizedBox(
-                            height: 16,
+                          Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                              child: CustomButton(title: "Subscribe", onClick: () {})),
+                          const SizedBox(
+                            height: 10,
                           )
                         ],
                       ),

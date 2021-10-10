@@ -12,11 +12,11 @@ class SettingsPresenter extends BasePresenter<SettingsViewModel> {
   SettingsPresenter(SettingsViewModel model) : super(model);
 
   void changeInfo() {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => ChangeProfileScreen()));
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => const ChangeProfileScreen()));
   }
 
   void linkCard() {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => LinkCardScreen()));
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => const LinkCardScreen()));
   }
 
   void support() {
@@ -28,7 +28,7 @@ class SettingsPresenter extends BasePresenter<SettingsViewModel> {
   }
 
   void agreement() {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => AgreementScreen()));
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => const AgreementScreen()));
   }
 
   void privacyPolicy() async {

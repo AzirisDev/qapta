@@ -15,7 +15,7 @@ int? initScreen;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences preferences = await SharedPreferences.getInstance();
-  initScreen = await preferences.getInt("initScreen");
+  initScreen = preferences.getInt("initScreen");
   await preferences.setInt("initScreen", 1);
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -38,9 +38,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.blue,
-            accentColor: Colors.white,
           ),
-          home: initScreen == null ? OnboardingScreen() : Wrapper(),
+          home: initScreen == null ? const OnboardingScreen() : const Wrapper(),
         ),
       ),
     );

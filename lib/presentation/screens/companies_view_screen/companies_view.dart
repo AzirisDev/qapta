@@ -16,7 +16,7 @@ class CompaniesScreen extends StatefulWidget {
 }
 
 class _CompaniesScreenState extends State<CompaniesScreen> {
-  CompaniesPresenter _presenter = CompaniesPresenter(CompaniesViewModel(ScreenState.None));
+  final CompaniesPresenter _presenter = CompaniesPresenter(CompaniesViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -33,10 +33,10 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
           automaticallyImplyLeading: false,
           title: Container(
             width: 200,
-            padding: EdgeInsets.symmetric(vertical: 8),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             decoration: BoxDecoration(
                 color: AppColors.PRIMARY_BLUE, borderRadius: BorderRadius.circular(12)),
-            child: Center(
+            child: const Center(
               child: Text(
                 "Companies",
                 style: TextStyle(
@@ -52,7 +52,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: ListView.builder(
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount: _presenter.companies.length,
               itemBuilder: (context, index) {
                 Company company = _presenter.companies[index];

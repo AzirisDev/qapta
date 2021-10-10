@@ -9,8 +9,9 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final TextAlign? textAlign;
   final int? maxLength;
+  final int? minLines;
 
-  CustomTextField({
+  const CustomTextField({
     Key? key,
     required this.controller,
     required this.hint,
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType,
     this.textAlign,
     this.maxLength,
+    this.minLines,
   }) : super(key: key);
 
   @override
@@ -26,6 +28,8 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: TextFormField(
+        maxLines: minLines != null ? minLines! + 3 : 1,
+        minLines: minLines,
         maxLength: maxLength,
         textAlign: textAlign != null ? textAlign! : TextAlign.start,
         keyboardType: keyboardType,

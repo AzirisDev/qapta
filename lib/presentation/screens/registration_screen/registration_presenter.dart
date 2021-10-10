@@ -52,7 +52,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (builder) => Wrapper(),
+        builder: (builder) => const Wrapper(),
       ),
     );
   }

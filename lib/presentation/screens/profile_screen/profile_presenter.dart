@@ -17,6 +17,6 @@ class ProfilePresenter extends BasePresenter<ProfileViewModel> {
 
   void signOut() async {
     await FirebaseDatabase().signOut();
-    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 }

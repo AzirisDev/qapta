@@ -44,7 +44,7 @@ class CustomButton extends StatelessWidget {
               children: [
                 if (!showLoading)
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       mainAxisAlignment: isSettings ?? false
                           ? MainAxisAlignment.spaceBetween
@@ -82,7 +82,7 @@ class CustomButton extends StatelessWidget {
                   ),
                 if (showLoading)
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       width: 25,
                       height: 25,
                       child: CircularProgressIndicator(

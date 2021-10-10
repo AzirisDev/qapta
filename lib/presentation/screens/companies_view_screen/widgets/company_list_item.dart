@@ -11,11 +11,11 @@ class CompanyListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: GestureDetector(
         onTap: onClick,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
             color: AppColors.MONO_WHITE,
             border: Border.all(
@@ -30,7 +30,7 @@ class CompanyListItem extends StatelessWidget {
               Container(
                 width: 80,
                 height: 80,
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -42,12 +42,12 @@ class CompanyListItem extends StatelessWidget {
               Container(
                 width: 1,
                 height: 80,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: AppColors.PRIMARY_BLUE,
                 ),
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 50,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -55,7 +55,7 @@ class CompanyListItem extends StatelessWidget {
                       itemBuilder: (context, index) {
                         List<String> months = company.prices.keys.toList();
                         return Container(
-                          margin: EdgeInsets.only(right: 5),
+                          margin: const EdgeInsets.only(right: 5),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -64,7 +64,7 @@ class CompanyListItem extends StatelessWidget {
                                   Container(
                                     width: 24,
                                     height: 24,
-                                    padding: EdgeInsets.all(5),
+                                    padding: const EdgeInsets.all(5),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
@@ -74,7 +74,7 @@ class CompanyListItem extends StatelessWidget {
                                   ),
                                   Text(
                                     months[index],
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
@@ -84,7 +84,7 @@ class CompanyListItem extends StatelessWidget {
                               ),
                               Text(
                                 "${company.prices[months[index]].toString()} \$",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,

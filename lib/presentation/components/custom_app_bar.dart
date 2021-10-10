@@ -8,7 +8,7 @@ AppBar CustomAppBar(String title) {
     centerTitle: true,
     title: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         color: AppColors.MONO_WHITE,
         fontSize: 24,
         fontWeight: FontWeight.w500,

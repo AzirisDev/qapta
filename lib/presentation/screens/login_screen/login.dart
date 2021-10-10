@@ -19,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  LoginPresenter _presenter = LoginPresenter(LoginViewModel(ScreenState.None));
+  final LoginPresenter _presenter = LoginPresenter(LoginViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -47,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       minWidth: MediaQuery.of(context).size.width,
@@ -58,12 +58,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               MainIcon(
                                 width: 100,
                                 color: AppColors.PRIMARY_BLUE,
@@ -139,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5),
+                            padding: const EdgeInsets.only(top: 5),
                             child: CustomButton(
                               title: "Let's go",
                               onClick: _presenter.isCodeSent

@@ -7,7 +7,7 @@ import 'base_view_model.dart';
 
 abstract class BasePresenter<M extends BaseViewModel> {
   M model;
-  BehaviorSubject<M> _subject = BehaviorSubject<M>();
+  final BehaviorSubject<M> _subject = BehaviorSubject<M>();
   late BuildContext context;
   Stream<M> get stream => _subject.stream;
   // late UserScopeData userScope;
@@ -38,22 +38,22 @@ abstract class BasePresenter<M extends BaseViewModel> {
   }
 
   void startLoading() {
-    model.state = ScreenState.Loading;
+    model.state = ScreenState.loading;
     updateView();
   }
 
   void endLoading() {
-    model.state = ScreenState.Done;
+    model.state = ScreenState.done;
     updateView();
   }
 
   void startReading() {
-    model.state = ScreenState.Reading;
+    model.state = ScreenState.reading;
     updateView();
   }
 
   void endLoadingWithError() {
-    model.state = ScreenState.Error;
+    model.state = ScreenState.error;
     updateView();
   }
 }

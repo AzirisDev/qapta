@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class UserScope extends StatefulWidget {
   final Widget child;
 
-  UserScope({required this.child});
+  const UserScope({required this.child});
 
   @override
   State<StatefulWidget> createState() => UserScopeState();

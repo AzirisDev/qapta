@@ -14,7 +14,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  SettingsPresenter _presenter = SettingsPresenter(SettingsViewModel(ScreenState.None));
+  final SettingsPresenter _presenter = SettingsPresenter(SettingsViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -34,10 +34,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
               automaticallyImplyLeading: false,
               title: Container(
                 width: 200,
-                padding: EdgeInsets.symmetric(vertical: 8),
+                padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: BoxDecoration(
                     color: AppColors.PRIMARY_BLUE, borderRadius: BorderRadius.circular(12)),
-                child: Center(
+                child: const Center(
                   child: Text(
                     "Settings",
                     style: TextStyle(
@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Personal information",
                     style: TextStyle(
                       fontSize: 16,
@@ -70,7 +70,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     textColor: AppColors.PRIMARY_BLUE,
                     isSettings: true,
                   ),
-                  Text(
+                  const Text(
                     "Bank card",
                     style: TextStyle(
                       fontSize: 16,
@@ -85,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     textColor: AppColors.PRIMARY_BLUE,
                     isSettings: true,
                   ),
-                  Text(
+                  const Text(
                     "Help",
                     style: TextStyle(
                       fontSize: 16,

@@ -18,7 +18,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  RegistrationPresenter _presenter = RegistrationPresenter(RegistrationViewModel(ScreenState.None));
+  final RegistrationPresenter _presenter = RegistrationPresenter(RegistrationViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -47,7 +47,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: SingleChildScrollView(
-                  physics: ClampingScrollPhysics(),
+                  physics: const ClampingScrollPhysics(),
                   child: ConstrainedBox(
                     constraints: BoxConstraints(
                       minWidth: MediaQuery.of(context).size.width,
@@ -58,12 +58,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               MainIcon(
                                 width: 100,
                                 color: AppColors.PRIMARY_BLUE,
@@ -94,7 +94,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               builder: (FormFieldState<String> state) {
                                 return InputDecorator(
                                   decoration: InputDecoration(
-                                    labelStyle: TextStyle(color: Colors.black, fontSize: 17.0),
+                                    labelStyle: const TextStyle(color: Colors.black, fontSize: 17.0),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
@@ -133,7 +133,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5),
+                            padding: const EdgeInsets.only(top: 5),
                             child: CustomButton(
                               title: "Continue",
                               onClick: _presenter.addUserToDatabase,

@@ -14,7 +14,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  OnboardingPresenter _presenter = OnboardingPresenter(OnboardingViewModel(ScreenState.None));
+  final OnboardingPresenter _presenter = OnboardingPresenter(OnboardingViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -87,11 +87,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       controlsPadding:
           kIsWeb ? const EdgeInsets.all(12.0) : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
       dotsDecorator: DotsDecorator(
-        size: Size(10.0, 10.0),
+        size: const Size(10.0, 10.0),
         color: AppColors.MONO_WHITE.withOpacity(0.5),
         activeColor: AppColors.MONO_WHITE,
-        activeSize: Size(22.0, 10.0),
-        activeShape: RoundedRectangleBorder(
+        activeSize: const Size(22.0, 10.0),
+        activeShape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),

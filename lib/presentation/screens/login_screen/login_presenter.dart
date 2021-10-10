@@ -45,7 +45,9 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
               updateView();
             },
             codeAutoRetrievalTimeout: (verificationId) async {});
-      } catch (e) {}
+      } catch (e) {
+        print(e);
+      }
       updateView();
     }
   }
@@ -107,8 +109,9 @@ class NumberTextInputFormatter extends TextInputFormatter {
       newText.write(newValue.text.substring(7, usedSubstringIndex = 9) + ' ');
       if (newValue.selection.end >= 10) selectionIndex += 1;
     }
-    if (newTextLength >= usedSubstringIndex)
+    if (newTextLength >= usedSubstringIndex) {
       newText.write(newValue.text.substring(usedSubstringIndex));
+    }
     return TextEditingValue(
       text: newText.toString(),
       selection: TextSelection.collapsed(offset: selectionIndex),
@@ -131,8 +134,9 @@ class CodeTextInputFormatter extends TextInputFormatter {
       newText.write(newValue.text.substring(2, usedSubstringIndex = 4) + '-');
       if (newValue.selection.end >= 5) selectionIndex += 1;
     }
-    if (newTextLength >= usedSubstringIndex)
+    if (newTextLength >= usedSubstringIndex) {
       newText.write(newValue.text.substring(usedSubstringIndex));
+    }
     return TextEditingValue(
       text: newText.toString(),
       selection: TextSelection.collapsed(offset: selectionIndex),

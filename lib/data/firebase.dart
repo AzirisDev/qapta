@@ -17,6 +17,8 @@ class FirebaseDatabase {
   Future signOut() async {
     try {
       return await auth.signOut();
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 }
