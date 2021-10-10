@@ -122,7 +122,8 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                           width: 1),
                                     ),
                                     margin: const EdgeInsets.only(right: 5, left: 5),
-                                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
                                     child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [

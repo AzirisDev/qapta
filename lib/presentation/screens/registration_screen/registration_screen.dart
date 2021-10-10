@@ -18,7 +18,8 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-  final RegistrationPresenter _presenter = RegistrationPresenter(RegistrationViewModel(ScreenState.none));
+  final RegistrationPresenter _presenter =
+      RegistrationPresenter(RegistrationViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -94,7 +95,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               builder: (FormFieldState<String> state) {
                                 return InputDecorator(
                                   decoration: InputDecoration(
-                                    labelStyle: const TextStyle(color: Colors.black, fontSize: 17.0),
+                                    labelStyle:
+                                        const TextStyle(color: Colors.black, fontSize: 17.0),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
