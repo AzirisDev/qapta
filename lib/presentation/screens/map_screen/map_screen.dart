@@ -95,6 +95,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
+    getCurrentLocation();
     super.didChangeDependencies();
   }
 
@@ -120,7 +121,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.only(bottom: 5),
+                padding: const EdgeInsets.only(bottom: 5, right: 5),
                 child: FloatingActionButton(
                   child: const Icon(Icons.location_searching),
                   onPressed: () {

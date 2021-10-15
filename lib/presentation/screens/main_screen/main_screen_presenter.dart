@@ -1,3 +1,4 @@
+import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/companies_view_screen/companies_view.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_view_model.dart';
@@ -14,4 +15,14 @@ class MainPresenter extends BasePresenter<MainViewModel> {
     const ProfileScreen(),
     const SettingsScreen(),
   ];
+
+  @override
+  void onInitWithContext() {
+    super.onInitWithContext();
+  }
+
+  void initUserData(UserData user) {
+    userScope.userData = user;
+    updateView();
+  }
 }

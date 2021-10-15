@@ -1,4 +1,5 @@
 // import 'package:chipper/presentation/di/user_scope.dart';
+import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -10,7 +11,7 @@ abstract class BasePresenter<M extends BaseViewModel> {
   final BehaviorSubject<M> _subject = BehaviorSubject<M>();
   late BuildContext context;
   Stream<M> get stream => _subject.stream;
-  // late UserScopeData userScope;
+  late UserScopeData userScope;
 
   BasePresenter(this.model);
 
@@ -23,7 +24,7 @@ abstract class BasePresenter<M extends BaseViewModel> {
       firstInit = true;
     }
     this.context = context;
-    // this.userScope = UserScopeWidget.of(context);
+    userScope = UserScopeWidget.of(context);
     if (firstInit) onInitWithContext();
   }
 

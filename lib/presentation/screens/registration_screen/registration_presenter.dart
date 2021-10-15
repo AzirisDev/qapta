@@ -1,7 +1,7 @@
 import 'package:ad_drive/data/firebase.dart';
+import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
-import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/registration_screen/registration_view_model.dart';
 import 'package:ad_drive/presentation/screens/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +14,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
   TextEditingController fullNameController = TextEditingController();
 
   late final String phoneNumber;
+  late final String uid;
 
   final FirebaseAuth auth = FirebaseDatabase().auth;
   final FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -45,9 +46,13 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
 
   void addUserToDatabase() {
     model.entering = true;
-    model.userModel =
-        UserData(city: selectedCity, username: fullNameController.text, phoneNumber: phoneNumber);
-    UserScope.of(context).user = model.userModel;
+    model.userModel = UserData(
+      uid: uid,
+      city: selectedCity,
+      username: fullNameController.text,
+      phoneNumber: phoneNumber,
+    );
+    userScope.userData = model.userModel;
     addUser();
     Navigator.push(
       context,
@@ -58,6 +63,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
   }
 
   void addUser() async {
+    await SharedPreferencesRepository().addUserData(model.userModel);
     await users.add(model.userModel);
   }
 }

@@ -71,6 +71,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
           MaterialPageRoute(
             builder: (builder) => RegistrationScreen(
               phoneNumber: phoneNumberController.text.replaceAll(" ", ""),
+              uid: authCredential.user!.uid,
             ),
           ),
         );

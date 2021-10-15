@@ -32,7 +32,7 @@ class SettingsPresenter extends BasePresenter<SettingsViewModel> {
   }
 
   void privacyPolicy() async {
-    const url = 'https://flutter.io';
+    const url = 'https://www.qapta.kz/';
     if (await canLaunch(url)) {
       await launch(url);
     } else {

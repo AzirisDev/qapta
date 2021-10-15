@@ -1,6 +1,8 @@
 import 'package:ad_drive/data/firebase.dart';
+import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/model/user_model.dart';
 import 'package:ad_drive/presentation/di/user_scope.dart';
+import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding.dart';
 import 'package:ad_drive/presentation/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -26,22 +28,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        StreamProvider<UserModel?>.value(value: FirebaseDatabase().user, initialData: null),
-        ChangeNotifierProvider<BottomNavigationBarProvider>(
-          create: (_) => BottomNavigationBarProvider(),
-        ),
-      ],
-      child: UserScope(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
+    return UserScopeWidget(
+      child: Builder(builder: (context) {
+        return MultiProvider(
+          providers: [
+            StreamProvider<UserModel?>.value(value: FirebaseDatabase().user, initialData: null),
+            ChangeNotifierProvider<BottomNavigationBarProvider>(
+              create: (_) => BottomNavigationBarProvider(),
+            ),
+          ],
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: FutureBuilder(
+              future: UserScopeWidget.of(context).init(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.data == null) {
+                  return const Center(
+                    child: Text("data is null"),
+                  );
+                }
+                UserData user = snapshot.data;
+                if (user.uid == "") {
+                  return initScreen == null ? const OnboardingScreen() : const Wrapper();
+                } else {
+                  return MainScreen(
+                    user: user,
+                  );
+                }
+              },
+            ),
           ),
-          home: initScreen == null ? const OnboardingScreen() : const Wrapper(),
-        ),
-      ),
+        );
+      }),
     );
   }
 }

@@ -13,7 +13,7 @@ class FAQScreen extends StatelessWidget {
         child: SizedBox(
           height: double.infinity,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: ListView.builder(
                 itemCount: list.length,
                 itemBuilder: (context, index) {
@@ -28,13 +28,26 @@ class FAQScreen extends StatelessWidget {
   }
 
   List<List<String>> list = [
-    ["question1", "answer1"],
-    ["question2", "answer2"],
-    ["question3", "answer3"],
-    ["question4", "answer4"],
-    ["question5", "answer5"],
-    ["question6", "answer6"],
-    ["question7", "answer7"],
+    [
+      "Где скачать "
+          "ваше приложение ?",
+      "Приложение находится в разработке. После успешных тестов, его можно будет установить в AppStore и Google Play Market."
+    ],
+    [
+      "Куда писать по "
+          "поводу сотрудничества?",
+      "support@qapta.kz"
+    ],
+    ["Как долго происходит верификация?", "В среднем верификация займет от 1 до 3 рабочих дней."],
+    [
+      "Как будут происходить выплаты?",
+      "Выплаты будут происходить переводом на ваш банковский счет"
+    ],
+    [
+      "От чего будет "
+          "зависеть мой заработок?",
+      "Ваш заработок будет зависеть от проезженного расстония, тарифов рекламной кампании и района где вы будете передвигаться."
+    ],
   ];
 }
 
@@ -70,9 +83,11 @@ class _QuestionCardState extends State<QuestionCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.question,
-                  style: const TextStyle(fontSize: 18),
+                Flexible(
+                  child: Text(
+                    widget.question,
+                    style: const TextStyle(fontSize: 18),
+                  ),
                 ),
                 isTapped
                     ? const Icon(
@@ -84,14 +99,19 @@ class _QuestionCardState extends State<QuestionCard> {
               ],
             ),
             if (isTapped)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    widget.answer,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.only(left: 30, top: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(
+                      child: Text(
+                        widget.answer,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             const Divider(
               indent: 30,

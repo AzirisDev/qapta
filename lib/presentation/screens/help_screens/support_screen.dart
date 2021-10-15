@@ -13,7 +13,7 @@ class SupportScreen extends StatelessWidget {
 
   void launchEmail() async {
     final url =
-        "mailto: qaptakz@gmail.com?subject=Feedback&body=${Uri.encodeFull(questionController.text)}";
+        "mailto: support@qapta.kz?subject=Feedback&body=${Uri.encodeFull(questionController.text)}";
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -61,7 +61,7 @@ class SupportScreen extends StatelessWidget {
                     color: AppColors.MONO_BLACK.withOpacity(0.5)),
               ),
               const Text(
-                "qapta.kz@gmail.com",
+                "support@qapta.kz",
                 style: TextStyle(
                     fontSize: 18, fontWeight: FontWeight.w300, color: AppColors.PRIMARY_BLUE),
               ),

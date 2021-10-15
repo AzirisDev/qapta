@@ -1,5 +1,6 @@
 import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/helper/bottom_nav_bar_provider.dart';
+import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen_presenter.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_view_model.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  final UserData user;
+  const MainScreen({Key? key, required this.user}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -19,6 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
+    _presenter.initUserData(widget.user);
     super.didChangeDependencies();
   }
 

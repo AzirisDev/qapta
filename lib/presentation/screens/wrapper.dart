@@ -1,4 +1,5 @@
 import 'package:ad_drive/model/user_model.dart';
+import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,10 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<UserModel?>(context);
 
-    return user != null ? const MainScreen() : const LoginScreen();
+    return user != null
+        ? MainScreen(
+            user: UserScopeWidget.of(context).userData,
+          )
+        : const LoginScreen();
   }
 }
