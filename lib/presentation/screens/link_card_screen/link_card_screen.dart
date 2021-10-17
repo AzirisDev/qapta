@@ -51,27 +51,18 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
               const SizedBox(
                 height: 30,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 6),
-                  decoration: BoxDecoration(
-                      color: AppColors.PRIMARY_BLUE, borderRadius: BorderRadius.circular(16)),
-                  child: CreditCardWidget(
-                    glassmorphismConfig: Glassmorphism.defaultConfig(),
-                    cardBgColor: AppColors.PRIMARY_BLUE,
-                    cardNumber: cardNumber,
-                    expiryDate: expiryDate,
-                    cardHolderName: cardHolderName,
-                    cvvCode: cvvCode,
-                    showBackView: isCvvFocused,
-                    obscureCardNumber: true,
-                    obscureCardCvv: true,
-                    isHolderNameVisible: true,
-                    isSwipeGestureEnabled: true,
-                    onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
-                  ),
-                ),
+              CreditCardWidget(
+                cardBgColor: AppColors.PRIMARY_BLUE,
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cardHolderName: cardHolderName,
+                cvvCode: cvvCode,
+                showBackView: isCvvFocused,
+                obscureCardNumber: true,
+                obscureCardCvv: true,
+                isHolderNameVisible: true,
+                isSwipeGestureEnabled: true,
+                onCreditCardWidgetChange: (CreditCardBrand creditCardBrand) {},
               ),
               Flexible(
                 child: SingleChildScrollView(

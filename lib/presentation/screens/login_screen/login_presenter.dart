@@ -1,6 +1,9 @@
 import 'package:ad_drive/data/firebase.dart';
+import 'package:ad_drive/data/firestore.dart';
+import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart';
+import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:ad_drive/presentation/screens/registration_screen/registration_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +29,11 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
 
   bool isCodeSent = false;
 
+  @override
+  void onInitWithContext() async {
+    super.onInitWithContext();
+  }
+
   Future verifyPhoneNumber() async {
     if (formKey.currentState!.validate()) {
       model.sendingCode = true;
@@ -35,8 +43,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
             phoneNumber: phoneNumberController.text,
             verificationCompleted: (phoneAuthCredential) async {},
             verificationFailed: (verificationFailed) async {
-              scaffoldKey.currentState!
-                  .showSnackBar(SnackBar(content: Text(verificationFailed.message!)));
+              print(verificationFailed.toString());
             },
             codeSent: (verificationId, resendingToken) async {
               isCodeSent = true;
@@ -65,16 +72,30 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
     updateView();
     try {
       final authCredential = await auth.signInWithCredential(phoneCredential);
+      UserData? existingUserData;
+      try {
+        existingUserData = await FireStoreInstance().fetchUserData(authCredential.user!.uid);
+      } catch (e) {
+        print(e);
+      }
       if (authCredential.user != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (builder) => RegistrationScreen(
-              phoneNumber: phoneNumberController.text.replaceAll(" ", ""),
-              uid: authCredential.user!.uid,
+        if (existingUserData != null) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => MainScreen(user: existingUserData!),
+              ));
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => RegistrationScreen(
+                phoneNumber: phoneNumberController.text.replaceAll(" ", ""),
+                uid: authCredential.user!.uid,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
     } on FirebaseAuthException catch (e) {
       scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(e.message!)));

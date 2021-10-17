@@ -131,20 +131,198 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
               ),
               SlidingUpPanel(
                 minHeight: 150,
-                panel: const Center(child: Text("This is the sliding Widget")),
-                collapsed: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                  decoration: BoxDecoration(color: AppColors.MONO_WHITE, borderRadius: radius),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "This is the collapsed Widget",
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    ],
+                maxHeight: 250,
+                panel: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(24),
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          AppColors.PRIMARY_BLUE,
+                          AppColors.PRIMARY_BLUE.withOpacity(0.97),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.95),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.93),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.90),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.85),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.8),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.75),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.55),
+                          AppColors.PRIMARY_BLUE.withOpacity(0.35),
+                        ],
+                      )),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Monday",
+                          style: TextStyle(
+                              fontSize: 30,
+                              color: AppColors.MONO_WHITE,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "October 18, 2021",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: AppColors.MONO_WHITE,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Icon(
+                                  Icons.location_on_rounded,
+                                  color: AppColors.MONO_WHITE,
+                                ),
+                                Text(
+                                  "Distance",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: AppColors.MONO_WHITE,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "1589 km",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 1,
+                              height: 50,
+                              color: AppColors.MONO_WHITE,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Icon(
+                                  Icons.monetization_on_outlined,
+                                  color: AppColors.MONO_WHITE,
+                                ),
+                                Text(
+                                  "Money",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: AppColors.MONO_WHITE,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "50 \$",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Container(
+                              width: 1,
+                              height: 50,
+                              color: AppColors.MONO_WHITE,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                Icon(
+                                  Icons.timer,
+                                  color: AppColors.MONO_WHITE,
+                                ),
+                                Text(
+                                  "Time",
+                                  style: TextStyle(
+                                      fontSize: 24,
+                                      color: AppColors.MONO_WHITE,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  "02 : 59",
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+                collapsed: Container(
+                    padding: EdgeInsets.only(
+                        top: 16,
+                        left: 16,
+                        right: 16,
+                        bottom: MediaQuery.of(context).padding.bottom + 16),
+                    decoration: BoxDecoration(color: AppColors.MONO_WHITE, borderRadius: radius),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Icon(
+                              Icons.monetization_on_outlined,
+                              color: AppColors.PRIMARY_BLUE,
+                            ),
+                            Text(
+                              "Earnings for today:",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                            decoration: BoxDecoration(
+                                color: AppColors.PRIMARY_BLUE,
+                                borderRadius: BorderRadius.circular(24),
+                                gradient: LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.85),
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.9),
+                                    AppColors.PRIMARY_BLUE,
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.9),
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.85),
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.8),
+                                    AppColors.PRIMARY_BLUE.withOpacity(0.75),
+                                  ],
+                                )),
+                            child: Text(
+                              "50 \$",
+                              style: TextStyle(
+                                color: AppColors.MONO_WHITE,
+                                fontSize: 50,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )),
+                      ],
+                    )),
                 borderRadius: radius,
               ),
             ],

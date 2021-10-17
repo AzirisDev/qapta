@@ -1,11 +1,9 @@
-import 'package:ad_drive/data/firebase.dart';
+import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/registration_screen/registration_view_model.dart';
 import 'package:ad_drive/presentation/screens/wrapper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
@@ -15,11 +13,6 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
 
   late final String phoneNumber;
   late final String uid;
-
-  final FirebaseAuth auth = FirebaseDatabase().auth;
-  final FirebaseFirestore fireStore = FirebaseFirestore.instance;
-
-  late CollectionReference users;
 
   final formKey = GlobalKey<FormState>();
 
@@ -33,9 +26,6 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
 
   @override
   void onInitWithContext() async {
-    users = fireStore.collection("users").withConverter<UserData>(
-        fromFirestore: (snapshot, _) => UserData.fromJson(snapshot.data()!),
-        toFirestore: (userModel, _) => userModel.toJson());
     super.onInitWithContext();
   }
 
@@ -64,6 +54,6 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
 
   void addUser() async {
     await SharedPreferencesRepository().addUserData(model.userModel);
-    await users.add(model.userModel);
+    FireStoreInstance().addUser(model.userModel);
   }
 }

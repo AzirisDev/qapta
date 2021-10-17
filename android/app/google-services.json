@@ -1,20 +1,21 @@
 {
   "project_info": {
     "project_number": "25055003280",
+    "firebase_url": "https://ad-drive-fa549-default-rtdb.firebaseio.com",
     "project_id": "ad-drive-fa549",
     "storage_bucket": "ad-drive-fa549.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:25055003280:android:c58929e120e8a272b68e15",
+        "mobilesdk_app_id": "1:25055003280:android:e7ab8e391b396c20b68e15",
         "android_client_info": {
           "package_name": "com.example.ad_drive"
         }
       },
       "oauth_client": [
         {
-          "client_id": "25055003280-e1q6r2328t00un5hrir9i0dkj2vfru04.apps.googleusercontent.com",
+          "client_id": "25055003280-njbhm1jrdm77gt5d3he7ao41ih3em2qb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.ad_drive",
@@ -28,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBSSoGfbKi9RXFiQW1P1PxDWsmnyyciwZE"
+          "current_key": "AIzaSyBMQolYw_-RlKnWTPx0y84s-veOasVv5Z8"
         }
       ],
       "services": {

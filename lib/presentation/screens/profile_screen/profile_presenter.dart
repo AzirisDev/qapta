@@ -1,5 +1,4 @@
 import 'package:ad_drive/data/firebase.dart';
-import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_view_model.dart';
@@ -17,7 +16,6 @@ class ProfilePresenter extends BasePresenter<ProfileViewModel> {
 
   void signOut() async {
     await FirebaseDatabase().signOut();
-    await SharedPreferencesRepository().clearUserData();
     Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
   }
 }

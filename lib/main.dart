@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
                   );
                 }
                 UserData user = snapshot.data;
-                if (user.uid == "") {
+                final userLoggedIn = Provider.of<UserModel?>(context);
+                if (userLoggedIn == null || user.uid == "") {
                   return initScreen == null ? const OnboardingScreen() : const Wrapper();
                 } else {
                   return MainScreen(

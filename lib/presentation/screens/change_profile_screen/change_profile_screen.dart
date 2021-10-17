@@ -57,7 +57,11 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                   ),
                   Padding(
                       padding: const EdgeInsets.only(top: 5),
-                      child: CustomButton(title: "Change", onClick: () {}))
+                      child: CustomButton(
+                          title: "Change",
+                          onClick: () {
+                            _presenter.changeProfileName();
+                          }))
                 ],
               ),
             ),
