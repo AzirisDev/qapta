@@ -50,6 +50,7 @@ dependencies:
   location: ^4.2.0
   sliding_up_panel: ^2.0.0+1
   flutter_credit_card: ^3.0.0
+  image_picker: ^0.8.4+2
 
 dev_dependencies:
   flutter_test:

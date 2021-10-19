@@ -47,5 +47,7 @@
 		<false/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>To verify the ride</string>
 	</dict>
 </plist>

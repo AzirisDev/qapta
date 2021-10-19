@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
+import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_presenter.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
+import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -131,7 +134,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
               ),
               SlidingUpPanel(
                 minHeight: 150,
-                maxHeight: 250,
+                maxHeight: 600,
                 panel: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(24),
@@ -265,6 +268,21 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                             ),
                           ],
                         ),
+                        CustomButton(
+                          title: "Start drive",
+                          onClick: () async {
+                            _presenter.model.photo = await Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => TakePhotoScreen()));
+                            _presenter.updateView();
+                          },
+                          textColor: AppColors.PRIMARY_BLUE,
+                          backgroundColor: AppColors.MONO_WHITE,
+                        ),
+                        if (_presenter.model.photo != null)
+                          Image.file(
+                            File(_presenter.model.photo!.path),
+                            height: 200,
+                          ),
                       ],
                     ),
                   ),
