@@ -4,6 +4,7 @@ import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_presenter.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_view_model.dart';
+import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -156,7 +157,12 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           ),
                           Padding(
                               padding: const EdgeInsets.symmetric(vertical: 10),
-                              child: CustomButton(title: "Subscribe", onClick: () {})),
+                              child: CustomButton(
+                                  title: "Subscribe",
+                                  onClick: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) => SubscribeScreen()));
+                                  })),
                           const SizedBox(
                             height: 10,
                           )

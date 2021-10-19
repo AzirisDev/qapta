@@ -11,5 +11,6 @@ class TakePhotoPresenter extends BasePresenter<TakePhotoViewModel> {
   void takePicture() async {
     XFile? photo = await _picker.pickImage(source: ImageSource.camera);
     Navigator.pop(context, photo);
+    updateView();
   }
 }

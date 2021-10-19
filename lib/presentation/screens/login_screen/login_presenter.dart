@@ -61,6 +61,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
 
   void startSignInWithPhoneAuthCredential() {
     model.sendingCode = true;
+    FocusScope.of(context).unfocus();
     if (formKey.currentState!.validate()) {
       PhoneAuthCredential phoneCredential = PhoneAuthProvider.credential(
           verificationId: verificationCode, smsCode: codeController.text.replaceAll("-", ""));

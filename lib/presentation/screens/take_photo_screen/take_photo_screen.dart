@@ -7,7 +7,9 @@ import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_view_
 import 'package:flutter/material.dart';
 
 class TakePhotoScreen extends StatefulWidget {
-  const TakePhotoScreen({Key? key}) : super(key: key);
+  final int flag;
+
+  const TakePhotoScreen({Key? key, required this.flag}) : super(key: key);
 
   @override
   _TakePhotoScreenState createState() => _TakePhotoScreenState();
@@ -32,7 +34,7 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
           onTap: () {
             Navigator.pop(context);
           },
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: AppColors.PRIMARY_BLUE,
           ),
@@ -41,9 +43,21 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
       child: Column(
         children: [
           Spacer(),
-          Image.asset("assets/main_images/take_photo_car.jpg"),
+          Padding(
+              padding: const EdgeInsets.all(16),
+              child: Image.asset(widget.flag == 0
+                  ? "assets/main_images/id_front.jpg"
+                  : widget.flag == 1
+                      ? "assets/main_images/id_back.jpg"
+                      : widget.flag == 2
+                          ? "assets/main_images/driver_licence_front.jpg"
+                          : widget.flag == 3
+                              ? "assets/main_images/driver_licence_back.jpg"
+                              : "assets/main_images/ad_example.png")),
           Spacer(),
-          CustomButton(title: "Take photo", onClick: _presenter.takePicture)
+          Padding(
+              padding: const EdgeInsets.all(16),
+              child: CustomButton(title: "Take photo", onClick: _presenter.takePicture))
         ],
       ),
       backgroundColor: AppColors.MONO_WHITE,
