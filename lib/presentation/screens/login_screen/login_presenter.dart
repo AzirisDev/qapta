@@ -1,5 +1,6 @@
 import 'package:ad_drive/data/firebase.dart';
 import 'package:ad_drive/data/firestore.dart';
+import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart';
@@ -81,6 +82,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
       }
       if (authCredential.user != null) {
         if (existingUserData != null) {
+          await SharedPreferencesRepository().addUserData(existingUserData);
           Navigator.push(
               context,
               MaterialPageRoute(

@@ -2,9 +2,9 @@ import 'package:ad_drive/data/firebase.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/model/user_model.dart';
 import 'package:ad_drive/presentation/di/user_scope.dart';
+import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding.dart';
-import 'package:ad_drive/presentation/screens/wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                 UserData user = snapshot.data;
                 final userLoggedIn = Provider.of<UserModel?>(context);
                 if (userLoggedIn == null || user.uid == "") {
-                  return initScreen == null ? const OnboardingScreen() : const Wrapper();
+                  return initScreen == null ? const OnboardingScreen() : const LoginScreen();
                 } else {
                   return MainScreen(
                     user: user,

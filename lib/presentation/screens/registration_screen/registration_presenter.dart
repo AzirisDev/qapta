@@ -2,8 +2,8 @@ import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:ad_drive/presentation/screens/registration_screen/registration_view_model.dart';
-import 'package:ad_drive/presentation/screens/wrapper.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
@@ -47,7 +47,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (builder) => const Wrapper(),
+        builder: (builder) => MainScreen(user: model.userModel),
       ),
     );
   }

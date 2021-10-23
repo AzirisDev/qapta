@@ -22,7 +22,7 @@ class SharedPreferencesRepository {
   }
 
   Future addUserData(UserData userData) async {
-    return _prefs.setString(_USER_DATA, jsonEncode(userData.toJson()));
+    return await _prefs.setString(_USER_DATA, jsonEncode(userData.toJson()));
   }
 
   UserData getUserData() {
@@ -35,6 +35,6 @@ class SharedPreferencesRepository {
   }
 
   Future clearUserData() async {
-    return _prefs.setStringList(_USER_DATA, []);
+    return await _prefs.setString(_USER_DATA, "");
   }
 }
