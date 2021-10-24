@@ -1,7 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:ad_drive/data/directions_repository.dart';
+import 'package:ad_drive/model/directions.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_presenter.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../../app_colors.dart';
@@ -27,17 +29,12 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
   StreamSubscription? _locationSubscription;
   final Location _locationTracker = Location();
   Marker? marker;
-  Circle? circle;
   GoogleMapController? _controller;
-
+  Directions? _info;
   static const CameraPosition initialLocation = CameraPosition(target: LatLng(37, -122), zoom: 14);
+  LatLng lastLocation = const LatLng(37, -122);
 
-  Future<Uint8List> getMarker() async {
-    ByteData byteData = await DefaultAssetBundle.of(context).load("assets/icons/ic_money.svg");
-    return byteData.buffer.asUint8List();
-  }
-
-  void updateMarkerAndCircle(LocationData newLocationData, Uint8List imageData) {
+  void updateMarker(LocationData newLocationData) {
     if (newLocationData.longitude != null &&
         newLocationData.latitude != null &&
         newLocationData.heading != null &&
@@ -54,28 +51,22 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
           zIndex: 2,
           flat: true,
           anchor: const Offset(0.5, 0.5),
-          icon: BitmapDescriptor.fromBytes(imageData));
-      circle = Circle(
-          circleId: const CircleId("car"),
-          radius: newLocationData.accuracy!,
-          zIndex: 1,
-          strokeColor: AppColors.PRIMARY_BLUE,
-          center: latLng,
-          fillColor: AppColors.PRIMARY_BLUE.withAlpha(70));
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
     }
   }
 
   void getCurrentLocation() async {
     try {
-      Uint8List imageData = await getMarker();
       var location = await _locationTracker.getLocation();
-      updateMarkerAndCircle(location, imageData);
+      updateMarker(location);
 
       if (_locationSubscription != null) {
         _locationSubscription!.cancel();
       }
 
-      _locationSubscription = _locationTracker.onLocationChanged.listen((event) {
+      _locationSubscription = _locationTracker.onLocationChanged
+          .throttleTime(const Duration(seconds: 60))
+          .listen((event) async {
         if (_controller != null) {
           _controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
               target: LatLng(
@@ -85,6 +76,12 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
               tilt: 0,
               zoom: 18,
               bearing: 192)));
+          final directions = await DirectionsRepository().getDirections(
+              origin: lastLocation, destination: LatLng(event.latitude!, event.longitude!));
+          setState(() {
+            lastLocation = LatLng(event.latitude!, event.longitude!);
+            _info = directions;
+          });
         }
       });
     } on PlatformException catch (e) {
@@ -112,15 +109,55 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
         builder: (context, snapshot) {
           return Scaffold(
             body: Stack(
+              alignment: Alignment.center,
               children: [
                 GoogleMap(
                   zoomControlsEnabled: false,
                   mapType: MapType.hybrid,
                   initialCameraPosition: initialLocation,
                   markers: Set.of(marker != null ? [marker!] : []),
-                  circles: Set.of(circle != null ? [circle!] : []),
                   onMapCreated: (controller) => _controller = controller,
+                  polylines: {
+                    if (_info != null)
+                      Polyline(
+                        polylineId: const PolylineId('overview_polyline'),
+                        color: AppColors.PRIMARY_BLUE,
+                        width: 5,
+                        points: _info!.polylinePoints
+                            .map((e) => LatLng(e.latitude, e.longitude))
+                            .toList(),
+                      ),
+                  },
                 ),
+                if (_info != null)
+                  Positioned(
+                    top: MediaQuery.of(context).padding.top,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 6.0,
+                        horizontal: 12.0,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.PRIMARY_BLUE,
+                        borderRadius: BorderRadius.circular(20.0),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 2),
+                            blurRadius: 6.0,
+                          )
+                        ],
+                      ),
+                      child: Text(
+                        '${_info!.totalDistance}, ${_info!.totalDuration}',
+                        style: const TextStyle(
+                          color: AppColors.MONO_WHITE,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
