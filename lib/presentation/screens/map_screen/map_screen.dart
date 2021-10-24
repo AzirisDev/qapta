@@ -31,8 +31,12 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
   Marker? marker;
   GoogleMapController? _controller;
   Directions? _info;
+  final Set<Polyline> _lines = {};
+  int polylineIdCounter = 0;
   static const CameraPosition initialLocation = CameraPosition(target: LatLng(37, -122), zoom: 14);
   LatLng lastLocation = const LatLng(37, -122);
+  double totalDistance = 0;
+  int totalDuration = 0;
 
   void updateMarker(LocationData newLocationData) {
     if (newLocationData.longitude != null &&
@@ -81,6 +85,15 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
           setState(() {
             lastLocation = LatLng(event.latitude!, event.longitude!);
             _info = directions;
+            polylineIdCounter++;
+            totalDistance += double.parse(_info!.totalDistance.split(" ").first);
+            totalDuration += int.parse(_info!.totalDuration.split(" ").first);
+            _lines.add(Polyline(
+              polylineId: PolylineId(polylineIdCounter.toString()),
+              color: AppColors.PRIMARY_BLUE,
+              width: 5,
+              points: _info!.polylinePoints.map((e) => LatLng(e.latitude, e.longitude)).toList(),
+            ));
           });
         }
       });
@@ -92,9 +105,14 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
   }
 
   @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
+
+  @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
-    getCurrentLocation();
     super.didChangeDependencies();
   }
 
@@ -117,17 +135,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                   initialCameraPosition: initialLocation,
                   markers: Set.of(marker != null ? [marker!] : []),
                   onMapCreated: (controller) => _controller = controller,
-                  polylines: {
-                    if (_info != null)
-                      Polyline(
-                        polylineId: const PolylineId('overview_polyline'),
-                        color: AppColors.PRIMARY_BLUE,
-                        width: 5,
-                        points: _info!.polylinePoints
-                            .map((e) => LatLng(e.latitude, e.longitude))
-                            .toList(),
-                      ),
-                  },
+                  polylines: _lines,
                 ),
                 if (_info != null)
                   Positioned(
@@ -219,24 +227,24 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                 children: [
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.location_on_rounded,
                                         color: AppColors.MONO_WHITE,
                                       ),
-                                      Text(
+                                      const Text(
                                         "Distance",
                                         style: TextStyle(
                                             fontSize: 24,
                                             color: AppColors.MONO_WHITE,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       Text(
-                                        "1589 km",
-                                        style: TextStyle(
+                                        totalDistance.toString() + " miles",
+                                        style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.MONO_WHITE,
                                         ),
@@ -250,24 +258,24 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.monetization_on_outlined,
                                         color: AppColors.MONO_WHITE,
                                       ),
-                                      Text(
+                                      const Text(
                                         "Money",
                                         style: TextStyle(
                                             fontSize: 24,
                                             color: AppColors.MONO_WHITE,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       Text(
-                                        "50 \$",
-                                        style: TextStyle(
+                                        (totalDistance * 50).toString() + "\$",
+                                        style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.MONO_WHITE,
                                         ),
@@ -281,24 +289,24 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         Icons.timer,
                                         color: AppColors.MONO_WHITE,
                                       ),
-                                      Text(
+                                      const Text(
                                         "Time",
                                         style: TextStyle(
                                             fontSize: 24,
                                             color: AppColors.MONO_WHITE,
                                             fontWeight: FontWeight.bold),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 8,
                                       ),
                                       Text(
-                                        "02 : 59",
-                                        style: TextStyle(
+                                        totalDuration.toString() + "minutes",
+                                        style: const TextStyle(
                                           fontSize: 24,
                                           color: AppColors.MONO_WHITE,
                                         ),
