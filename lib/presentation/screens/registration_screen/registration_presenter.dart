@@ -41,6 +41,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
       city: selectedCity,
       username: fullNameController.text,
       phoneNumber: phoneNumber,
+      documents: [],
     );
     userScope.userData = model.userModel;
     addUser();

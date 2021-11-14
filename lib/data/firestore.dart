@@ -25,6 +25,10 @@ class FireStoreInstance {
     }
   }
 
+  void uploadDocumentsURL(String uid, List<String> documents) {
+    users.doc(uid).update({"documents": documents});
+  }
+
   void updateUserData(String uid, String newName) {
     users.doc(uid).update({"username": newName});
   }

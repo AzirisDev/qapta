@@ -28,7 +28,7 @@ class SharedPreferencesRepository {
   UserData getUserData() {
     String json = _prefs.getString(_USER_DATA) ?? "";
     if (json.isEmpty) {
-      return UserData(uid: "", city: "", username: "", phoneNumber: "");
+      return UserData(uid: "", city: "", username: "", phoneNumber: "", documents: []);
     } else {
       return UserData.fromJson(jsonDecode(json));
     }

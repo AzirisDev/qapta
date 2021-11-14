@@ -30,7 +30,7 @@ class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
       images.add(File(model.idBack!.path));
       images.add(File(model.driverLicenceFront!.path));
       images.add(File(model.driverLicenceBack!.path));
-      PhotoUploader().uploadImageFile(images);
+      PhotoUploader(userScopeData: userScope).uploadImageFile(images);
       updateView();
     } else {
       notComplete = true;
