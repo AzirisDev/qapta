@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_model.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/widgets/contract_screen.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
@@ -22,6 +25,12 @@ class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
   void submit() {
     if (validate()) {
       notComplete = false;
+      List<File> images = [];
+      images.add(File(model.idFront!.path));
+      images.add(File(model.idBack!.path));
+      images.add(File(model.driverLicenceFront!.path));
+      images.add(File(model.driverLicenceBack!.path));
+      PhotoUploader().uploadImageFile(images);
       updateView();
     } else {
       notComplete = true;
