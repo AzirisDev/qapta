@@ -32,6 +32,9 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   void onInitWithContext() async {
     super.onInitWithContext();
     await getCurrentLocation();
+  }
+
+  void startTracking() {
     positionStream = Geolocator.getPositionStream().listen((Position position) {
       if (locationListFromStream.isNotEmpty) {
         totalDistance += Geolocator.distanceBetween(
@@ -102,6 +105,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
             builder: (context) => const TakePhotoScreen(
                   flag: 4,
                 )));
+    startTracking();
     model.photo = photo;
     updateView();
   }
