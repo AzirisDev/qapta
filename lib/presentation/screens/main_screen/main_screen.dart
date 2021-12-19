@@ -29,52 +29,83 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
-      extendBody: true,
       body: _presenter.currentTab[provider.currentIndex],
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          borderRadius:
-              BorderRadius.only(topRight: Radius.circular(25), topLeft: Radius.circular(25)),
-        ),
-        clipBehavior: Clip.hardEdge,
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(25.0),
-            topRight: Radius.circular(25.0),
-          ),
-          child: Theme(
-            data: Theme.of(context).copyWith(canvasColor: AppColors.PRIMARY_BLUE),
-            child: BottomNavigationBar(
-              currentIndex: provider.currentIndex,
-              onTap: (index) {
-                provider.currentIndex = index;
-              },
-              selectedItemColor: AppColors.MONO_WHITE,
-              selectedFontSize: 0,
-              unselectedFontSize: 0,
-              selectedIconTheme: const IconThemeData(
-                size: 30,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppColors.PRIMARY_BLUE,
+        child: const Icon(Icons.map_rounded, color: AppColors.MONO_WHITE),
+        onPressed: () {
+          provider.currentIndex = 1;
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                flex: 2,
+                child: MaterialButton(
+                  minWidth: 40,
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onPressed: () {
+                    provider.currentIndex = 0;
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        left: 2,
+                        top: 3,
+                        child: Icon(
+                          Icons.home_outlined,
+                          color: provider.currentIndex == 0 ? Colors.black12 : Colors.transparent,
+                          size: 35,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.home_outlined,
+                        color: AppColors.PRIMARY_BLUE,
+                        size: 35,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              unselectedItemColor: AppColors.MONO_WHITE.withOpacity(0.5),
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.list_alt_rounded),
-                  label: '',
+              Expanded(flex: 1,child: Container()),
+              Expanded(
+                flex: 2,
+                child: MaterialButton(
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  minWidth: 40,
+                  onPressed: () {
+                    provider.currentIndex = 2;
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        right: 2,
+                        top: 3,
+                        child: Icon(
+                          Icons.person_outline_rounded,
+                          color: provider.currentIndex == 2 ? Colors.black12 : Colors.transparent,
+                          size: 35,
+                        ),
+                      ),
+                      const Icon(
+                        Icons.person_outline_rounded,
+                        color: AppColors.PRIMARY_BLUE,
+                        size: 35,
+                      ),
+                    ],
+                  ),
                 ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.gps_fixed_rounded),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: '',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: '',
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

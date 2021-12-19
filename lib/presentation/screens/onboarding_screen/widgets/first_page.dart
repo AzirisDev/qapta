@@ -20,7 +20,11 @@ class FirstPage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(flex: 1),
-              SvgPicture.asset('assets/icon/main_icon_text.svg'),
+              Container(
+                width: 300,
+                height: 300,
+                child: SvgPicture.asset('assets/icons/blue_q.svg'),
+              ),
               CustomButton(
                   title: "Продолжить",
                   onClick: () {
