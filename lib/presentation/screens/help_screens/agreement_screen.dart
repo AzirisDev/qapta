@@ -9,7 +9,7 @@ class AgreementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeneralScaffold(
-        appBar: CustomAppBar("Agreement"),
+        appBar: CustomAppBar(title: "Agreement"),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(

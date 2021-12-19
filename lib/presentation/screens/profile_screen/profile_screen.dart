@@ -84,7 +84,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             backgroundColor: AppColors.PRIMARY_BLUE,
                             textColor: AppColors.MONO_WHITE,
                             borderColor: AppColors.PRIMARY_BLUE,
-                            icon: Icons.exit_to_app_rounded,
                           ),
                         ),
                       ],

@@ -2,19 +2,20 @@ import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_presenter.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_view_model.dart';
+import 'package:ad_drive/presentation/screens/onboarding_screen/widgets/page_on_boarding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
+import 'package:flutter/services.dart';
 
-class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({Key? key}) : super(key: key);
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  _OnboardingScreenState createState() => _OnboardingScreenState();
+  _OnBoardingScreenState createState() => _OnBoardingScreenState();
 }
 
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final OnboardingPresenter _presenter = OnboardingPresenter(OnboardingViewModel(ScreenState.none));
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
+  final OnBoardingPresenter _presenter = OnBoardingPresenter(OnboardingViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -24,81 +25,55 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 19.0);
-
-    const pageDecoration = PageDecoration(
-      titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-      bodyTextStyle: bodyStyle,
-      descriptionPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: Colors.white,
-      imagePadding: EdgeInsets.zero,
-      contentMargin: EdgeInsets.only(top: 100),
-    );
-
-    return IntroductionScreen(
-      key: _presenter.introKey,
-      globalBackgroundColor: Colors.white,
-      pages: [
-        PageViewModel(
-          title: "Welcome",
-          body: "Ad Drive - opportunity to make extra money while driving.",
-          image: _presenter.buildImage('main_icon.svg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Be with us",
-          body: "Choose company for cooperation. Choose your advertisement campaign.",
-          image: _presenter.buildImage('main_icon.svg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Wrap your car",
-          body: "Drive to nearest pasting point that will be shown on the map.",
-          image: _presenter.buildImage('main_icon.svg'),
-          decoration: pageDecoration,
-        ),
-        PageViewModel(
-          title: "Make money",
-          body: "Don't forget to turn on the app every time you drive",
-          image: _presenter.buildImage('main_icon.svg'),
-          decoration: pageDecoration,
-        ),
-      ],
-      onDone: () => _presenter.onIntroEnd(context),
-      onSkip: () => _presenter.onIntroEnd(context),
-      showSkipButton: true,
-      skipFlex: 0,
-      nextFlex: 0,
-      skip: const Text(
-        'Skip',
-        style: TextStyle(color: Colors.white),
-      ),
-      next: const Icon(
-        Icons.arrow_forward,
-        color: Colors.white,
-      ),
-      done: const Text('Done',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          )),
-      curve: Curves.fastLinearToSlowEaseIn,
-      controlsMargin: const EdgeInsets.all(16),
-      controlsPadding:
-          kIsWeb ? const EdgeInsets.all(12.0) : const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-      dotsDecorator: DotsDecorator(
-        size: const Size(10.0, 10.0),
-        color: AppColors.MONO_WHITE.withOpacity(0.5),
-        activeColor: AppColors.MONO_WHITE,
-        activeSize: const Size(22.0, 10.0),
-        activeShape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
-        ),
-      ),
-      dotsContainerDecorator: const ShapeDecoration(
-        color: AppColors.PRIMARY_BLUE,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+    return Scaffold(
+      backgroundColor: AppColors.MONO_WHITE,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              const Spacer(),
+              SizedBox(
+                height: 450,
+                child: PageView(
+                  physics: const BouncingScrollPhysics(),
+                  controller: _presenter.pageController,
+                  onPageChanged: (int page) {
+                    setState(() {
+                      _presenter.currentPage = page;
+                    });
+                  },
+                  children: const <Widget>[
+                    PageOnBoarding(
+                      asset: 'assets/main_images/onboarding1.gif',
+                      text: 'Выбирайте из каталога понравившуюся компанию',
+                    ),
+                    PageOnBoarding(
+                      asset: 'assets/main_images/onboarding2.gif',
+                      text: 'Отправляйте заявку и ожидайте ободрения',
+                    ),
+                    PageOnBoarding(
+                      asset: 'assets/main_images/onboarding3.gif',
+                      text: 'После одобрения мы клеем рекламу на Вашем автомобиле',
+                    ),
+                    PageOnBoarding(
+                      asset: 'assets/main_images/onboarding4.gif',
+                      text:
+                          'Фотографируйте автомобиль после каждой поездки и получайте деньги на счет!',
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: _presenter.buildPageIndicator(),
+              ),
+              const Spacer(flex: 1),
+              _presenter.button(),
+            ],
+          ),
         ),
       ),
     );

@@ -68,7 +68,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                   const Text(
                     "Bank card",
@@ -83,7 +82,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                   const Text(
                     "Help",
@@ -98,7 +96,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                   CustomButton(
                     title: "FAQ",
@@ -106,7 +103,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                   CustomButton(
                     title: "Agreement",
@@ -114,7 +110,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                   CustomButton(
                     title: "Privacy policy",
@@ -122,7 +117,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     backgroundColor: AppColors.MONO_WHITE,
                     borderColor: AppColors.PRIMARY_BLUE,
                     textColor: AppColors.PRIMARY_BLUE,
-                    isSettings: true,
                   ),
                 ],
               ),

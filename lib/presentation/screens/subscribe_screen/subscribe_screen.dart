@@ -32,7 +32,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-            appBar: CustomAppBar("Subscribe"),
+            appBar: CustomAppBar(title: "Subscribe"),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

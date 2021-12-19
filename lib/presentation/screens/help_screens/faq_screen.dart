@@ -9,7 +9,7 @@ class FAQScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeneralScaffold(
-        appBar: CustomAppBar("FAQ"),
+        appBar: CustomAppBar(title: "FAQ"),
         child: SizedBox(
           height: double.infinity,
           child: Padding(

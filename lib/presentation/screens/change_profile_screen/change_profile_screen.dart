@@ -31,7 +31,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-            appBar: CustomAppBar("Personal information"),
+            appBar: CustomAppBar(title: "Personal information"),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(

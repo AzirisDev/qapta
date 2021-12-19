@@ -1,5 +1,4 @@
 import 'package:ad_drive/app_colors.dart';
-import 'package:ad_drive/presentation/components/main_icon.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -9,8 +8,6 @@ class CustomButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final Color? borderColor;
-  final IconData? icon;
-  final bool? isSettings;
 
   const CustomButton({
     Key? key,
@@ -20,8 +17,6 @@ class CustomButton extends StatelessWidget {
     this.backgroundColor = AppColors.PRIMARY_BLUE,
     this.textColor = AppColors.MONO_WHITE,
     this.borderColor = AppColors.PRIMARY_BLUE,
-    this.icon,
-    this.isSettings,
   }) : super(key: key);
 
   @override
@@ -32,67 +27,44 @@ class CustomButton extends StatelessWidget {
         height: 48,
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: borderColor!,
-          ),
+          borderRadius: BorderRadius.circular(4),
         ),
-        child: InkWell(
-            onTap: onClick,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                if (!showLoading)
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: isSettings ?? false
-                          ? MainAxisAlignment.spaceBetween
-                          : MainAxisAlignment.center,
-                      children: [
-                        if (isSettings != null ? !isSettings! : true)
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: icon == null
-                                ? MainIcon(
-                                    width: 30,
-                                    color: textColor!,
-                                  )
-                                : Icon(
-                                    icon,
-                                    color: textColor,
-                                  ),
-                          ),
-                        Text(
-                          title,
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              fontFamily: 'Roboto',
-                              color: textColor),
-                        ),
-                        isSettings ?? false
-                            ? Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: textColor,
-                              )
-                            : Container()
-                      ],
-                    ),
-                  ),
-                if (showLoading)
-                  Center(
-                    child: SizedBox(
-                      width: 25,
-                      height: 25,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: textColor,
+        child: GestureDetector(
+          onTap: onClick,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  if (!showLoading)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        title,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            fontFamily: 'ABeeZee',
+                            color: textColor),
                       ),
                     ),
-                  )
-              ],
-            )),
+                  if (showLoading)
+                    Center(
+                      child: SizedBox(
+                        width: 25,
+                        height: 25,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: textColor,
+                        ),
+                      ),
+                    )
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

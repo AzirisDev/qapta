@@ -18,7 +18,7 @@ class FirebaseDatabase {
     try {
       return await auth.signOut();
     } catch (e) {
-      print(e);
+      //ignore
     }
   }
 }

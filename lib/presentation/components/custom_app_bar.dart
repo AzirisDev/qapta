@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../app_colors.dart';
 
-AppBar CustomAppBar(String title) {
+AppBar CustomAppBar({required String title, Color color = AppColors.PRIMARY_BLUE}) {
   return AppBar(
     elevation: 0,
     centerTitle: true,
@@ -14,6 +14,6 @@ AppBar CustomAppBar(String title) {
         fontWeight: FontWeight.w500,
       ),
     ),
-    backgroundColor: AppColors.PRIMARY_BLUE,
+    backgroundColor: color,
   );
 }

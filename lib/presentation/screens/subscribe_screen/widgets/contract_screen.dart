@@ -7,7 +7,7 @@ class ContractScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar("Contract"),
+      appBar: CustomAppBar(title:"Contract"),
       body: Column(
         children: [
           Text("Contract"),
