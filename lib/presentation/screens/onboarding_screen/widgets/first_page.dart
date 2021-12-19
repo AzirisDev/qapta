@@ -5,6 +5,7 @@ import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class FirstPage extends StatelessWidget {
   const FirstPage({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class FirstPage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(flex: 1),
-              Image.asset('assets/icons/main_icon_text.png'),
+              SvgPicture.asset('assets/icon/main_icon_text.svg'),
               CustomButton(
                   title: "Продолжить",
                   onClick: () {

@@ -1,5 +1,6 @@
-import 'package:ad_drive/presentation/screens/onboarding_screen/utilities/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../styles.dart';
 
 class PageOnBoarding extends StatelessWidget {
   final String text;

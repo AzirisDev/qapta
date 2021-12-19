@@ -7,3 +7,10 @@ const kTextStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w400,
 );
+
+const appBarTextStyle = TextStyle(
+  color: AppColors.PRIMARY_BLUE,
+  fontFamily: 'Raleway',
+  fontWeight: FontWeight.w700,
+  fontSize: 34,
+);
