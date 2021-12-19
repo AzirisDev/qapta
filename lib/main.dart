@@ -5,6 +5,7 @@ import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/login_screen/test.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
+import 'package:ad_drive/presentation/screens/main_screen/test.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/widgets/first_page.dart';
 import 'package:ad_drive/presentation/screens/settings_screen/settings_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -61,7 +62,7 @@ class MyApp extends StatelessWidget {
                 //     user: user,
                 //   );
                 // }
-                return TestScreen();
+                return TestMainScreen();
               },
             ),
           ),
