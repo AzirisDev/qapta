@@ -47,7 +47,8 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                   ),
                   CustomTextField(
                     controller: _presenter.nameController,
-                    hint: "name",
+                    hint: "Name",
+                    label: "Name",
                     validator: (text) {
                       if (text == null || text.isEmpty || text.length < 8) {
                         return "Enter your name";

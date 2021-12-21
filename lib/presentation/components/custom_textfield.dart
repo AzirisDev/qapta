@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
+  final String label;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? formatters;
   final TextInputType? keyboardType;
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
     this.textAlign,
     this.maxLength,
     this.minLines,
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -40,12 +42,10 @@ class CustomTextField extends StatelessWidget {
         cursorWidth: 1.5,
         validator: validator,
         decoration: InputDecoration(
+          labelText: label,
           counterText: "",
-          border: const OutlineInputBorder(
+          border: const UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
-            borderRadius: BorderRadius.all(
-              Radius.circular(10.0),
-            ),
           ),
           hintText: hint,
           hintStyle: const TextStyle(

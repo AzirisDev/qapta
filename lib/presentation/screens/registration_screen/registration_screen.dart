@@ -129,6 +129,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             child: CustomTextField(
                               controller: _presenter.fullNameController,
                               hint: "full name",
+                              label: "Full name",
                               validator: (text) {
                                 if (text == null || text.isEmpty) {
                                   return "Enter your name";

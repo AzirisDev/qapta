@@ -8,6 +8,7 @@ import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../app_colors.dart';
 
@@ -38,123 +39,131 @@ class _LoginScreenState extends State<LoginScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-              key: _presenter.scaffoldKey,
-              appBar: AppBar(
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                automaticallyImplyLeading: false,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: MediaQuery.of(context).size.width,
-                      minHeight: MediaQuery.of(context).size.height,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 50,
+            key: _presenter.scaffoldKey,
+            backgroundColor: AppColors.MONO_GREY,
+            child: SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: MediaQuery.of(context).size.width,
+                  minHeight: MediaQuery.of(context).size.height,
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 350,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(30),
+                            bottomRight: Radius.circular(30),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              MainIcon(
-                                width: 100,
-                                color: AppColors.PRIMARY_BLUE,
+                          color: AppColors.MONO_WHITE,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Flexible(
+                              child: SvgPicture.asset(
+                                'assets/icons/blue_q.svg',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                            Container(
+                              width: 150,
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                  color: AppColors.MONO_WHITE,
+                                  border: Border(
+                                      bottom: BorderSide(color: AppColors.PRIMARY_BLUE, width: 3))),
+                              child: Center(
+                                child: Text(
+                                  "Вход",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Raleway',
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Form(
+                                key: _presenter.formKey,
+                                child: Column(
+                                  children: [
+                                    CustomTextField(
+                                      controller: _presenter.phoneNumberController,
+                                      hint: "+7 ___ ___ __ __",
+                                      label: "Phone number",
+                                      validator: (text) {
+                                        if (text == null || text.isEmpty || text.length < 16) {
+                                          return "Enter your phone number";
+                                        }
+                                        return null;
+                                      },
+                                      formatters: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        _presenter.mobileFormatter,
+                                      ],
+                                      keyboardType: TextInputType.number,
+                                      maxLength: 16,
+                                    ),
+                                    if (_presenter.isCodeSent)
+                                      CustomTextField(
+                                        controller: _presenter.codeController,
+                                        hint: "12-34-56",
+                                        label: "Code",
+                                        validator: (text) {
+                                          if (text == null || text.isEmpty || text.length < 8) {
+                                            return "Enter your code";
+                                          }
+                                          return null;
+                                        },
+                                        formatters: [
+                                          FilteringTextInputFormatter.digitsOnly,
+                                          _presenter.codeFormatter,
+                                        ],
+                                        keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
+                                        maxLength: 8,
+                                      )
+                                  ],
+                                ),
+                              ),
+                              Spacer(),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5, bottom: 64),
+                                child: CustomButton(
+                                  title: "Let's go",
+                                  onClick: _presenter.isCodeSent
+                                      ? _presenter.startSignInWithPhoneAuthCredential
+                                      : _presenter.verifyPhoneNumber,
+                                  showLoading: _presenter.model.sendingCode,
+                                ),
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          const Text(
-                            "Verification",
-                            style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.only(top: 10),
-                            child: Text("Phone Number",
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w300,
-                                )),
-                          ),
-                          Form(
-                            key: _presenter.formKey,
-                            child: Column(
-                              children: [
-                                CustomTextField(
-                                  controller: _presenter.phoneNumberController,
-                                  hint: "+7 ___ ___ __ __",
-                                  validator: (text) {
-                                    if (text == null || text.isEmpty || text.length < 16) {
-                                      return "Enter your phone number";
-                                    }
-                                    return null;
-                                  },
-                                  formatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                    _presenter.mobileFormatter,
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  maxLength: 16,
-                                ),
-                                if (_presenter.isCodeSent)
-                                  const Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Text("Code",
-                                        style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w300,
-                                        )),
-                                  ),
-                                if (_presenter.isCodeSent)
-                                  CustomTextField(
-                                    controller: _presenter.codeController,
-                                    hint: "code",
-                                    validator: (text) {
-                                      if (text == null || text.isEmpty || text.length < 8) {
-                                        return "Enter your code";
-                                      }
-                                      return null;
-                                    },
-                                    formatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
-                                      _presenter.codeFormatter,
-                                    ],
-                                    keyboardType: TextInputType.number,
-                                    textAlign: TextAlign.center,
-                                    maxLength: 8,
-                                  )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: CustomButton(
-                              title: "Let's go",
-                              onClick: _presenter.isCodeSent
-                                  ? _presenter.startSignInWithPhoneAuthCredential
-                                  : _presenter.verifyPhoneNumber,
-                              showLoading: _presenter.model.sendingCode,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
-              backgroundColor: Colors.white);
+            ),
+          );
         });
   }
 }

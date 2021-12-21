@@ -39,6 +39,7 @@ class SupportScreen extends StatelessWidget {
                 minLines: 2,
                 controller: questionController,
                 hint: "Ask a question. We will respond very soon.",
+                label: "Question",
                 validator: (text) {
                   if (text == null || text.isEmpty || text.length < 8) {
                     return "Enter your question";
