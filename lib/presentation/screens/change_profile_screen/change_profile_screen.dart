@@ -31,7 +31,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-            appBar: CustomAppBar(title: "Personal information"),
+            appBar: customAppBar(title: "Личная информация"),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
@@ -41,6 +41,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                     padding: EdgeInsets.only(top: 10),
                     child: Text("Name",
                         style: TextStyle(
+                          fontFamily: 'Raleway',
                           fontSize: 15,
                           fontWeight: FontWeight.w300,
                         )),

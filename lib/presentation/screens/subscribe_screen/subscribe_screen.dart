@@ -18,7 +18,7 @@ class SubscribeScreen extends StatefulWidget {
 }
 
 class _SubscribeScreenState extends State<SubscribeScreen> {
-  SubscrivePresenter _presenter = SubscrivePresenter(SubscribeViewModel(ScreenState.none));
+  final SubscrivePresenter _presenter = SubscrivePresenter(SubscribeViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -32,7 +32,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-            appBar: CustomAppBar(title: "Subscribe"),
+            appBar: customAppBar(title: "Подписка"),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -41,7 +41,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
                       "Photo uploading".toUpperCase(),
-                      style: TextStyle(
+                      style: const TextStyle(
+                        fontFamily: 'Raleway',
                         color: AppColors.PRIMARY_BLUE,
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
@@ -59,6 +60,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                       child: const Text(
                         'I accept terms of Contract',
                         style: TextStyle(
+                          fontFamily: 'Raleway',
                           decoration: TextDecoration.underline,
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -96,12 +98,12 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 100,
               height: 100,
               child: photo != null
                   ? Image.file(File(photo.path))
-                  : Icon(
+                  : const Icon(
                       Icons.camera_alt_rounded,
                       size: 75,
                     ),
@@ -110,7 +112,8 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
               child: Text(
                 text,
                 maxLines: 2,
-                style: TextStyle(
+                style: const TextStyle(
+                  fontFamily: 'Raleway',
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),

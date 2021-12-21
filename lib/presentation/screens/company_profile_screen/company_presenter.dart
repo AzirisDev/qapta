@@ -8,8 +8,6 @@ class CompanyPresenter extends BasePresenter<CompanyViewModel> {
 
   void onTapInfoContainer(int currentIndex) {
     index = currentIndex;
-    print("Im pressed");
-    print(currentIndex);
     updateView();
   }
 }

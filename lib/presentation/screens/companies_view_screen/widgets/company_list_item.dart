@@ -75,6 +75,7 @@ class CompanyListItem extends StatelessWidget {
                                   Text(
                                     months[index],
                                     style: const TextStyle(
+                                      fontFamily: 'Raleway',
                                       color: Colors.black,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w500,
@@ -85,6 +86,7 @@ class CompanyListItem extends StatelessWidget {
                               Text(
                                 "${company.prices[months[index]].toString()} \$",
                                 style: const TextStyle(
+                                  fontFamily: 'Raleway',
                                   color: Colors.black,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,

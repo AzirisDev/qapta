@@ -49,6 +49,7 @@ class CustomTextField extends StatelessWidget {
           ),
           hintText: hint,
           hintStyle: const TextStyle(
+            fontFamily: 'RaleWay',
             fontSize: 17,
             fontWeight: FontWeight.w400,
             color: Colors.grey,

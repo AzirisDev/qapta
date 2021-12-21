@@ -61,7 +61,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         ),
                         child: Text(
                           company.name,
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(fontFamily: 'Raleway',color: Colors.black),
                         ),
                       ),
                       background: Container(
@@ -81,7 +81,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         children: [
                           const Text(
                             "About",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                            style: TextStyle(fontFamily: 'Raleway',fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const Divider(
                             height: 40,
@@ -89,6 +89,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                           Text(
                             company.description,
                             style: const TextStyle(
+                              fontFamily: 'Raleway',
                               fontSize: 16,
                             ),
                           ),
@@ -131,6 +132,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                         Text(
                                           months[index],
                                           style: TextStyle(
+                                            fontFamily: 'Raleway',
                                             color: _presenter.index == index
                                                 ? Colors.blue
                                                 : Colors.black,
@@ -141,6 +143,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                         Text(
                                           "${company.prices[months[index]].toString()} \$",
                                           style: TextStyle(
+                                            fontFamily: 'Raleway',
                                             color: _presenter.index == index
                                                 ? Colors.blue
                                                 : Colors.black,
@@ -161,7 +164,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   title: "Subscribe",
                                   onClick: () {
                                     Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) => SubscribeScreen()));
+                                        MaterialPageRoute(builder: (context) => const SubscribeScreen()));
                                   })),
                           const SizedBox(
                             height: 10,

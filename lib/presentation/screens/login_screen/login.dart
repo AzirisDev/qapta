@@ -2,7 +2,6 @@ import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/custom_textfield.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
-import 'package:ad_drive/presentation/components/main_icon.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_presenter.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,11 +72,11 @@ class _LoginScreenState extends State<LoginScreen> {
                             Container(
                               width: 150,
                               padding: const EdgeInsets.all(14),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   color: AppColors.MONO_WHITE,
                                   border: Border(
                                       bottom: BorderSide(color: AppColors.PRIMARY_BLUE, width: 3))),
-                              child: Center(
+                              child: const Center(
                                 child: Text(
                                   "Вход",
                                   style: TextStyle(
@@ -107,10 +106,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     CustomTextField(
                                       controller: _presenter.phoneNumberController,
                                       hint: "+7 ___ ___ __ __",
-                                      label: "Phone number",
+                                      label: "Номер телефона",
                                       validator: (text) {
                                         if (text == null || text.isEmpty || text.length < 16) {
-                                          return "Enter your phone number";
+                                          return "Введите номер телефона";
                                         }
                                         return null;
                                       },
@@ -125,10 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       CustomTextField(
                                         controller: _presenter.codeController,
                                         hint: "12-34-56",
-                                        label: "Code",
+                                        label: "Код",
                                         validator: (text) {
                                           if (text == null || text.isEmpty || text.length < 8) {
-                                            return "Enter your code";
+                                            return "Введите код";
                                           }
                                           return null;
                                         },
@@ -143,11 +142,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ],
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(top: 5, bottom: 64),
                                 child: CustomButton(
-                                  title: "Let's go",
+                                  title: "Продолжить",
                                   onClick: _presenter.isCodeSent
                                       ? _presenter.startSignInWithPhoneAuthCredential
                                       : _presenter.verifyPhoneNumber,

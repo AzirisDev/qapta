@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   final UserData user;
+
   const MainScreen({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -29,8 +30,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
+      backgroundColor: provider.currentIndex == 1 ? AppColors.PRIMARY_BLUE : null,
       body: _presenter.currentTab[provider.currentIndex],
       floatingActionButton: FloatingActionButton(
+        elevation: provider.currentIndex == 1 ? 0 : null,
         backgroundColor: AppColors.PRIMARY_BLUE,
         child: const Icon(Icons.map_rounded, color: AppColors.MONO_WHITE),
         onPressed: () {
@@ -39,6 +42,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
+        elevation: provider.currentIndex == 1 ? 0 : null,
         shape: const CircularNotchedRectangle(),
         notchMargin: 10,
         child: SizedBox(
@@ -75,7 +79,7 @@ class _MainScreenState extends State<MainScreen> {
                   ),
                 ),
               ),
-              Expanded(flex: 1,child: Container()),
+              Expanded(flex: 1, child: Container()),
               Expanded(
                 flex: 2,
                 child: MaterialButton(

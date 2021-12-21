@@ -42,7 +42,7 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
     );
 
     return GeneralScaffold(
-      appBar: CustomAppBar(title:"Link card"),
+      appBar: customAppBar(title:"Карта"),
       child: Container(
         color: Colors.white,
         child: SafeArea(

@@ -40,6 +40,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
               child: Text(
                 "Companies",
                 style: TextStyle(
+                  fontFamily: 'Raleway',
                   color: AppColors.MONO_WHITE,
                   fontSize: 24,
                   fontWeight: FontWeight.w500,

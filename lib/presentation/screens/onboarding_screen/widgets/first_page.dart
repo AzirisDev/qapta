@@ -13,14 +13,14 @@ class FirstPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: '', color: Colors.transparent),
+      appBar: customAppBar(title: '', color: Colors.transparent),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             children: [
               const Spacer(flex: 1),
-              Container(
+              SizedBox(
                 width: 300,
                 height: 300,
                 child: SvgPicture.asset('assets/icons/blue_q.svg'),

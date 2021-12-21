@@ -44,7 +44,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
             phoneNumber: phoneNumberController.text,
             verificationCompleted: (phoneAuthCredential) async {},
             verificationFailed: (verificationFailed) async {
-              print(verificationFailed.toString());
+              //ignore
             },
             codeSent: (verificationId, resendingToken) async {
               isCodeSent = true;
@@ -54,7 +54,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
             },
             codeAutoRetrievalTimeout: (verificationId) async {});
       } catch (e) {
-        print(e);
+        //ignore
       }
       updateView();
     }
@@ -78,7 +78,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
       try {
         existingUserData = await FireStoreInstance().fetchUserData(authCredential.user!.uid);
       } catch (e) {
-        print(e);
+        //ignore
       }
       if (authCredential.user != null) {
         if (existingUserData != null) {

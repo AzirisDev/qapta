@@ -22,15 +22,16 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeneralScaffold(
-        appBar: CustomAppBar(title: "Support"),
+        appBar: customAppBar(title: "Поддержка"),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Ask question",
+                "Опишите проблему",
                 style: TextStyle(
+                    fontFamily: 'Raleway',
                     fontSize: 18,
                     fontWeight: FontWeight.w300,
                     color: AppColors.MONO_BLACK.withOpacity(0.5)),
@@ -38,11 +39,11 @@ class SupportScreen extends StatelessWidget {
               CustomTextField(
                 minLines: 2,
                 controller: questionController,
-                hint: "Ask a question. We will respond very soon.",
-                label: "Question",
+                hint: "Задайте вопрос. Мы вам ответим в скором времени",
+                label: "Вопрос",
                 validator: (text) {
                   if (text == null || text.isEmpty || text.length < 8) {
-                    return "Enter your question";
+                    return "Задайте вопрос";
                   }
                   return null;
                 },
@@ -50,13 +51,14 @@ class SupportScreen extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              CustomButton(title: "Send", onClick: launchEmail),
+              CustomButton(title: "Отправить", onClick: launchEmail),
               const SizedBox(
                 height: 16,
               ),
               Text(
-                "Contact details",
+                "Контакты",
                 style: TextStyle(
+                    fontFamily: 'Raleway',
                     fontSize: 18,
                     fontWeight: FontWeight.w300,
                     color: AppColors.MONO_BLACK.withOpacity(0.5)),
@@ -64,7 +66,11 @@ class SupportScreen extends StatelessWidget {
               const Text(
                 "support@qapta.kz",
                 style: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.w300, color: AppColors.PRIMARY_BLUE),
+                  fontFamily: 'Raleway',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: AppColors.PRIMARY_BLUE,
+                ),
               ),
             ],
           ),

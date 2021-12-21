@@ -19,7 +19,7 @@ class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
   }
 
   void openContract() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ContractScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const ContractScreen()));
   }
 
   void submit() {

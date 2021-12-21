@@ -76,14 +76,16 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                         children: [
                           Text(
                             DateFormat('EEEE').format(DateTime.now()).toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
+                                fontFamily: 'Raleway',
                                 fontSize: 30,
                                 color: AppColors.MONO_WHITE,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
                             DateFormat("y-MMMM-d").format(DateTime.now()).toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
+                              fontFamily: 'Raleway',
                               fontSize: 20,
                               color: AppColors.MONO_WHITE,
                             ),
@@ -104,6 +106,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   const Text(
                                     "Distance",
                                     style: TextStyle(
+                                        fontFamily: 'Raleway',
                                         fontSize: 24,
                                         color: AppColors.MONO_WHITE,
                                         fontWeight: FontWeight.bold),
@@ -114,6 +117,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   Text(
                                     _presenter.totalDistance.toInt().toString() + " miles",
                                     style: const TextStyle(
+                                      fontFamily: 'Raleway',
                                       fontSize: 24,
                                       color: AppColors.MONO_WHITE,
                                     ),
@@ -135,6 +139,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   const Text(
                                     "Money",
                                     style: TextStyle(
+                                        fontFamily: 'Raleway',
                                         fontSize: 24,
                                         color: AppColors.MONO_WHITE,
                                         fontWeight: FontWeight.bold),
@@ -145,6 +150,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                   Text(
                                     (_presenter.totalDistance.toInt() * 50).toString() + " \$",
                                     style: const TextStyle(
+                                      fontFamily: 'Raleway',
                                       fontSize: 24,
                                       color: AppColors.MONO_WHITE,
                                     ),
@@ -180,7 +186,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Column(
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.monetization_on_outlined,
                                 color: AppColors.PRIMARY_BLUE,
@@ -188,6 +194,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                               Text(
                                 "Earnings for today:",
                                 style: TextStyle(
+                                  fontFamily: 'Raleway',
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -195,7 +202,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                             ],
                           ),
                           Container(
-                              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                               decoration: BoxDecoration(
                                   color: AppColors.PRIMARY_BLUE,
                                   borderRadius: BorderRadius.circular(24),
@@ -212,9 +219,10 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                       AppColors.PRIMARY_BLUE.withOpacity(0.75),
                                     ],
                                   )),
-                              child: Text(
+                              child: const Text(
                                 "50 \$",
                                 style: TextStyle(
+                                  fontFamily: 'Raleway',
                                   color: AppColors.MONO_WHITE,
                                   fontSize: 50,
                                   fontWeight: FontWeight.w500,

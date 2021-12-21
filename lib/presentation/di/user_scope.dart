@@ -7,7 +7,7 @@ class UserScopeData {
 
   late UserData userData;
 
-  UserScopeData({required this.state}) {}
+  UserScopeData({required this.state});
 
   Future<UserData> init() async {
     UserData userData = await SharedPreferencesRepository().init();

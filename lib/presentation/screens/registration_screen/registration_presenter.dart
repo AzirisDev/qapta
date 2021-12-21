@@ -10,6 +10,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
   RegistrationPresenter(RegistrationViewModel model) : super(model);
 
   TextEditingController fullNameController = TextEditingController();
+  TextEditingController emailNameController = TextEditingController();
 
   late final String phoneNumber;
   late final String uid;
@@ -22,7 +23,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
     "Shymkent",
   ];
 
-  var selectedCity;
+  late String selectedCity;
 
   @override
   void onInitWithContext() async {
@@ -41,6 +42,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
       city: selectedCity,
       username: fullNameController.text,
       phoneNumber: phoneNumber,
+      email: emailNameController.text,
       documents: [],
     );
     userScope.userData = model.userModel;

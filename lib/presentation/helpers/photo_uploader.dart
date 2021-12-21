@@ -33,7 +33,7 @@ class PhotoUploader {
         imgbbResponse = ImgbbResponseModel.fromJson(response.data);
         documentsUrl.add(imgbbResponse.data.displayUrl);
       } else {
-        print("error");
+        //ignore
       }
     }
     FireStoreInstance().uploadDocumentsURL(userScopeData.userData.uid, documentsUrl);

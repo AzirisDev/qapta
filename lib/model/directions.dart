@@ -18,7 +18,7 @@ class Directions {
     // Check if route is not available
     if ((map['routes'] as List).isEmpty) {
       return Directions(
-          bounds: LatLngBounds(southwest: LatLng(0, 0), northeast: LatLng(0, 0)),
+          bounds: LatLngBounds(southwest: const LatLng(0, 0), northeast: const LatLng(0, 0)),
           polylinePoints: [],
           totalDistance: "",
           totalDuration: "");

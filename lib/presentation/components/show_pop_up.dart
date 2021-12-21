@@ -34,6 +34,7 @@ Future<void> showPopup({
                     title,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
+                      fontFamily: 'Raleway',
                       fontWeight: FontWeight.w700,
                       fontSize: 24,
                       color: AppColors.MONO_BLACK,
@@ -49,6 +50,7 @@ Future<void> showPopup({
                         softWrap: true,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                          fontFamily: 'Raleway',
                           fontSize: 16,
                           color: AppColors.MONO_BLACK,
                         ),
@@ -131,6 +133,7 @@ buildButtonForPopups({
             : Text(
                 textForButton,
                 style: TextStyle(
+                  fontFamily: 'Raleway',
                   fontSize: 18,
                   letterSpacing: 0.5,
                   color: isColorFilled ? AppColors.MONO_WHITE : textColor,
@@ -154,6 +157,7 @@ buildCancelButton({
       child: Text(
         textForCancel,
         style: const TextStyle(
+          fontFamily: 'Raleway',
           fontSize: 17,
           color: AppColors.MONO_BLACK,
         ),

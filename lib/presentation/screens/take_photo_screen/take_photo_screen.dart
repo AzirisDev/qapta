@@ -16,7 +16,7 @@ class TakePhotoScreen extends StatefulWidget {
 }
 
 class _TakePhotoScreenState extends State<TakePhotoScreen> {
-  TakePhotoPresenter _presenter = TakePhotoPresenter(TakePhotoViewModel(ScreenState.none));
+  final TakePhotoPresenter _presenter = TakePhotoPresenter(TakePhotoViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {
@@ -42,7 +42,7 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
       ),
       child: Column(
         children: [
-          Spacer(),
+          const Spacer(),
           Padding(
               padding: const EdgeInsets.all(16),
               child: Image.asset(widget.flag == 0
@@ -54,7 +54,7 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
                           : widget.flag == 3
                               ? "assets/main_images/driver_licence_back.jpg"
                               : "assets/main_images/ad_example.png")),
-          Spacer(),
+          const Spacer(),
           Padding(
               padding: const EdgeInsets.all(16),
               child: CustomButton(title: "Take photo", onClick: _presenter.takePicture))

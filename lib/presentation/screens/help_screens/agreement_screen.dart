@@ -9,7 +9,7 @@ class AgreementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GeneralScaffold(
-        appBar: CustomAppBar(title: "Agreement"),
+        appBar: customAppBar(title: "Договор"),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
@@ -30,6 +30,7 @@ class AgreementScreen extends StatelessWidget {
                           Text(
                             "Privacy policy",
                             style: TextStyle(
+                              fontFamily: 'Raleway',
                               color: AppColors.PRIMARY_BLUE,
                               fontSize: 24,
                             ),
@@ -43,12 +44,14 @@ class AgreementScreen extends StatelessWidget {
                     const Text(
                       "Rules of use of Qapta service",
                       style: TextStyle(
+                        fontFamily: 'Raleway',
                         fontSize: 16,
                       ),
                     ),
                     const Text(
                       "(Prikol LLP BIN 123456789123)",
                       style: TextStyle(
+                        fontFamily: 'Raleway',
                         fontSize: 16,
                       ),
                     ),
@@ -58,6 +61,7 @@ class AgreementScreen extends StatelessWidget {
                     const Text(
                       "Nur-Sultan Current version from April 11, 2021",
                       style: TextStyle(
+                        fontFamily: 'Raleway',
                         fontSize: 16,
                       ),
                     ),
@@ -71,6 +75,7 @@ class AgreementScreen extends StatelessWidget {
                       "Morbi quam justo, laoreet non augue nec, molestie auctor urna. Sed a justo tincidunt lectus pharetra fringilla. In nunc mi, sodales eu tempor vel, interdum nec odio. Cras id dui erat. Phasellus eu lorem non lectus scelerisque porttitor. Duis in dui fermentum, egestas enim nec, tincidunt nisi. Phasellus accumsan est ac purus posuere, et gravida lectus posuere. Sed luctus consectetur volutpat. Donec consequat ac erat id consectetur. Nunc venenatis scelerisque magna, a dignissim massa varius eu."
                       " Vivamus eleifend nibh sit amet varius faucibus. Suspendisse magna ante, cursus a luctus eu, semper ac nisl. Pellentesque sodales, elit sit amet elementum varius, arcu tortor posuere nunc, eget iaculis ante augue in ligula. Aliquam erat volutpat. In erat metus, gravida lobortis urna nec, tincidunt sagittis sem. Phasellus finibus elementum dolor, vitae congue tellus sagittis ac. Praesent a odio sed metus sollicitudin imperdiet ac sit amet diam. Nam malesuada elementum tincidunt. Pellentesque in ipsum nec lectus scelerisque convallis. Cras ac lorem at turpis cursus porttitor ut vitae sem. Donec pretium erat nec dui mollis, sed posuere ex rhoncus. Vivamus lobortis purus id augue fermentum, mattis sollicitudin nulla elementum. Praesent tristique facilisis nisl, vel vehicula velit dignissim facilisis.",
                       style: TextStyle(
+                        fontFamily: 'Raleway',
                         fontSize: 16,
                       ),
                     ),
