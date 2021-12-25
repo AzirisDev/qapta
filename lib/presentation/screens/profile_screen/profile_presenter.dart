@@ -48,6 +48,10 @@ class ProfilePresenter extends BasePresenter<ProfileViewModel> {
     Navigator.push(context, CupertinoPageRoute(builder: (context) => const AgreementScreen()));
   }
 
+  void editProfile() {
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => const ChangeProfileScreen()));
+  }
+
   void privacyPolicy() async {
     const url = 'https://www.qapta.kz/';
     if (await canLaunch(url)) {

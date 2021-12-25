@@ -110,6 +110,10 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     updateView();
   }
 
+  void endRide(){
+
+  }
+
   void updateMarker(LocationData newLocationData) {
     if (newLocationData.longitude != null &&
         newLocationData.latitude != null &&

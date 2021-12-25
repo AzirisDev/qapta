@@ -31,28 +31,30 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
         stream: _presenter.stream,
         builder: (context, snapshot) {
           return GeneralScaffold(
-            appBar: customAppBar(title: "Личная информация"),
+            appBar: customAppBar(title: "Изменить"),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text("Name",
-                        style: TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 15,
-                          fontWeight: FontWeight.w300,
-                        )),
-                  ),
                   CustomTextField(
                     controller: _presenter.nameController,
-                    hint: "Name",
-                    label: "Name",
+                    hint: "Имя",
+                    label: "Имя",
                     validator: (text) {
                       if (text == null || text.isEmpty || text.length < 8) {
-                        return "Enter your name";
+                        return "Введите имя";
+                      }
+                      return null;
+                    },
+                  ),
+                  CustomTextField(
+                    controller: _presenter.emailController,
+                    hint: "Email",
+                    label: "email",
+                    validator: (text) {
+                      if (text == null || text.isEmpty || text.length < 8) {
+                        return "Введите email";
                       }
                       return null;
                     },
@@ -60,7 +62,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                   Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: CustomButton(
-                          title: "Change",
+                          title: "Изменить",
                           onClick: () {
                             _presenter.changeProfileName();
                           }))

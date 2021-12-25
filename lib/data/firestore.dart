@@ -29,8 +29,8 @@ class FireStoreInstance {
     users.doc(uid).update({"documents": documents});
   }
 
-  void updateUserData(String uid, String newName) {
-    users.doc(uid).update({"username": newName});
+  void updateUserData(String uid, String newName, String newEmail) {
+    users.doc(uid).update({"username": newName, "email": newEmail});
   }
 
   late CollectionReference users = fireStore.collection("users").withConverter<UserData>(

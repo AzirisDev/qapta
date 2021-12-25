@@ -4,6 +4,7 @@ import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_presenter.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_view_model.dart';
+import 'package:ad_drive/styles.dart';
 import 'package:flutter/material.dart';
 
 class TakePhotoScreen extends StatefulWidget {
@@ -41,7 +42,18 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Text(
+            "Сфотографируйте автомобиль",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.PRIMARY_BLUE,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              fontFamily: 'Raleway',
+            ),
+          ),
           const Spacer(),
           Padding(
               padding: const EdgeInsets.all(16),
@@ -55,9 +67,19 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
                               ? "assets/main_images/driver_licence_back.jpg"
                               : "assets/main_images/ad_example.png")),
           const Spacer(),
+          Text(
+            "*нам нужно убедиться, что выездите с нашей рекламой и мы начислим вам деньги",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.PRIMARY_BLUE,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              fontFamily: 'Raleway',
+            ),
+          ),
           Padding(
               padding: const EdgeInsets.all(16),
-              child: CustomButton(title: "Take photo", onClick: _presenter.takePicture))
+              child: CustomButton(title: "Сфотографировать", onClick: _presenter.takePicture))
         ],
       ),
       backgroundColor: AppColors.MONO_WHITE,

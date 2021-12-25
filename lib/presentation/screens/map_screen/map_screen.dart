@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
-import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_presenter.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 import '../../../app_colors.dart';
 
@@ -20,6 +20,12 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixin {
   final MapPresenter _presenter = MapPresenter(MapViewModel(ScreenState.none));
+
+  @override
+  void initState() {
+    initializeDateFormatting();
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
@@ -49,11 +55,14 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                   polylines: _presenter.lines,
                 ),
                 SlidingUpPanel(
-                  minHeight: 150,
-                  maxHeight: 600,
+                  minHeight: 100,
+                  maxHeight: 360,
+                  backdropEnabled: true,
+                  backdropColor: Colors.black,
                   panel: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(24), topRight: Radius.circular(24)),
                         gradient: LinearGradient(
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
@@ -71,105 +80,112 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                           ],
                         )),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 32),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            DateFormat('EEEE').format(DateTime.now()).toString(),
-                            style: const TextStyle(
-                                fontFamily: 'Raleway',
-                                fontSize: 30,
-                                color: AppColors.MONO_WHITE,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            DateFormat("y-MMMM-d").format(DateTime.now()).toString(),
+                            DateFormat.yMMMd('ru').format(DateTime.now()).toString(),
                             style: const TextStyle(
                               fontFamily: 'Raleway',
-                              fontSize: 20,
+                              fontSize: 32,
                               color: AppColors.MONO_WHITE,
                             ),
                           ),
                           const SizedBox(
                             height: 15,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    Icons.location_on_rounded,
-                                    color: AppColors.MONO_WHITE,
-                                  ),
-                                  const Text(
-                                    "Distance",
-                                    style: TextStyle(
-                                        fontFamily: 'Raleway',
-                                        fontSize: 24,
-                                        color: AppColors.MONO_WHITE,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    _presenter.totalDistance.toInt().toString() + " miles",
-                                    style: const TextStyle(
-                                      fontFamily: 'Raleway',
-                                      fontSize: 24,
-                                      color: AppColors.MONO_WHITE,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                width: 1,
-                                height: 50,
+                          Divider(
+                            color: AppColors.MONO_WHITE,
+                          ),
+                          const Text(
+                            "Ваш заработок за сегодня",
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 20,
                                 color: AppColors.MONO_WHITE,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            (_presenter.totalDistance.toInt() * 50).toString() + " KZT",
+                            style: const TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 32,
+                              color: AppColors.MONO_WHITE,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          const Text(
+                            "Пройденный путь",
+                            style: TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 20,
+                                color: AppColors.MONO_WHITE,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            _presenter.totalDistance.toInt().toString() + " километров",
+                            style: const TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 32,
+                              color: AppColors.MONO_WHITE,
+                            ),
+                          ),
+                          Divider(
+                            color: AppColors.MONO_WHITE,
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Завершить поездку',
+                                style: TextStyle(
+                                  fontFamily: 'Raleway',
+                                  fontSize: 24,
+                                  color: AppColors.MONO_WHITE,
+                                ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    Icons.monetization_on_outlined,
-                                    color: AppColors.MONO_WHITE,
+                              GestureDetector(
+                                onTap: _presenter.endRide,
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppColors.PRIMARY_BLUE,
+                                    border: Border.all(color: AppColors.MONO_WHITE, width: 4),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.white,
+                                        blurRadius: 10.0,
+                                        spreadRadius: 0.0,
+                                        offset: Offset(
+                                          0.0,
+                                          0.0,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const Text(
-                                    "Money",
+                                  child: Text(
+                                    'X',
                                     style: TextStyle(
                                         fontFamily: 'Raleway',
-                                        fontSize: 24,
-                                        color: AppColors.MONO_WHITE,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.MONO_WHITE),
                                   ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  Text(
-                                    (_presenter.totalDistance.toInt() * 50).toString() + " \$",
-                                    style: const TextStyle(
-                                      fontFamily: 'Raleway',
-                                      fontSize: 24,
-                                      color: AppColors.MONO_WHITE,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
-                          ),
-                          CustomButton(
-                            title: "Start drive",
-                            onClick: _presenter.takePhoto,
-                            textColor: AppColors.PRIMARY_BLUE,
-                            backgroundColor: AppColors.MONO_WHITE,
-                          ),
-                          if (_presenter.model.photo != null)
-                            Image.file(
-                              File(_presenter.model.photo!.path),
-                              height: 200,
-                            ),
+                          )
                         ],
                       ),
                     ),
@@ -177,57 +193,52 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                   collapsed: Container(
                       padding: EdgeInsets.only(
                           top: 16,
-                          left: 16,
-                          right: 16,
+                          left: 32,
+                          right: 32,
                           bottom: MediaQuery.of(context).padding.bottom + 16),
-                      decoration: BoxDecoration(color: AppColors.MONO_WHITE, borderRadius: radius),
+                      decoration: BoxDecoration(
+                        color: AppColors.PRIMARY_BLUE,
+                        borderRadius: radius,
+                      ),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            children: const [
-                              Icon(
-                                Icons.monetization_on_outlined,
-                                color: AppColors.PRIMARY_BLUE,
-                              ),
-                              Text(
-                                "Earnings for today:",
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
+                          const Text(
+                            'Начать поездку',
+                            style: TextStyle(
+                              fontFamily: 'Raleway',
+                              fontSize: 24,
+                              color: AppColors.MONO_WHITE,
+                            ),
                           ),
-                          Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          GestureDetector(
+                            onTap: _presenter.takePhoto,
+                            child: Container(
+                              padding: EdgeInsets.zero,
                               decoration: BoxDecoration(
-                                  color: AppColors.PRIMARY_BLUE,
-                                  borderRadius: BorderRadius.circular(24),
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.85),
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.9),
-                                      AppColors.PRIMARY_BLUE,
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.9),
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.85),
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.8),
-                                      AppColors.PRIMARY_BLUE.withOpacity(0.75),
-                                    ],
-                                  )),
-                              child: const Text(
-                                "50 \$",
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  color: AppColors.MONO_WHITE,
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )),
+                                shape: BoxShape.circle,
+                                color: AppColors.PRIMARY_BLUE,
+                                border: Border.all(color: AppColors.MONO_WHITE, width: 4),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.white,
+                                    blurRadius: 10.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(
+                                      0.0,
+                                      0.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              child: const Icon(
+                                Icons.play_arrow_rounded,
+                                color: AppColors.MONO_WHITE,
+                                size: 40,
+                              ),
+                            ),
+                          ),
                         ],
                       )),
                   borderRadius: radius,
