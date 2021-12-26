@@ -44,16 +44,17 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "Сфотографируйте автомобиль",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.PRIMARY_BLUE,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              fontFamily: 'Raleway',
+          if (widget.flag == 4)
+            const Text(
+              "Сфотографируйте автомобиль",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.PRIMARY_BLUE,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'Raleway',
+              ),
             ),
-          ),
           const Spacer(),
           Padding(
               padding: const EdgeInsets.all(16),
@@ -67,16 +68,17 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
                               ? "assets/main_images/driver_licence_back.jpg"
                               : "assets/main_images/ad_example.png")),
           const Spacer(),
-          Text(
-            "*нам нужно убедиться, что выездите с нашей рекламой и мы начислим вам деньги",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.PRIMARY_BLUE,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              fontFamily: 'Raleway',
+          if (widget.flag == 4)
+            const Text(
+              "*нам нужно убедиться, что выездите с нашей рекламой и мы начислим вам деньги",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: AppColors.PRIMARY_BLUE,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontFamily: 'Raleway',
+              ),
             ),
-          ),
           Padding(
               padding: const EdgeInsets.all(16),
               child: CustomButton(title: "Сфотографировать", onClick: _presenter.takePicture))

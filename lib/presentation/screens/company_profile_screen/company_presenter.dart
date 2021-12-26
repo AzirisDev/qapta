@@ -6,6 +6,15 @@ class CompanyPresenter extends BasePresenter<CompanyViewModel> {
 
   int index = 2;
 
+  bool isExpand = false;
+
+  List<String> adverts = ['Полностью', 'Лобовое', 'Бампер'];
+
+  void expandText(){
+    isExpand = !isExpand;
+    updateView();
+  }
+
   void onTapInfoContainer(int currentIndex) {
     index = currentIndex;
     updateView();

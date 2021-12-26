@@ -36,34 +36,37 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
-                      "Photo uploading".toUpperCase(),
-                      style: const TextStyle(
+                      'Сфотограцируйте ваши документы',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
                         fontFamily: 'Raleway',
-                        color: AppColors.PRIMARY_BLUE,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
+                        color: AppColors.MONO_BLACK,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
-                  photoCard(_presenter.model.idFront, "Front side of ID card", 0),
-                  photoCard(_presenter.model.idBack, "Back side of ID card", 1),
+                  photoCard(_presenter.model.idFront, "Передняя сторона Удостоверение личности", 0),
+                  photoCard(_presenter.model.idBack, "Задняя сторона Удостоверение личности", 1),
                   photoCard(
-                      _presenter.model.driverLicenceFront, "Front side of driver's licence", 2),
-                  photoCard(_presenter.model.driverLicenceBack, "Back side of driver's licence", 3),
+                      _presenter.model.driverLicenceFront, "Передняя сторона Водительских прав", 2),
+                  photoCard(
+                      _presenter.model.driverLicenceBack, "Передняя сторона Водительских прав", 3),
                   SwitchListTile(
                     title: GestureDetector(
                       onTap: _presenter.openContract,
                       child: const Text(
-                        'I accept terms of Contract',
+                        'Я принимаю условия Пользования',
                         style: TextStyle(
                           fontFamily: 'Raleway',
                           decoration: TextDecoration.underline,
                           fontSize: 20,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
@@ -74,12 +77,14 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     onChanged: _presenter.onChanged,
                   ),
                   CustomButton(
-                    title: _presenter.notComplete ? "Fill form" : "Submit",
+                    title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
                     onClick: _presenter.submit,
-                    backgroundColor:
-                        _presenter.notComplete ? AppColors.MONO_RED : AppColors.PRIMARY_BLUE,
-                    borderColor:
-                        _presenter.notComplete ? AppColors.MONO_RED : AppColors.PRIMARY_BLUE,
+                    backgroundColor: _presenter.notComplete
+                        ? AppColors.MONO_RED.withOpacity(0.7)
+                        : AppColors.PRIMARY_BLUE,
+                    borderColor: _presenter.notComplete
+                        ? AppColors.MONO_RED.withOpacity(0.7)
+                        : AppColors.PRIMARY_BLUE,
                   ),
                 ],
               ),
@@ -115,7 +120,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                 style: const TextStyle(
                   fontFamily: 'Raleway',
                   fontSize: 20,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             )

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class GeneralScaffold extends StatelessWidget {
   final Widget child;
   final AppBar? appBar;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 
-  const GeneralScaffold({Key? key, required this.child, this.appBar, required this.backgroundColor})
+  const GeneralScaffold({Key? key, required this.child, this.appBar, this.backgroundColor})
       : super(key: key);
 
   @override
