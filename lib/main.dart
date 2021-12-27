@@ -48,28 +48,20 @@ class MyApp extends StatelessWidget {
             home: FutureBuilder(
               future: UserScopeWidget.of(context).init(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
-                // if (snapshot.data == null) {
-                //   return const Center(
-                //     child: Text("data is null"),
-                //   );
-                // }
-                // UserData user = snapshot.data;
-                // final userLoggedIn = Provider.of<UserModel?>(context);
-                // if (userLoggedIn == null || user.uid == "") {
-                //   return initScreen == null ? const FirstPage() : const LoginScreen();
-                // } else {
-                //   return MainScreen(
-                //     user: user,
-                //   );
-                // }
-                return CompanyProfile(
-                  company: Company(
-                    name: "Apple Inc.",
-                    description: lorem(words: 60, paragraphs: 2),
-                    logo: "assets/icons/apple_logo.svg",
-                    prices: {"1 month": 65, "3 month": 155, "6 month": 456},
-                  ),
-                );
+                if (snapshot.data == null) {
+                  return const Center(
+                    child: Text("data is null"),
+                  );
+                }
+                UserData user = snapshot.data;
+                final userLoggedIn = Provider.of<UserModel?>(context);
+                if (userLoggedIn == null || user.uid == "") {
+                  return initScreen == null ? const FirstPage() : const LoginScreen();
+                } else {
+                  return MainScreen(
+                    user: user,
+                  );
+                }
               },
             ),
           ),
