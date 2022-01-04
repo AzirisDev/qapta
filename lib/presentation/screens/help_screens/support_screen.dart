@@ -13,7 +13,7 @@ class SupportScreen extends StatelessWidget {
 
   void launchEmail() async {
     final url =
-        "mailto: support@qapta.kz?subject=Feedback&body=${Uri.encodeFull(questionController.text)}";
+        "mailto: support@qapta.kz?subject=Жалобы и пожелания&body=${Uri.encodeFull(questionController.text)}";
     if (await canLaunch(url)) {
       await launch(url);
     }

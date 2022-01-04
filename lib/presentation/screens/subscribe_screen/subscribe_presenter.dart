@@ -6,6 +6,7 @@ import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_mo
 import 'package:ad_drive/presentation/screens/subscribe_screen/widgets/contract_screen.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
   SubscrivePresenter(SubscribeViewModel model) : super(model);
@@ -22,7 +23,7 @@ class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const ContractScreen()));
   }
 
-  void submit() {
+  void submit() async {
     if (validate()) {
       notComplete = false;
       List<File> images = [];
@@ -30,11 +31,23 @@ class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
       images.add(File(model.idBack!.path));
       images.add(File(model.driverLicenceFront!.path));
       images.add(File(model.driverLicenceBack!.path));
-      PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+      List<String> documents =
+          await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+      launchEmail(documents);
       updateView();
     } else {
       notComplete = true;
       updateView();
+    }
+  }
+
+  //TODO: ADD COMPANY SUPPORT
+
+  void launchEmail(List<String> documents) async {
+    final url =
+        "mailto: support@qapta.kz?subject=${userScope.userData.username} Заявка на подписку&body=${Uri.encodeFull("Компания: " + "COMPANY" + "\n" + "ФИО: " + userScope.userData.username + "\n" + "Город: " + userScope.userData.city + "\n" + "Телефон: " + userScope.userData.phoneNumber + "\n" + "Документы: " + documents.toString())}";
+    if (await canLaunch(url)) {
+      await launch(url);
     }
   }
 
