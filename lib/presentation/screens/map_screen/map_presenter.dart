@@ -27,11 +27,26 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   CameraPosition initialLocation = const CameraPosition(target: LatLng(37, -122), zoom: 14);
   LatLng lastLocation = const LatLng(37, -122);
   double totalDistance = 0;
+  bool isJobAvailable = false;
 
   @override
   void onInitWithContext() async {
     super.onInitWithContext();
-    await getCurrentLocation();
+    if(getJobAvailable()){
+      await getCurrentLocation();
+    }
+  }
+
+  bool getJobAvailable(){
+    bool canWork = DateTime.now().hour < 18 && DateTime.now().hour > 11;
+    if(canWork){
+      isJobAvailable = true;
+      updateView();
+    } else {
+      isJobAvailable = false;
+      updateView();
+    }
+    return canWork;
   }
 
   void startTracking() {

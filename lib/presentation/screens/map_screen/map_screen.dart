@@ -44,16 +44,20 @@ class _MapScreenState extends State<MapScreen> {
             body: Stack(
               alignment: Alignment.center,
               children: [
-                GoogleMap(
-                  zoomControlsEnabled: false,
-                  mapType: MapType.hybrid,
-                  initialCameraPosition: _presenter.initialLocation,
-                  markers: Set.of(_presenter.marker != null ? [_presenter.marker!] : []),
-                  onMapCreated: (controller) => _presenter.controller = controller,
-                  polylines: _presenter.lines,
-                ),
+                _presenter.isJobAvailable
+                    ? GoogleMap(
+                        zoomControlsEnabled: false,
+                        mapType: MapType.hybrid,
+                        initialCameraPosition: _presenter.initialLocation,
+                        markers: Set.of(_presenter.marker != null ? [_presenter.marker!] : []),
+                        onMapCreated: (controller) => _presenter.controller = controller,
+                        polylines: _presenter.lines,
+                      )
+                    : Center(
+                        child: Text("You can not work now bro"),
+                      ),
                 SlidingUpPanel(
-                  minHeight: 100,
+                  minHeight: _presenter.isJobAvailable ? 100 : 0,
                   maxHeight: 360,
                   backdropEnabled: true,
                   backdropColor: Colors.black,
