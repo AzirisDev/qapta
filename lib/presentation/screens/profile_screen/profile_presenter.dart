@@ -41,7 +41,7 @@ class ProfilePresenter extends BasePresenter<ProfileViewModel> {
   }
 
   void support() {
-    Navigator.push(context, CupertinoPageRoute(builder: (context) => SupportScreen()));
+    Navigator.push(context, CupertinoPageRoute(builder: (context) => const SupportScreen()));
   }
 
   void agreement() {

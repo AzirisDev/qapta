@@ -7,9 +7,7 @@ import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_presenter.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_view_model.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CompanyProfile extends StatefulWidget {
@@ -40,7 +38,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
           return GeneralScaffold(
               appBar: customAppBar(title: 'О компании'),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,13 +163,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                 children: [
                                   Text(
                                     company.prices.values.elementAt(_presenter.index).toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'Raleway',
                                       fontSize: 36,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     ' KZT/час',
                                     style: TextStyle(
                                       fontFamily: 'Raleway',

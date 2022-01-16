@@ -2,18 +2,15 @@ import 'package:ad_drive/data/firebase.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/model/user_model.dart';
 import 'package:ad_drive/presentation/di/user_scope.dart';
-import 'package:ad_drive/presentation/screens/company_profile_screen/company_profile.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/widgets/first_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'helper/bottom_nav_bar_provider.dart';
-import 'model/company.dart';
 
 int? initScreen;
 

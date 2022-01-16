@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomButton extends StatelessWidget {
   final String title;
   final void Function() onClick;
-  final showLoading;
+  final bool showLoading;
   final Color? backgroundColor;
   final Color? textColor;
   final Color? borderColor;

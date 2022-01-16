@@ -18,7 +18,7 @@ class SubscribeScreen extends StatefulWidget {
 }
 
 class _SubscribeScreenState extends State<SubscribeScreen> {
-  final SubscrivePresenter _presenter = SubscrivePresenter(SubscribeViewModel(ScreenState.none));
+  final SubscribePresenter _presenter = SubscribePresenter(SubscribeViewModel(ScreenState.none));
 
   @override
   void didChangeDependencies() {

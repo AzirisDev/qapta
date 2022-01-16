@@ -40,9 +40,9 @@ dependencies:
   flutter_native_splash: ^1.2.3
   introduction_screen: ^2.1.0
   hive: ^2.0.4
-  flutter_svg: ^0.22.0
+  flutter_svg: ^1.0.1
   provider: ^6.0.0
-  cloud_firestore: ^2.5.3
+  cloud_firestore: ^3.1.6
   flutter_lorem: ^2.0.0
   shared_preferences: ^2.0.7
   url_launcher: ^6.0.12
@@ -52,7 +52,7 @@ dependencies:
   flutter_credit_card: ^3.0.0
   image_picker: ^0.8.4+2
   flutter_polyline_points: ^1.0.0
-  geolocator: ^7.7.1
+  geolocator: ^8.0.3
   dio: ^4.0.3
   http: ^0.13.4
 

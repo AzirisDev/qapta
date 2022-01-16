@@ -115,9 +115,9 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
                             title: "Validate",
                             onClick: () {
                               if (formKey.currentState!.validate()) {
-                                print('valid!');
+                                // print('valid!');
                               } else {
-                                print('invalid!');
+                                // print('invalid!');
                               }
                             }),
                       )

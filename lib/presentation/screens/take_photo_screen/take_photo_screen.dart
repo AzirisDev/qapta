@@ -4,7 +4,6 @@ import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_presenter.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_view_model.dart';
-import 'package:ad_drive/styles.dart';
 import 'package:flutter/material.dart';
 
 class TakePhotoScreen extends StatefulWidget {

@@ -3,7 +3,6 @@ import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_presenter.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_view_model.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/widgets/page_on_boarding.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

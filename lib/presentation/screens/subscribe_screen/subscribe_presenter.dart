@@ -8,8 +8,8 @@ import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_scree
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SubscrivePresenter extends BasePresenter<SubscribeViewModel> {
-  SubscrivePresenter(SubscribeViewModel model) : super(model);
+class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
+  SubscribePresenter(SubscribeViewModel model) : super(model);
 
   bool switchBool = true;
   bool notComplete = false;

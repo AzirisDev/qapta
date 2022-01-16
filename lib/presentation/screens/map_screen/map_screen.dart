@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_presenter.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
@@ -18,7 +16,7 @@ class MapScreen extends StatefulWidget {
   _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixin {
+class _MapScreenState extends State<MapScreen> {
   final MapPresenter _presenter = MapPresenter(MapViewModel(ScreenState.none));
 
   @override
@@ -95,7 +93,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                           const SizedBox(
                             height: 15,
                           ),
-                          Divider(
+                          const Divider(
                             color: AppColors.MONO_WHITE,
                           ),
                           const Text(
@@ -139,7 +137,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                               color: AppColors.MONO_WHITE,
                             ),
                           ),
-                          Divider(
+                          const Divider(
                             color: AppColors.MONO_WHITE,
                           ),
                           Row(
@@ -157,7 +155,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                               GestureDetector(
                                 onTap: _presenter.endRide,
                                 child: Container(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: AppColors.PRIMARY_BLUE,
@@ -174,7 +172,7 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
                                       ),
                                     ],
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     'X',
                                     style: TextStyle(
                                         fontFamily: 'Raleway',
@@ -248,7 +246,4 @@ class _MapScreenState extends State<MapScreen> with AutomaticKeepAliveClientMixi
           );
         });
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

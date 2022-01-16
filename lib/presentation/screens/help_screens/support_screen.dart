@@ -6,9 +6,14 @@ import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SupportScreen extends StatelessWidget {
-  SupportScreen({Key? key}) : super(key: key);
+class SupportScreen extends StatefulWidget {
+  const SupportScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SupportScreen> createState() => _SupportScreenState();
+}
+
+class _SupportScreenState extends State<SupportScreen> {
   TextEditingController questionController = TextEditingController();
 
   void launchEmail() async {

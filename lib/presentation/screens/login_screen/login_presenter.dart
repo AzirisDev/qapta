@@ -100,8 +100,8 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
           );
         }
       }
-    } on FirebaseAuthException catch (e) {
-      scaffoldKey.currentState!.showSnackBar(SnackBar(content: Text(e.message!)));
+    } on FirebaseAuthException catch (_) {
+      //ignore
     }
     updateView();
   }

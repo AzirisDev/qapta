@@ -6,7 +6,6 @@ import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/model/imgbb_response_model.dart';
 import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 
 class PhotoUploader {
   UserScopeData userScopeData;
