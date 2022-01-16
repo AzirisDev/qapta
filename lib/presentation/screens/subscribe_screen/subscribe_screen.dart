@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_app_bar.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
@@ -11,7 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SubscribeScreen extends StatefulWidget {
-  const SubscribeScreen({Key? key}) : super(key: key);
+  final Company company;
+  final int index;
+  const SubscribeScreen({Key? key, required this.company, required this.index}) : super(key: key);
 
   @override
   _SubscribeScreenState createState() => _SubscribeScreenState();
@@ -23,6 +26,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
+    _presenter.initCompany(widget.company, widget.index);
     super.didChangeDependencies();
   }
 
@@ -77,6 +81,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     onChanged: _presenter.onChanged,
                   ),
                   CustomButton(
+                    showLoading: _presenter.model.isLoading,
                     title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
                     onClick: _presenter.submit,
                     backgroundColor: _presenter.notComplete

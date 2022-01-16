@@ -187,7 +187,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => const SubscribeScreen()));
+                                            builder: (context) => SubscribeScreen(company: company, index: _presenter.index,)));
                                   }),
                             ),
                           ],
