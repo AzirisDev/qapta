@@ -1,3 +1,4 @@
+import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/company_profile_screen/company_profile.dart';
@@ -59,6 +60,16 @@ class CompaniesPresenter extends BasePresenter<CompaniesViewModel> {
       prices: {"1 month": 1, "3 month": 2, "6 month": 999},
     ),
   ];
+
+  @override
+  void onInitWithContext() {
+    super.onInitWithContext();
+    fetchCompanies();
+  }
+
+  void fetchCompanies() async {
+    await FireStoreInstance().fetchCompanies();
+  }
 
   void onCompanyClick(Company company) {
     Navigator.push(

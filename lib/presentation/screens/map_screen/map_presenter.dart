@@ -126,7 +126,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   void endRide(){
-
+    //TODO:Save distance in db
   }
 
   void updateMarker(LocationData newLocationData) {
@@ -153,6 +153,9 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   void dispose() {
     if (locationSubscription != null) {
       locationSubscription!.cancel();
+    }
+    if (positionStream != null) {
+      positionStream!.cancel();
     }
     super.dispose();
   }
