@@ -56,9 +56,9 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   }
 
   void launchEmail(List<String> documents) async {
-    int price = model.company!.prices.values.elementAt(model.index!);
+    String priceModel = model.company!.prices.keys.elementAt(model.index!);
     final url =
-        "mailto: support@qapta.kz?subject=${userScope.userData.username} Заявка на подписку&body=${Uri.encodeFull("Компания: " + model.company!.name+ "\n" + "ФИО: " + userScope.userData.username + "\n" + "На какую кампанию: " + price.toString() + " KZT/hour" + "\n"+ "Город: " + userScope.userData.city + "\n" + "Телефон: " + userScope.userData.phoneNumber + "\n" + "Документы: " + documents.toString())}";
+        "mailto: support@qapta.kz?subject=${userScope.userData.username} Заявка на подписку&body=${Uri.encodeFull("Компания: " + model.company!.name+ "\n" + "ФИО: " + userScope.userData.username + "\n" + "На какую кампанию: " + priceModel.toString() + "\n"+ "Город: " + userScope.userData.city + "\n" + "Телефон: " + userScope.userData.phoneNumber + "\n" + "Документы: " + documents.toString())}";
     if (await canLaunch(url)) {
       await launch(url);
     }

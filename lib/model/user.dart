@@ -4,15 +4,18 @@ class UserData {
   String username;
   String phoneNumber;
   String email;
+  String avatarUrl;
   List<String> documents;
 
-  UserData(
-      {required this.uid,
-      required this.city,
-      required this.username,
-      required this.phoneNumber,
-      required this.email,
-      required this.documents});
+  UserData({
+    required this.uid,
+    required this.city,
+    required this.username,
+    required this.phoneNumber,
+    required this.email,
+    required this.documents,
+    required this.avatarUrl,
+  });
 
   UserData.fromJson(Map<String, Object?> json)
       : this(
@@ -21,6 +24,7 @@ class UserData {
           username: json['username'] as String,
           phoneNumber: json['phoneNumber'] as String,
           email: json['email'] as String,
+          avatarUrl: json['avatarUrl'] as String,
           documents: List<String>.from(json['documents'] as List<dynamic>),
         );
 
@@ -31,6 +35,7 @@ class UserData {
       'username': username,
       'phoneNumber': phoneNumber,
       'email': email,
+      'avatarUrl': avatarUrl,
       'documents': documents,
     };
   }

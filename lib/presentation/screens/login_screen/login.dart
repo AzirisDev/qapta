@@ -136,7 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           _presenter.codeFormatter,
                                         ],
                                         keyboardType: TextInputType.number,
-                                        textAlign: TextAlign.center,
+                                        textAlign: TextAlign.start,
                                         maxLength: 8,
                                       )
                                   ],

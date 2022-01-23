@@ -35,17 +35,15 @@ class FireStoreInstance {
   }
 
   Future<List<Company>> fetchCompanies() async {
-    var snapshot = await companies.get();
+    QuerySnapshot snapshot = await companies.get();
     List<Company> documents = [];
-    int length = snapshot.docs.length;
     for (var element in snapshot.docs) {
       documents.add(
         Company(
-          name: element['name'],
-          description: element['description'],
-          logo: element['logo'],
-          prices: element['prices'
-              ''],
+          name: element["name"],
+          description: element["description"],
+          logo: element["logo"],
+          prices: element["prices"],
         ),
       );
     }

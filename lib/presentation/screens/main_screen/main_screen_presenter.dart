@@ -8,11 +8,25 @@ import 'package:ad_drive/presentation/screens/profile_screen/profile_screen.dart
 class MainPresenter extends BasePresenter<MainViewModel> {
   MainPresenter(MainViewModel model) : super(model);
 
+  bool isJobAvailable = true;
+
   var currentTab = [
     const CompaniesScreen(),
     const MapScreen(),
     const ProfileScreen(),
   ];
+
+  bool getJobAvailable(){
+    bool canWork = DateTime.now().hour < 18 && DateTime.now().hour > 11;
+    if(canWork){
+      isJobAvailable = true;
+      updateView();
+    } else {
+      isJobAvailable = false;
+      updateView();
+    }
+    return canWork;
+  }
 
   @override
   void onInitWithContext() {

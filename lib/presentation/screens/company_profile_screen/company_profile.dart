@@ -48,12 +48,13 @@ class _CompanyProfileState extends State<CompanyProfile> {
                         children: [
                           Container(
                               decoration: BoxDecoration(
-                                  color: AppColors.PRIMARY_BLUE.withOpacity(0.8),
-                                  borderRadius: BorderRadius.circular(10)),
+                                  color: AppColors.PRIMARY_BLUE.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: AppColors.PRIMARY_BLUE)),
                               padding: const EdgeInsets.all(50),
                               height: 250,
                               width: 250,
-                              child: SvgPicture.asset(company.logo)),
+                              child: SvgPicture.network(company.logo)),
                         ],
                       ),
                       const SizedBox(

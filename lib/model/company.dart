@@ -1,7 +1,7 @@
 class Company {
   String name;
   String description;
-  Map<String, int> prices;
+  Map<String, dynamic> prices;
   String logo;
 
   Company({
@@ -16,7 +16,7 @@ class Company {
     name: json["name"] as String,
     description: json["description"] as String,
     logo: json["logo"] as String,
-    prices: Map<String, int>.from(json['prices'] as Map<String, int>),
+    prices: Map<String, dynamic>.from(json['prices'] as Map<String, dynamic>),
   );
 
   toJson() {

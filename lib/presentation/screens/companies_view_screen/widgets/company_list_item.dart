@@ -1,7 +1,7 @@
 import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CompanyListItem extends StatelessWidget {
   final Company company;
@@ -57,7 +57,7 @@ class CompanyListItem extends StatelessWidget {
                         height: 7,
                       ),
                       Text(
-                        "${company.prices.values.first} KZT",
+                        "${company.prices.values.last} KZT",
                         style: const TextStyle(
                           shadows: <Shadow>[
                             Shadow(
@@ -80,9 +80,7 @@ class CompanyListItem extends StatelessWidget {
                 height: 80,
                 width: 100,
                 padding: EdgeInsets.zero,
-                child: SvgPicture.asset(
-                  company.logo,
-                ),
+                child: SvgPicture.network(company.logo),
               ),
             ],
           ),

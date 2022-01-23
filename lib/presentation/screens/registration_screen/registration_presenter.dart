@@ -43,6 +43,8 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
       username: fullNameController.text,
       phoneNumber: phoneNumber,
       email: emailNameController.text,
+      //TODO: add opportunity to add avatar from camera and gallery
+      avatarUrl: "",
       documents: [],
     );
     userScope.userData = model.userModel;

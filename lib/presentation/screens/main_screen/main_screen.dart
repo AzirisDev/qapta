@@ -30,7 +30,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
     return Scaffold(
-      backgroundColor: provider.currentIndex == 1 ? AppColors.PRIMARY_BLUE : null,
+      backgroundColor:
+          provider.currentIndex == 1 && !_presenter.isJobAvailable ? AppColors.PRIMARY_BLUE : null,
       body: _presenter.currentTab[provider.currentIndex],
       floatingActionButton: FloatingActionButton(
         elevation: provider.currentIndex == 1 ? 0 : null,
