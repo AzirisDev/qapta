@@ -29,91 +29,96 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavigationBarProvider>(context);
-    return Scaffold(
-      backgroundColor:
-          provider.currentIndex == 1 && !_presenter.isJobAvailable ? AppColors.PRIMARY_BLUE : null,
-      body: _presenter.currentTab[provider.currentIndex],
-      floatingActionButton: FloatingActionButton(
-        elevation: provider.currentIndex == 1 ? 0 : null,
-        backgroundColor: AppColors.PRIMARY_BLUE,
-        child: const Icon(Icons.map_rounded, color: AppColors.MONO_WHITE),
-        onPressed: () {
-          provider.currentIndex = 1;
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        elevation: provider.currentIndex == 1 ? 0 : null,
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 10,
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: MaterialButton(
-                  minWidth: 40,
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: () {
-                    provider.currentIndex = 0;
-                  },
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        left: 2,
-                        top: 3,
-                        child: Icon(
-                          Icons.home_outlined,
-                          color: provider.currentIndex == 0 ? Colors.black12 : Colors.transparent,
-                          size: 35,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.home_outlined,
-                        color: AppColors.PRIMARY_BLUE,
-                        size: 35,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(flex: 1, child: Container()),
-              Expanded(
-                flex: 2,
-                child: MaterialButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  minWidth: 40,
-                  onPressed: () {
-                    provider.currentIndex = 2;
-                  },
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        right: 2,
-                        top: 3,
-                        child: Icon(
-                          Icons.person_outline_rounded,
-                          color: provider.currentIndex == 2 ? Colors.black12 : Colors.transparent,
-                          size: 35,
-                        ),
-                      ),
-                      const Icon(
-                        Icons.person_outline_rounded,
-                        color: AppColors.PRIMARY_BLUE,
-                        size: 35,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+    return StreamBuilder<MainViewModel>(
+      stream: _presenter.stream,
+      builder: (context, snapshot) {
+        return Scaffold(
+          backgroundColor:
+              provider.currentIndex == 1 && _presenter.isJobAvailable ? AppColors.PRIMARY_BLUE : null,
+          body: _presenter.currentTab[provider.currentIndex],
+          floatingActionButton: FloatingActionButton(
+            elevation: provider.currentIndex == 1 ? 0 : null,
+            backgroundColor: AppColors.PRIMARY_BLUE,
+            child: const Icon(Icons.map_rounded, color: AppColors.MONO_WHITE),
+            onPressed: () {
+              provider.currentIndex = 1;
+            },
           ),
-        ),
-      ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          bottomNavigationBar: BottomAppBar(
+            elevation: provider.currentIndex == 1 ? 0 : null,
+            shape: const CircularNotchedRectangle(),
+            notchMargin: 10,
+            child: SizedBox(
+              height: 60,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Expanded(
+                    flex: 2,
+                    child: MaterialButton(
+                      minWidth: 40,
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () {
+                        provider.currentIndex = 0;
+                      },
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned(
+                            left: 2,
+                            top: 3,
+                            child: Icon(
+                              Icons.home_outlined,
+                              color: provider.currentIndex == 0 ? Colors.black12 : Colors.transparent,
+                              size: 35,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.home_outlined,
+                            color: AppColors.PRIMARY_BLUE,
+                            size: 35,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 1, child: Container()),
+                  Expanded(
+                    flex: 2,
+                    child: MaterialButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      minWidth: 40,
+                      onPressed: () {
+                        provider.currentIndex = 2;
+                      },
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned(
+                            right: 2,
+                            top: 3,
+                            child: Icon(
+                              Icons.person_outline_rounded,
+                              color: provider.currentIndex == 2 ? Colors.black12 : Colors.transparent,
+                              size: 35,
+                            ),
+                          ),
+                          const Icon(
+                            Icons.person_outline_rounded,
+                            color: AppColors.PRIMARY_BLUE,
+                            size: 35,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      }
     );
   }
 }

@@ -17,7 +17,7 @@ class MainPresenter extends BasePresenter<MainViewModel> {
   ];
 
   bool getJobAvailable(){
-    bool canWork = DateTime.now().hour < 18 && DateTime.now().hour > 11;
+    bool canWork = DateTime.now().hour < 20 && DateTime.now().hour > 9;
     if(canWork){
       isJobAvailable = true;
       updateView();
@@ -31,6 +31,7 @@ class MainPresenter extends BasePresenter<MainViewModel> {
   @override
   void onInitWithContext() {
     super.onInitWithContext();
+    getJobAvailable();
   }
 
   void initUserData(UserData user) {

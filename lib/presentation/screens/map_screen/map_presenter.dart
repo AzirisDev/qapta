@@ -38,7 +38,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   bool getJobAvailable(){
-    bool canWork = DateTime.now().hour < 18 && DateTime.now().hour > 11;
+    bool canWork = DateTime.now().hour < 20 && DateTime.now().hour > 9;
     if(canWork){
       isJobAvailable = true;
       updateView();
