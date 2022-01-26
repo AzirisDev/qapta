@@ -95,8 +95,8 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                       ),
                 SlidingUpPanel(
-                  minHeight: _presenter.isJobAvailable ? 100 : 0,
-                  maxHeight: 360,
+                  minHeight: _presenter.isJobAvailable ? 160 : 0,
+                  maxHeight: 420,
                   backdropEnabled: true,
                   backdropColor: Colors.black,
                   panel: Container(

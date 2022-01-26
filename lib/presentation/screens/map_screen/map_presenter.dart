@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' show cos, sqrt, asin;
 
 import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/helpers/get_job_available.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   bool getJobAvailable(){
-    bool canWork = DateTime.now().hour < 20 && DateTime.now().hour > 9;
+    bool canWork = JobAvailability().getJobAvailable();
     if(canWork){
       isJobAvailable = true;
       updateView();
