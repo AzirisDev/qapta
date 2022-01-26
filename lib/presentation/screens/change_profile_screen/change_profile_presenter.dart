@@ -10,21 +10,19 @@ class ChangeProfilePresenter extends BasePresenter<ChangeProfileViewModel> {
   ChangeProfilePresenter(ChangeProfileViewModel model) : super(model);
 
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
 
   @override
   void onInitWithContext() async {
     UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
     if (userData != null) {
       nameController.text = userData.username;
-      emailController.text = userData.email;
     }
     updateView();
     super.onInitWithContext();
   }
 
   void changeProfileName() async {
-    FireStoreInstance().updateUserData(userScope.userData.uid, nameController.text, emailController.text);
+    FireStoreInstance().updateUserData(userScope.userData.uid, nameController.text);
     UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
     if (userData != null) {
       userScope.userData = userData;

@@ -30,8 +30,18 @@ class FireStoreInstance {
     users.doc(uid).update({"documents": documents});
   }
 
-  void updateUserData(String uid, String newName, String newEmail) {
-    users.doc(uid).update({"username": newName, "email": newEmail});
+  void updateUserData(String uid, String newName) {
+    users.doc(uid).update({
+      "username": newName,
+    });
+  }
+
+  void sendRequest(String uid, String company, String price) {
+    requests.doc(uid).set({
+      "id": uid,
+      "company": company,
+      "price": price,
+    });
   }
 
   Future<List<Company>> fetchCompanies() async {
@@ -57,4 +67,6 @@ class FireStoreInstance {
   late CollectionReference companies = fireStore.collection("companies").withConverter<Company>(
       fromFirestore: (snapshot, _) => Company.fromJson(snapshot.data()!),
       toFirestore: (company, _) => company.toJson());
+
+  late CollectionReference requests = fireStore.collection("requests");
 }

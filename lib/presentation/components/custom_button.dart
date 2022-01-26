@@ -21,16 +21,16 @@ class CustomButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5, bottom: 5),
-      child: Container(
-        height: 48,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: GestureDetector(
-          onTap: onClick,
+    return GestureDetector(
+      onTap: onClick,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 5, bottom: 5),
+        child: Container(
+          height: 48,
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(4),
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

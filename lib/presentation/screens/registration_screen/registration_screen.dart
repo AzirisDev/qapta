@@ -126,17 +126,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                     return null;
                                   },
                                 ),
-                                CustomTextField(
-                                  controller: _presenter.emailNameController,
-                                  hint: "email",
-                                  label: "Email",
-                                  validator: (text) {
-                                    if (text == null || text.isEmpty) {
-                                      return "Enter your email";
-                                    }
-                                    return null;
-                                  },
-                                ),
                               ],
                             ),
                           ),

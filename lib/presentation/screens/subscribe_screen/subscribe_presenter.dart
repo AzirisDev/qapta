@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
@@ -7,7 +8,6 @@ import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_mo
 import 'package:ad_drive/presentation/screens/subscribe_screen/widgets/contract_screen.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   SubscribePresenter(SubscribeViewModel model) : super(model);
@@ -15,7 +15,7 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   bool switchBool = true;
   bool notComplete = false;
 
-  void initCompany(Company company, int index){
+  void initCompany(Company company, int index) {
     model.company = company;
     model.index = index;
   }
@@ -32,36 +32,32 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   //TODO: NEED TO OPTIMIZE
 
   void submit() async {
-    if (validate()) {
-      DateTime time = DateTime.now();
-      startLoading();
-      notComplete = false;
-      List<File> images = [];
-      images.add(File(model.idFront!.path));
-      images.add(File(model.idBack!.path));
-      images.add(File(model.driverLicenceFront!.path));
-      images.add(File(model.driverLicenceBack!.path));
-      List<String> documents =
-          await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
-      print("-----------------");
-      print(DateTime.now().difference(time).inSeconds.toString());
-      print("-----------------");
-      launchEmail(documents);
-      updateView();
-      endLoading();
-    } else {
-      notComplete = true;
-      updateView();
-    }
-  }
-
-  void launchEmail(List<String> documents) async {
-    String priceModel = model.company!.prices.keys.elementAt(model.index!);
-    final url =
-        "mailto: support@qapta.kz?subject=${userScope.userData.username} Заявка на подписку&body=${Uri.encodeFull("Компания: " + model.company!.name+ "\n" + "ФИО: " + userScope.userData.username + "\n" + "На какую кампанию: " + priceModel.toString() + "\n"+ "Город: " + userScope.userData.city + "\n" + "Телефон: " + userScope.userData.phoneNumber + "\n" + "Документы: " + documents.toString())}";
-    if (await canLaunch(url)) {
-      await launch(url);
-    }
+    // if (validate()) {
+    //   DateTime time = DateTime.now();
+    //   startLoading();
+    //   notComplete = false;
+    //   List<File> images = [];
+    //   images.add(File(model.idFront!.path));
+    //   images.add(File(model.idBack!.path));
+    //   images.add(File(model.driverLicenceFront!.path));
+    //   images.add(File(model.driverLicenceBack!.path));
+    //   await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+    //   print("-----------------");
+    //   print(DateTime.now().difference(time).inSeconds.toString());
+    //   print("-----------------");
+    //   FireStoreInstance().sendRequest(userScope.userData.uid, model.company!.name,
+    //       model.company!.prices.keys.elementAt(model.index!));
+    //   updateView();
+    //   endLoading();
+    // } else {
+    //   notComplete = true;
+    //   updateView();
+    // }
+    startLoading();
+    updateView();
+    await Future.delayed(Duration(seconds: 5));
+    endLoading();
+    updateView();
   }
 
   bool validate() {

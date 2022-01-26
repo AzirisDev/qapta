@@ -48,17 +48,6 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                       return null;
                     },
                   ),
-                  CustomTextField(
-                    controller: _presenter.emailController,
-                    hint: "Email",
-                    label: "email",
-                    validator: (text) {
-                      if (text == null || text.isEmpty || text.length < 8) {
-                        return "Введите email";
-                      }
-                      return null;
-                    },
-                  ),
                   Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: CustomButton(

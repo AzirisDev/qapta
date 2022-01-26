@@ -12,7 +12,7 @@ class PhotoUploader {
 
   PhotoUploader({required this.userScopeData});
 
-  Future<List<String>> uploadImageFile(List<File> _images) async {
+  Future<void> uploadImageFile(List<File> _images) async {
     Dio dio = Dio();
     ImgbbResponseModel imgbbResponse;
     List<String> documentsUrl = [];
@@ -36,6 +36,5 @@ class PhotoUploader {
       }
     }
     FireStoreInstance().uploadDocumentsURL(userScopeData.userData.uid, documentsUrl);
-    return documentsUrl;
   }
 }
