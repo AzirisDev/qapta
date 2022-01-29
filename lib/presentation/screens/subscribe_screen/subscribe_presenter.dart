@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/data/firestore.dart';
+import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
+import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/components/popup.dart';
 import 'package:ad_drive/presentation/components/show_pop_up.dart';
@@ -21,9 +23,9 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   bool switchBool = true;
   bool notComplete = false;
 
-  void initCompany(Company company, int index) {
+  void initCompany(Company company, String campany) {
     model.company = company;
-    model.index = index;
+    model.campany = campany;
   }
 
   void onChanged(bool value) {
@@ -63,23 +65,33 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
         );
       }
       notComplete = false;
-      List<File> images = [];
-      images.add(File(model.idFront!.path));
-      images.add(File(model.idBack!.path));
-      images.add(File(model.driverLicenceFront!.path));
-      images.add(File(model.driverLicenceBack!.path));
-      await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
-      FireStoreInstance().sendRequest(
+      if (userScope.userData.documents.isEmpty) {
+        List<File> images = [];
+        images.add(File(model.idFront!.path));
+        images.add(File(model.idBack!.path));
+        images.add(File(model.driverLicenceFront!.path));
+        images.add(File(model.driverLicenceBack!.path));
+        await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+      }
+      await FireStoreInstance().sendRequest(
         userScope.userData.uid,
         model.company!.name,
-        model.company!.prices.keys.elementAt(model.index!),
+        model.campany!,
       );
-      FireStoreInstance().updateUserData(
-        uid: userScope.userData.uid,
-        cardModel: model.cardModel,
-      );
+      if (userScope.userData.cardModel.cardNumber.isEmpty ||
+          userScope.userData.cardModel.cardHolder.isEmpty) {
+        await FireStoreInstance().updateUserData(
+          uid: userScope.userData.uid,
+          cardModel: model.cardModel,
+        );
+      }
       updateView();
       endLoading();
+      UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
+      if (userData != null) {
+        await SharedPreferencesRepository().addUserData(userData);
+        userScope.userData = userData;
+      }
       Navigator.pop(context);
       showPopup(
         title: "Спасибо!",
@@ -99,11 +111,17 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   }
 
   bool validate() {
-    if (model.idFront == null ||
-        model.idBack == null ||
-        model.driverLicenceBack == null ||
-        model.driverLicenceFront == null ||
-        switchBool == false) {
+    if (userScope.userData.documents.isNotEmpty &&
+        userScope.userData.cardModel.cardNumber.isNotEmpty &&
+        userScope.userData.cardModel.cardHolder.isNotEmpty) {
+      return true;
+    }
+    if ((model.idFront == null ||
+            model.idBack == null ||
+            model.driverLicenceBack == null ||
+            model.driverLicenceFront == null) ||
+        switchBool == false ||
+        model.cardModel == null) {
       return false;
     }
     return true;

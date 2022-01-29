@@ -8,7 +8,7 @@ class CompanyPresenter extends BasePresenter<CompanyViewModel> {
 
   bool isExpand = false;
 
-  List<String> adverts = ['Полностью', 'Лобовое', 'Бампер'];
+  List<String> adverts = ['Лобовое', 'Бампер', 'Полностью'];
 
   void expandText(){
     isExpand = !isExpand;

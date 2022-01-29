@@ -27,16 +27,17 @@ class FireStoreInstance {
     }
   }
 
-  void updateUserData({required String uid, String? newName, CardModel? cardModel, List<String>? documents}) {
-    users.doc(uid).update({
-      if(newName != null) "username": newName,
-      if(documents != null) "documents": documents,
-      if(cardModel != null) "cardModel": cardModel.toJson()
+  Future<void> updateUserData(
+      {required String uid, String? newName, CardModel? cardModel, List<String>? documents}) async  {
+    await users.doc(uid).update({
+      if (newName != null) "username": newName,
+      if (documents != null) "documents": documents,
+      if (cardModel != null) "cardModel": cardModel.toJson()
     });
   }
 
-  void sendRequest(String uid, String company, String price) {
-    requests.doc(uid).set({
+  Future<void> sendRequest(String uid, String company, String price) async {
+    await requests.doc(uid).set({
       "id": uid,
       "company": company,
       "price": price,

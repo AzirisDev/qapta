@@ -1,4 +1,3 @@
-
 import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
@@ -13,9 +12,9 @@ import 'package:image_picker/image_picker.dart';
 
 class SubscribeScreen extends StatefulWidget {
   final Company company;
-  final int index;
+  final String campany;
 
-  const SubscribeScreen({Key? key, required this.company, required this.index}) : super(key: key);
+  const SubscribeScreen({Key? key, required this.company, required this.campany}) : super(key: key);
 
   @override
   _SubscribeScreenState createState() => _SubscribeScreenState();
@@ -27,7 +26,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   @override
   void didChangeDependencies() {
     _presenter.initWithContext(context);
-    _presenter.initCompany(widget.company, widget.index);
+    _presenter.initCompany(widget.company, widget.campany);
     super.didChangeDependencies();
   }
 
@@ -57,14 +56,35 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     ),
                   ),
                   photoCard(
-                      _presenter.model.idFront, "Передняя сторона Удостоверение личности", 0),
+                    _presenter.model.idFront,
+                    "Передняя сторона Удостоверение личности",
+                    0,
+                    _presenter.userScope.userData.documents.isNotEmpty,
+                  ),
                   photoCard(
-                      _presenter.model.idBack, "Задняя сторона Удостоверение личности", 1),
-                  photoCard(_presenter.model.driverLicenceFront,
-                      "Передняя сторона Водительских прав", 2),
-                  photoCard(_presenter.model.driverLicenceBack,
-                      "Передняя сторона Водительских прав", 3),
-                  subscribeTile('Введите данные вашей карты', _presenter.cardLinkNavigator, _presenter.model.cardModel,),
+                    _presenter.model.idBack,
+                    "Задняя сторона Удостоверение личности",
+                    1,
+                    _presenter.userScope.userData.documents.isNotEmpty,
+                  ),
+                  photoCard(
+                    _presenter.model.driverLicenceFront,
+                    "Передняя сторона Водительских прав",
+                    2,
+                    _presenter.userScope.userData.documents.isNotEmpty,
+                  ),
+                  photoCard(
+                    _presenter.model.driverLicenceBack,
+                    "Задняя сторона Водительских прав",
+                    3,
+                    _presenter.userScope.userData.documents.isNotEmpty,
+                  ),
+                  if (_presenter.userScope.userData.cardModel.cardNumber.isEmpty)
+                    subscribeTile(
+                      'Введите данные вашей карты',
+                      _presenter.cardLinkNavigator,
+                      _presenter.model.cardModel,
+                    ),
                   SwitchListTile(
                     title: GestureDetector(
                       onTap: _presenter.openContract,
@@ -84,7 +104,9 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                     inactiveTrackColor: Colors.grey,
                     onChanged: _presenter.onChanged,
                   ),
-                  const SizedBox(height: 12,),
+                  const SizedBox(
+                    height: 12,
+                  ),
                   CustomButton(
                     showLoading: false,
                     title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
@@ -104,15 +126,17 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
         });
   }
 
-  Widget photoCard(XFile? photo, String text, int flag) {
+  Widget photoCard(XFile? photo, String text, int flag, bool hasDocument) {
     return GestureDetector(
       onTap: () {
-        _presenter.uploadDocument(flag);
+        if (!hasDocument) {
+          _presenter.uploadDocument(flag);
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -128,7 +152,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
             children: [
               SizedBox(
                 height: 50,
-                child: photo != null
+                child: photo != null || hasDocument
                     ? const Icon(
                         Icons.check_box,
                         color: AppColors.PRIMARY_BLUE,
@@ -140,7 +164,9 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                         size: 50,
                       ),
               ),
-              const SizedBox(width: 8,),
+              const SizedBox(
+                width: 8,
+              ),
               Expanded(
                 child: Text(
                   text,
@@ -160,57 +186,55 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
   }
 }
 
-Widget subscribeTile (String title, void Function() onClick, CardModel? cardModel){
-    return InkWell(
-      onTap: onClick,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 7,
-                        offset: const Offset(0, 0), // changes position of shadow
-                      ),
-                    ]),
-                child: Row(
-                  children: [
-                    SizedBox(
-                        height: 50,
-                        child: cardModel != null
-                            ? const Icon(
-                          Icons.check_box,
-                          color: AppColors.PRIMARY_BLUE,
-                          size: 50,
-                        )
-                            : null
+Widget subscribeTile(String title, void Function() onClick, CardModel? cardModel) {
+  return InkWell(
+    onTap: onClick,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      spreadRadius: 1,
+                      blurRadius: 7,
+                      offset: const Offset(0, 0), // changes position of shadow
                     ),
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontFamily: 'Raleway',
-                          fontWeight: FontWeight.w400,
-
-                        ),
+                  ]),
+              child: Row(
+                children: [
+                  SizedBox(
+                      height: 50,
+                      child: cardModel != null
+                          ? const Icon(
+                              Icons.check_box,
+                              color: AppColors.PRIMARY_BLUE,
+                              size: 50,
+                            )
+                          : null),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: 'Raleway',
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                    const Icon(Icons.arrow_forward_ios_rounded)
-                  ],
-                ),
+                  ),
+                  const Icon(Icons.arrow_forward_ios_rounded)
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
+    ),
+  );
 }

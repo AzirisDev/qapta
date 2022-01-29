@@ -8,7 +8,7 @@ class SubscribeViewModel extends BaseViewModel {
   SubscribeViewModel(ScreenState state) : super(state);
 
   Company? company;
-  int? index;
+  String? campany;
 
   XFile? idFront;
   XFile? idBack;

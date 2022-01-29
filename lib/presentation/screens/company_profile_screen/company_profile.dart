@@ -50,7 +50,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                               decoration: BoxDecoration(
                                   color: AppColors.PRIMARY_BLUE.withOpacity(0.3),
                                   borderRadius: BorderRadius.circular(10),
-                              border: Border.all(color: AppColors.PRIMARY_BLUE)),
+                                  border: Border.all(color: AppColors.PRIMARY_BLUE)),
                               padding: const EdgeInsets.all(50),
                               height: 250,
                               width: 250,
@@ -186,9 +186,16 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                   title: "Подписаться",
                                   onClick: () {
                                     Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SubscribeScreen(company: company, index: _presenter.index,)));
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SubscribeScreen(
+                                          company: company,
+                                          campany: company.prices.keys
+                                              .elementAt(_presenter.index)
+                                              .toString(),
+                                        ),
+                                      ),
+                                    );
                                   }),
                             ),
                           ],

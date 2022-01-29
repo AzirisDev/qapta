@@ -38,7 +38,7 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
     );
 
     return GeneralScaffold(
-      appBar: customAppBar(title:"Карта"),
+      appBar: customAppBar(title: "Карта"),
       child: Container(
         color: Colors.white,
         child: SafeArea(
@@ -96,8 +96,11 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
                         child: CustomButton(
                             title: "Validate",
                             onClick: () {
-                              //TODO: validate card number and card holder name
-                              Navigator.pop(context, CardModel(cardNumber: cardNumber, cardHolder: cardHolderName));
+                              //TODO: validate card numberand card holder name
+                              if (formKey.currentState!.validate()) {
+                                Navigator.pop(context,
+                                    CardModel(cardNumber: cardNumber, cardHolder: cardHolderName));
+                              }
                             }),
                       )
                     ],
