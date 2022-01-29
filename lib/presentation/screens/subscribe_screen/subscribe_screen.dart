@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_app_bar.dart';
@@ -66,6 +66,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                           "Передняя сторона Водительских прав", 2),
                       photoCard(_presenter.model.driverLicenceBack,
                           "Передняя сторона Водительских прав", 3),
+                      subscribeTile('Введите данные вашей карты', _presenter.cardLinkNavigator, _presenter.model.cardModel,),
                       SwitchListTile(
                         title: GestureDetector(
                           onTap: _presenter.openContract,
@@ -85,6 +86,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
                         inactiveTrackColor: Colors.grey,
                         onChanged: _presenter.onChanged,
                       ),
+                      const SizedBox(height: 12,),
                       CustomButton(
                         showLoading: false,
                         title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
@@ -127,37 +129,106 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: photo != null
-                  ? const Icon(
-                      Icons.check_box,
-                      color: AppColors.PRIMARY_BLUE,
-                      size: 75,
-                    )
-                  : Icon(
-                      Icons.camera_alt_rounded,
-                      color: AppColors.MONO_BLACK.withOpacity(0.65),
-                      size: 75,
-                    ),
-            ),
-            Expanded(
-              child: Text(
-                text,
-                maxLines: 2,
-                style: const TextStyle(
-                  fontFamily: 'Raleway',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 4),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 1,
+                  blurRadius: 7,
+                  offset: const Offset(0, 0), // changes position of shadow
                 ),
+              ]),
+          child: Row(
+            children: [
+              SizedBox(
+                height: 50,
+                child: photo != null
+                    ? const Icon(
+                        Icons.check_box,
+                        color: AppColors.PRIMARY_BLUE,
+                        size: 50,
+                      )
+                    : Icon(
+                        Icons.camera_alt_rounded,
+                        color: AppColors.MONO_BLACK.withOpacity(0.65),
+                        size: 50,
+                      ),
               ),
-            )
-          ],
+              const SizedBox(width: 8,),
+              Expanded(
+                child: Text(
+                  text,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    fontFamily: 'Raleway',
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
+}
+
+Widget subscribeTile (String title, void Function() onClick, CardModel? cardModel){
+    return InkWell(
+      onTap: onClick,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.1),
+                        spreadRadius: 1,
+                        blurRadius: 7,
+                        offset: const Offset(0, 0), // changes position of shadow
+                      ),
+                    ]),
+                child: Row(
+                  children: [
+                    SizedBox(
+                        height: 50,
+                        child: cardModel != null
+                            ? const Icon(
+                          Icons.check_box,
+                          color: AppColors.PRIMARY_BLUE,
+                          size: 50,
+                        )
+                            : null
+                    ),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w400,
+
+                        ),
+                      ),
+                    ),
+                    const Icon(Icons.arrow_forward_ios_rounded)
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
 }

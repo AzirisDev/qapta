@@ -1,3 +1,4 @@
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,13 +27,11 @@ class FireStoreInstance {
     }
   }
 
-  void uploadDocumentsURL(String uid, List<String> documents) {
-    users.doc(uid).update({"documents": documents});
-  }
-
-  void updateUserData(String uid, String newName) {
+  void updateUserData({required String uid, String? newName, CardModel? cardModel, List<String>? documents}) {
     users.doc(uid).update({
-      "username": newName,
+      if(newName != null) "username": newName,
+      if(documents != null) "documents": documents,
+      if(cardModel != null) "card_model": cardModel.toJson()
     });
   }
 

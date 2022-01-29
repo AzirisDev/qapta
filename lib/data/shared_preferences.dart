@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +29,7 @@ class SharedPreferencesRepository {
   UserData getUserData() {
     String json = _prefs.getString(_USER_DATA) ?? "";
     if (json.isEmpty) {
-      return UserData(uid: "", city: "", username: "", phoneNumber: "", documents: [], avatarUrl: "");
+      return UserData(uid: "", city: "", username: "", phoneNumber: "", documents: [], avatarUrl: "", cardModel: CardModel.empty(),);
     } else {
       return UserData.fromJson(jsonDecode(json));
     }

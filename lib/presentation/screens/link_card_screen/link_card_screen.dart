@@ -1,10 +1,12 @@
 import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/model/card.dart';
+import 'package:ad_drive/presentation/components/credit_card/credit_card_form.dart';
+import 'package:ad_drive/presentation/components/credit_card/credit_card_widget.dart';
 import 'package:ad_drive/presentation/components/custom_app_bar.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
-import 'package:flutter_credit_card/flutter_credit_card.dart';
 
 class LinkCardScreen extends StatefulWidget {
   const LinkCardScreen({Key? key}) : super(key: key);
@@ -15,20 +17,14 @@ class LinkCardScreen extends StatefulWidget {
 
 class _LinkCardScreenState extends State<LinkCardScreen> {
   String cardNumber = '';
-  String expiryDate = '';
   String cardHolderName = '';
-  String cvvCode = '';
-  bool isCvvFocused = false;
   OutlineInputBorder? border;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  void onCreditCardModelChange(CreditCardModel model) {
+  void onCreditCardModelChange(CustomCreditCardModel model) {
     setState(() {
       cardNumber = model.cardNumber;
-      expiryDate = model.expiryDate;
       cardHolderName = model.cardHolderName;
-      cvvCode = model.cvvCode;
-      isCvvFocused = model.isCvvFocused;
     });
   }
 
@@ -51,13 +47,13 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
               const SizedBox(
                 height: 30,
               ),
-              CreditCardWidget(
+              CustomCreditCardWidget(
                 cardBgColor: AppColors.PRIMARY_BLUE,
                 cardNumber: cardNumber,
-                expiryDate: expiryDate,
+                expiryDate: '',
                 cardHolderName: cardHolderName,
-                cvvCode: cvvCode,
-                showBackView: isCvvFocused,
+                cvvCode: '',
+                showBackView: false,
                 obscureCardNumber: true,
                 obscureCardCvv: true,
                 isHolderNameVisible: true,
@@ -68,17 +64,15 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      CreditCardForm(
+                      CustomCreditCardForm(
                         formKey: formKey,
                         obscureCvv: true,
                         obscureNumber: true,
                         cardNumber: cardNumber,
-                        cvvCode: cvvCode,
                         isHolderNameVisible: true,
                         isCardNumberVisible: true,
                         isExpiryDateVisible: true,
                         cardHolderName: cardHolderName,
-                        expiryDate: expiryDate,
                         themeColor: Colors.blue,
                         textColor: AppColors.MONO_BLACK,
                         cardNumberDecoration: InputDecoration(
@@ -86,18 +80,6 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
                           hintText: 'XXXX XXXX XXXX XXXX',
                           focusedBorder: border,
                           enabledBorder: border,
-                        ),
-                        expiryDateDecoration: InputDecoration(
-                          focusedBorder: border,
-                          enabledBorder: border,
-                          labelText: 'Expired Date',
-                          hintText: 'XX/XX',
-                        ),
-                        cvvCodeDecoration: InputDecoration(
-                          focusedBorder: border,
-                          enabledBorder: border,
-                          labelText: 'CVV',
-                          hintText: 'XXX',
                         ),
                         cardHolderDecoration: InputDecoration(
                           focusedBorder: border,
@@ -114,11 +96,8 @@ class _LinkCardScreenState extends State<LinkCardScreen> {
                         child: CustomButton(
                             title: "Validate",
                             onClick: () {
-                              if (formKey.currentState!.validate()) {
-                                // print('valid!');
-                              } else {
-                                // print('invalid!');
-                              }
+                              //TODO: validate card number and card holder name
+                              Navigator.pop(context, CardModel(cardNumber: cardNumber, cardHolder: cardHolderName));
                             }),
                       )
                     ],

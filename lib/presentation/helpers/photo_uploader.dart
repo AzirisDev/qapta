@@ -35,6 +35,6 @@ class PhotoUploader {
         //ignore
       }
     }
-    FireStoreInstance().uploadDocumentsURL(userScopeData.userData.uid, documentsUrl);
+    FireStoreInstance().updateUserData(uid: userScopeData.userData.uid, documents: documentsUrl);
   }
 }

@@ -1,3 +1,5 @@
+import 'package:ad_drive/model/card.dart';
+
 class UserData {
   String uid;
   String city;
@@ -5,6 +7,7 @@ class UserData {
   String phoneNumber;
   String avatarUrl;
   List<String> documents;
+  CardModel cardModel;
 
   UserData({
     required this.uid,
@@ -13,6 +16,7 @@ class UserData {
     required this.phoneNumber,
     required this.documents,
     required this.avatarUrl,
+    required this.cardModel,
   });
 
   UserData.fromJson(Map<String, Object?> json)
@@ -23,6 +27,7 @@ class UserData {
           phoneNumber: json['phoneNumber'] as String,
           avatarUrl: json['avatarUrl'] as String,
           documents: List<String>.from(json['documents'] as List<dynamic>),
+          cardModel: CardModel.fromJson(json['card_model'] as Map<String, dynamic>),
         );
 
   toJson() {
@@ -33,6 +38,7 @@ class UserData {
       'phoneNumber': phoneNumber,
       'avatarUrl': avatarUrl,
       'documents': documents,
+      'cardModel': cardModel,
     };
   }
 }

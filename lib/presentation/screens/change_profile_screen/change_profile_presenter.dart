@@ -22,7 +22,7 @@ class ChangeProfilePresenter extends BasePresenter<ChangeProfileViewModel> {
   }
 
   void changeProfileName() async {
-    FireStoreInstance().updateUserData(userScope.userData.uid, nameController.text);
+    FireStoreInstance().updateUserData(uid: userScope.userData.uid, newName: nameController.text);
     UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
     if (userData != null) {
       userScope.userData = userData;

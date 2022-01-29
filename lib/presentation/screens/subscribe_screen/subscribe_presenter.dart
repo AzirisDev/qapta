@@ -1,12 +1,15 @@
 import 'dart:io';
 
 import 'package:ad_drive/data/firestore.dart';
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
+import 'package:ad_drive/presentation/screens/link_card_screen/link_card_screen.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_model.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/widgets/contract_screen.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
@@ -29,35 +32,38 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
     Navigator.push(context, MaterialPageRoute(builder: (context) => const ContractScreen()));
   }
 
+  void cardLinkNavigator() async {
+    CardModel? cardModel = await Navigator.push(context, CupertinoPageRoute(builder: (context) => const LinkCardScreen(),),);
+    if(cardModel != null){
+      model.cardModel = cardModel;
+    }
+    updateView();
+  }
+
   //TODO: NEED TO OPTIMIZE
 
   void submit() async {
-    // if (validate()) {
-    //   DateTime time = DateTime.now();
-    //   startLoading();
-    //   notComplete = false;
-    //   List<File> images = [];
-    //   images.add(File(model.idFront!.path));
-    //   images.add(File(model.idBack!.path));
-    //   images.add(File(model.driverLicenceFront!.path));
-    //   images.add(File(model.driverLicenceBack!.path));
-    //   await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
-    //   print("-----------------");
-    //   print(DateTime.now().difference(time).inSeconds.toString());
-    //   print("-----------------");
-    //   FireStoreInstance().sendRequest(userScope.userData.uid, model.company!.name,
-    //       model.company!.prices.keys.elementAt(model.index!));
-    //   updateView();
-    //   endLoading();
-    // } else {
-    //   notComplete = true;
-    //   updateView();
-    // }
-    startLoading();
-    updateView();
-    await Future.delayed(Duration(seconds: 5));
-    endLoading();
-    updateView();
+    if (validate()) {
+      DateTime time = DateTime.now();
+      startLoading();
+      notComplete = false;
+      List<File> images = [];
+      images.add(File(model.idFront!.path));
+      images.add(File(model.idBack!.path));
+      images.add(File(model.driverLicenceFront!.path));
+      images.add(File(model.driverLicenceBack!.path));
+      await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+      print("-----------------");
+      print(DateTime.now().difference(time).inSeconds.toString());
+      print("-----------------");
+      FireStoreInstance().sendRequest(userScope.userData.uid, model.company!.name,
+          model.company!.prices.keys.elementAt(model.index!));
+      updateView();
+      endLoading();
+    } else {
+      notComplete = true;
+      updateView();
+    }
   }
 
   bool validate() {

@@ -1,5 +1,6 @@
 import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/data/shared_preferences.dart';
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen.dart';
@@ -44,6 +45,7 @@ class RegistrationPresenter extends BasePresenter<RegistrationViewModel> {
       //TODO: add opportunity to add avatar from camera and gallery
       avatarUrl: "",
       documents: [],
+      cardModel: CardModel.empty(),
     );
     userScope.userData = model.userModel;
     addUser();

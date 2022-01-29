@@ -148,10 +148,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 20,
                         ),
                         SettingTile(
-                          title: 'Карта',
-                          onClick: _presenter.linkCard,
-                        ),
-                        SettingTile(
                           title: 'Договор с Qapta',
                           onClick: _presenter.agreement,
                         ),

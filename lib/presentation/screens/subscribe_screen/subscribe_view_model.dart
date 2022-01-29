@@ -1,3 +1,4 @@
+import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/base/base_view_model.dart';
@@ -13,4 +14,6 @@ class SubscribeViewModel extends BaseViewModel {
   XFile? idBack;
   XFile? driverLicenceFront;
   XFile? driverLicenceBack;
+
+  CardModel? cardModel;
 }
