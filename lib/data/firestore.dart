@@ -31,7 +31,7 @@ class FireStoreInstance {
     users.doc(uid).update({
       if(newName != null) "username": newName,
       if(documents != null) "documents": documents,
-      if(cardModel != null) "card_model": cardModel.toJson()
+      if(cardModel != null) "cardModel": cardModel.toJson()
     });
   }
 

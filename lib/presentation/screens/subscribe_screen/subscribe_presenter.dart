@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/components/popup.dart';
+import 'package:ad_drive/presentation/components/show_pop_up.dart';
 import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
 import 'package:ad_drive/presentation/screens/link_card_screen/link_card_screen.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_model.dart';
@@ -33,8 +36,13 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   }
 
   void cardLinkNavigator() async {
-    CardModel? cardModel = await Navigator.push(context, CupertinoPageRoute(builder: (context) => const LinkCardScreen(),),);
-    if(cardModel != null){
+    CardModel? cardModel = await Navigator.push(
+      context,
+      CupertinoPageRoute(
+        builder: (context) => const LinkCardScreen(),
+      ),
+    );
+    if (cardModel != null) {
       model.cardModel = cardModel;
     }
     updateView();
@@ -44,8 +52,16 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
 
   void submit() async {
     if (validate()) {
-      DateTime time = DateTime.now();
       startLoading();
+      updateView();
+      if (model.isLoading) {
+        Popups.showPopup(
+          title: "Проверяем документы",
+          description: "Это займет не больше минуты",
+          context: context,
+          isLoading: true,
+        );
+      }
       notComplete = false;
       List<File> images = [];
       images.add(File(model.idFront!.path));
@@ -53,13 +69,29 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
       images.add(File(model.driverLicenceFront!.path));
       images.add(File(model.driverLicenceBack!.path));
       await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
-      print("-----------------");
-      print(DateTime.now().difference(time).inSeconds.toString());
-      print("-----------------");
-      FireStoreInstance().sendRequest(userScope.userData.uid, model.company!.name,
-          model.company!.prices.keys.elementAt(model.index!));
+      FireStoreInstance().sendRequest(
+        userScope.userData.uid,
+        model.company!.name,
+        model.company!.prices.keys.elementAt(model.index!),
+      );
+      FireStoreInstance().updateUserData(
+        uid: userScope.userData.uid,
+        cardModel: model.cardModel,
+      );
       updateView();
       endLoading();
+      Navigator.pop(context);
+      showPopup(
+        title: "Спасибо!",
+        text: "Ваша заявка отправлена!\nМы с вами скоро свяжемся!",
+        buttonText: "Ok",
+        onButtonTap: () {
+          Navigator.pop(context);
+        },
+        buttonColor: AppColors.PRIMARY_BLUE,
+        textColor: AppColors.MONO_WHITE,
+        context: context,
+      );
     } else {
       notComplete = true;
       updateView();

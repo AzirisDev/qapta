@@ -27,7 +27,7 @@ class UserData {
           phoneNumber: json['phoneNumber'] as String,
           avatarUrl: json['avatarUrl'] as String,
           documents: List<String>.from(json['documents'] as List<dynamic>),
-          cardModel: CardModel.fromJson(json['card_model'] as Map<String, dynamic>),
+          cardModel: CardModel.fromJson(json['cardModel'] as Map<String, dynamic>),
         );
 
   toJson() {
@@ -38,7 +38,7 @@ class UserData {
       'phoneNumber': phoneNumber,
       'avatarUrl': avatarUrl,
       'documents': documents,
-      'cardModel': cardModel,
+      'cardModel': cardModel.toJson(),
     };
   }
 }

@@ -38,84 +38,66 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
         builder: (context, snapshot) {
           return GeneralScaffold(
             appBar: customAppBar(title: "Подписка"),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        child: Text(
-                          'Сфотограцируйте ваши документы',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Raleway',
-                            color: AppColors.MONO_BLACK,
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    child: Text(
+                      'Сфотограцируйте ваши документы',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontFamily: 'Raleway',
+                        color: AppColors.MONO_BLACK,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
                       ),
-                      photoCard(
-                          _presenter.model.idFront, "Передняя сторона Удостоверение личности", 0),
-                      photoCard(
-                          _presenter.model.idBack, "Задняя сторона Удостоверение личности", 1),
-                      photoCard(_presenter.model.driverLicenceFront,
-                          "Передняя сторона Водительских прав", 2),
-                      photoCard(_presenter.model.driverLicenceBack,
-                          "Передняя сторона Водительских прав", 3),
-                      subscribeTile('Введите данные вашей карты', _presenter.cardLinkNavigator, _presenter.model.cardModel,),
-                      SwitchListTile(
-                        title: GestureDetector(
-                          onTap: _presenter.openContract,
-                          child: const Text(
-                            'Я принимаю условия Пользования',
-                            style: TextStyle(
-                              fontFamily: 'Raleway',
-                              decoration: TextDecoration.underline,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        value: _presenter.switchBool,
-                        controlAffinity: ListTileControlAffinity.leading,
-                        activeColor: AppColors.PRIMARY_BLUE,
-                        inactiveTrackColor: Colors.grey,
-                        onChanged: _presenter.onChanged,
-                      ),
-                      const SizedBox(height: 12,),
-                      CustomButton(
-                        showLoading: false,
-                        title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
-                        onClick: _presenter.submit,
-                        backgroundColor: _presenter.notComplete
-                            ? AppColors.MONO_RED.withOpacity(0.7)
-                            : AppColors.PRIMARY_BLUE,
-                        borderColor: _presenter.notComplete
-                            ? AppColors.MONO_RED.withOpacity(0.7)
-                            : AppColors.PRIMARY_BLUE,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                if (_presenter.model.isLoading)
-                  Container(
-                    color: AppColors.MONO_GREY.withOpacity(0.5),
-                    child: const Center(
-                      child: SizedBox(
-                        width: 75,
-                        height: 75,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: AppColors.PRIMARY_BLUE,
+                  photoCard(
+                      _presenter.model.idFront, "Передняя сторона Удостоверение личности", 0),
+                  photoCard(
+                      _presenter.model.idBack, "Задняя сторона Удостоверение личности", 1),
+                  photoCard(_presenter.model.driverLicenceFront,
+                      "Передняя сторона Водительских прав", 2),
+                  photoCard(_presenter.model.driverLicenceBack,
+                      "Передняя сторона Водительских прав", 3),
+                  subscribeTile('Введите данные вашей карты', _presenter.cardLinkNavigator, _presenter.model.cardModel,),
+                  SwitchListTile(
+                    title: GestureDetector(
+                      onTap: _presenter.openContract,
+                      child: const Text(
+                        'Я принимаю условия Пользования',
+                        style: TextStyle(
+                          fontFamily: 'Raleway',
+                          decoration: TextDecoration.underline,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
-                  )
-              ],
+                    value: _presenter.switchBool,
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: AppColors.PRIMARY_BLUE,
+                    inactiveTrackColor: Colors.grey,
+                    onChanged: _presenter.onChanged,
+                  ),
+                  const SizedBox(height: 12,),
+                  CustomButton(
+                    showLoading: false,
+                    title: _presenter.notComplete ? "Заполните форму" : "Рекламировать",
+                    onClick: _presenter.submit,
+                    backgroundColor: _presenter.notComplete
+                        ? AppColors.MONO_RED.withOpacity(0.7)
+                        : AppColors.PRIMARY_BLUE,
+                    borderColor: _presenter.notComplete
+                        ? AppColors.MONO_RED.withOpacity(0.7)
+                        : AppColors.PRIMARY_BLUE,
+                  ),
+                ],
+              ),
             ),
             backgroundColor: AppColors.MONO_WHITE,
           );

@@ -134,9 +134,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
       isGestureUpdate = false;
     }
 
-    final CardType? cardType = widget.cardType != null
-        ? widget.cardType
-        : detectCCType(widget.cardNumber);
+    final CardType? cardType = widget.cardType ?? detectCCType(widget.cardNumber);
     widget.onCreditCardWidgetChange(CreditCardBrand(cardType));
 
     return Stack(
@@ -590,7 +588,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
           break;
 
         default:
-          icon = Container(
+          icon = SizedBox(
             height: 48,
             width: 48,
           );
