@@ -55,7 +55,6 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
   void submit() async {
     if (validate()) {
       startLoading();
-      updateView();
       if (model.isLoading) {
         Popups.showPopup(
           title: "Проверяем документы",
