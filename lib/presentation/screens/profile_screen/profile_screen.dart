@@ -83,8 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             child: ClipRRect(
                                               borderRadius:
                                                   const BorderRadius.all(Radius.circular(20)),
-                                              child: SvgPicture.network(
-                                                'https://upload.wikimedia.org/wikipedia/commons/7/7e/Circle-icons-profile.svg',
+                                              child: Image.network(
+                                                _presenter.userScope.userData.avatarUrl,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),

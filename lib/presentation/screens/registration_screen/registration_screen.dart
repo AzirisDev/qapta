@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/custom_textfield.dart';
@@ -74,41 +76,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: 230,
-                            width: 230,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: AppColors.MONO_WHITE,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.1),
-                                  spreadRadius: 1,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 0), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.add_circle_outline_rounded,
-                                  color: AppColors.PRIMARY_BLUE,
-                                  size: 60,
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Text(
-                                  "Загрузить фото",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      fontFamily: 'Raleway',
-                                      color: AppColors.MONO_BLACK.withOpacity(0.5)),
-                                )
-                              ],
+                          GestureDetector(
+                            onTap: () {
+                              _presenter.addPhoto();
+                            },
+                            child: Container(
+                              height: 230,
+                              width: 230,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: AppColors.MONO_WHITE,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.1),
+                                    spreadRadius: 1,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 0), // changes position of shadow
+                                  ),
+                                ],
+                              ),
+                              child: _presenter.model.avatarUrl != null
+                                  ? ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Image.file(
+                                        File(_presenter.model.avatarUrl!),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          Icons.add_circle_outline_rounded,
+                                          color: AppColors.PRIMARY_BLUE,
+                                          size: 60,
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          "Загрузить фото",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 18,
+                                              fontFamily: 'Raleway',
+                                              color: AppColors.MONO_BLACK.withOpacity(0.5)),
+                                        )
+                                      ],
+                                    ),
                             ),
                           ),
                           Form(
@@ -135,7 +150,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               builder: (FormFieldState<String> state) {
                                 return InputDecorator(
                                   decoration: const InputDecoration(
-                                      labelStyle: TextStyle(fontFamily: 'Raleway',color: Colors.black, fontSize: 17.0),
+                                      labelStyle: TextStyle(
+                                          fontFamily: 'Raleway',
+                                          color: Colors.black,
+                                          fontSize: 17.0),
                                       border: UnderlineInputBorder(
                                         borderSide: BorderSide(color: Colors.grey),
                                       )),

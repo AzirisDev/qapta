@@ -70,7 +70,8 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
         images.add(File(model.idBack!.path));
         images.add(File(model.driverLicenceFront!.path));
         images.add(File(model.driverLicenceBack!.path));
-        await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+        List<String> urls = await PhotoUploader(userScopeData: userScope).uploadImageFile(images);
+        await FireStoreInstance().updateUserData(uid: userScope.userData.uid, documents: urls);
       }
       await FireStoreInstance().sendRequest(
         userScope.userData.uid,

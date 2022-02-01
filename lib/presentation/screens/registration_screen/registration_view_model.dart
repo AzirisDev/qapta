@@ -7,5 +7,6 @@ class RegistrationViewModel extends BaseViewModel {
 
   bool entering = false;
 
-  late UserData userModel;
+  UserData? userModel;
+  String? avatarUrl;
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/model/imgbb_response_model.dart';
 import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +11,7 @@ class PhotoUploader {
 
   PhotoUploader({required this.userScopeData});
 
-  Future<void> uploadImageFile(List<File> _images) async {
+  Future<List<String>> uploadImageFile(List<File> _images) async {
     Dio dio = Dio();
     ImgbbResponseModel imgbbResponse;
     List<String> documentsUrl = [];
@@ -35,6 +34,6 @@ class PhotoUploader {
         //ignore
       }
     }
-    FireStoreInstance().updateUserData(uid: userScopeData.userData.uid, documents: documentsUrl);
+    return documentsUrl;
   }
 }

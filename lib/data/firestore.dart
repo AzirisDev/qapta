@@ -28,11 +28,12 @@ class FireStoreInstance {
   }
 
   Future<void> updateUserData(
-      {required String uid, String? newName, CardModel? cardModel, List<String>? documents}) async  {
+      {required String uid, String? newName, CardModel? cardModel, List<String>? documents, String? avatarUrl}) async  {
     await users.doc(uid).update({
       if (newName != null) "username": newName,
       if (documents != null) "documents": documents,
-      if (cardModel != null) "cardModel": cardModel.toJson()
+      if (cardModel != null) "cardModel": cardModel.toJson(),
+      if (avatarUrl != null) "avatarUrl": avatarUrl
     });
   }
 
