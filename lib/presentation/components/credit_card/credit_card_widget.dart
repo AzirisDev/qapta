@@ -6,7 +6,7 @@ import 'package:flutter_credit_card/credit_card_background.dart';
 import 'package:flutter_credit_card/credit_card_brand.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 
-const Map<CardType, String> CardTypeIconAsset = <CardType, String>{
+const Map<CardType, String> cardTypeIconAsset = <CardType, String>{
   CardType.visa: 'icons/visa.png',
   CardType.americanExpress: 'icons/amex.png',
   CardType.mastercard: 'icons/mastercard.png',
@@ -528,7 +528,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
       return customCardTypeIcon.first.cardImage;
     } else {
       return Image.asset(
-        CardTypeIconAsset[cardType]!,
+        cardTypeIconAsset[cardType]!,
         height: 48,
         width: 48,
         package: 'flutter_credit_card',
@@ -549,7 +549,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
       switch (ccType) {
         case CardType.visa:
           icon = Image.asset(
-            CardTypeIconAsset[ccType]!,
+            cardTypeIconAsset[ccType]!,
             height: 48,
             width: 48,
             package: 'flutter_credit_card',
@@ -559,7 +559,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
 
         case CardType.americanExpress:
           icon = Image.asset(
-            CardTypeIconAsset[ccType]!,
+            cardTypeIconAsset[ccType]!,
             height: 48,
             width: 48,
             package: 'flutter_credit_card',
@@ -569,7 +569,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
 
         case CardType.mastercard:
           icon = Image.asset(
-            CardTypeIconAsset[ccType]!,
+            cardTypeIconAsset[ccType]!,
             height: 48,
             width: 48,
             package: 'flutter_credit_card',
@@ -579,7 +579,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
 
         case CardType.discover:
           icon = Image.asset(
-            CardTypeIconAsset[ccType]!,
+            cardTypeIconAsset[ccType]!,
             height: 48,
             width: 48,
             package: 'flutter_credit_card',
@@ -588,7 +588,7 @@ class _CustomCreditCardWidgetState extends State<CustomCreditCardWidget>
           break;
 
         default:
-          icon = SizedBox(
+          icon = const SizedBox(
             height: 48,
             width: 48,
           );

@@ -5,7 +5,6 @@ import 'package:ad_drive/presentation/screens/profile_screen/profile_view_model.
 import 'package:ad_drive/presentation/screens/profile_screen/widgets/setting_tile.dart';
 import 'package:ad_drive/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);

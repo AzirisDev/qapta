@@ -148,7 +148,7 @@ class Popups {
           onPressed: () => pop(context, PopupsResult.cancel),
           child: Text(
             textForCancel,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 17,
               color: AppColors.MONO_RED,
             ),
