@@ -35,8 +35,56 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 230,
+                      width: 230,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: AppColors.MONO_WHITE,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 7,
+                            offset: const Offset(0, 0), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: _presenter.userScope.userData.avatarUrl.isNotEmpty
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: Image.network(
+                                _presenter.userScope.userData.avatarUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.add_circle_outline_rounded,
+                                  color: AppColors.PRIMARY_BLUE,
+                                  size: 60,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Загрузить фото",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      fontFamily: 'Raleway',
+                                      color: AppColors.MONO_BLACK.withOpacity(0.5)),
+                                )
+                              ],
+                            ),
+                    ),
+                  ),
                   CustomTextField(
                     controller: _presenter.nameController,
                     hint: "Имя",
@@ -53,7 +101,7 @@ class _ChangeProfileScreenState extends State<ChangeProfileScreen> {
                       child: CustomButton(
                           title: "Изменить",
                           onClick: () {
-                            _presenter.changeProfileName();
+                            _presenter.changeProfile();
                           }))
                 ],
               ),

@@ -28,7 +28,11 @@ class FireStoreInstance {
   }
 
   Future<void> updateUserData(
-      {required String uid, String? newName, CardModel? cardModel, List<String>? documents, String? avatarUrl}) async  {
+      {required String uid,
+      String? newName,
+      CardModel? cardModel,
+      List<String>? documents,
+      String? avatarUrl}) async {
     await users.doc(uid).update({
       if (newName != null) "username": newName,
       if (documents != null) "documents": documents,
@@ -61,6 +65,22 @@ class FireStoreInstance {
     return documents;
   }
 
+  Future<void> sendStartRide(String uid, String photoUrl) async {
+    await rides.doc(uid).set({
+      "uid": uid,
+      "startPhoto": photoUrl,
+      "startTime": Timestamp.fromDate(DateTime.now()),
+    });
+  }
+
+  Future<void> sendFinishRide(String uid, String photoUrl, int distance) async {
+    await rides.doc(uid).update({
+      "endPhoto": photoUrl,
+      "endTime": Timestamp.fromDate(DateTime.now()),
+      "distance": distance,
+    });
+  }
+
   late CollectionReference users = fireStore.collection("users").withConverter<UserData>(
       fromFirestore: (snapshot, _) => UserData.fromJson(snapshot.data()!),
       toFirestore: (userModel, _) => userModel.toJson());
@@ -70,4 +90,6 @@ class FireStoreInstance {
       toFirestore: (company, _) => company.toJson());
 
   late CollectionReference requests = fireStore.collection("requests");
+
+  late CollectionReference rides = fireStore.collection("rides");
 }

@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math' show cos, sqrt, asin;
 
+import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/helpers/get_job_available.dart';
+import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
 import 'package:ad_drive/presentation/screens/take_photo_screen/take_photo_screen.dart';
 import 'package:flutter/material.dart';
@@ -25,22 +28,22 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   final Set<Polyline> lines = {};
   List<LatLng> locationListFromStream = [];
   int polylineIdCounter = 0;
-  CameraPosition initialLocation = const CameraPosition(target: LatLng(37, -122), zoom: 14);
-  LatLng lastLocation = const LatLng(37, -122);
+  CameraPosition initialLocation = const CameraPosition(target: LatLng(43, 76), zoom: 14);
+  LatLng lastLocation = const LatLng(43, 76);
   double totalDistance = 0;
   bool isJobAvailable = false;
 
   @override
   void onInitWithContext() async {
     super.onInitWithContext();
-    if(getJobAvailable()){
+    if (getJobAvailable()) {
       await getCurrentLocation();
     }
   }
 
-  bool getJobAvailable(){
+  bool getJobAvailable() {
     bool canWork = JobAvailability().getJobAvailable();
-    if(canWork){
+    if (canWork) {
       isJobAvailable = true;
       updateView();
     } else {
@@ -114,22 +117,6 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     return 12742 * asin(sqrt(a));
   }
 
-  void takePhoto() async {
-    final photo = await Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => const TakePhotoScreen(
-                  flag: 4,
-                )));
-    startTracking();
-    model.photo = photo;
-    updateView();
-  }
-
-  void endRide(){
-    //TODO:Save distance in db
-  }
-
   void updateMarker(LocationData newLocationData) {
     if (newLocationData.longitude != null &&
         newLocationData.latitude != null &&
@@ -150,14 +137,42 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     }
   }
 
-  @override
-  void dispose() {
+  void endRide() async {
+    cancelStreams();
+    final photoUrl = await getUploadPhoto();
+    await FireStoreInstance().sendFinishRide(userScope.userData.uid, photoUrl, totalDistance.toInt());
+  }
+
+  void takePhoto() async {
+    final photoUrl = await getUploadPhoto();
+    await FireStoreInstance().sendStartRide(userScope.userData.uid, photoUrl);
+    startTracking();
+    updateView();
+  }
+
+  Future<String> getUploadPhoto() async {
+    final photo = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const TakePhotoScreen(
+              flag: 4,
+            )));
+    List<String> photoUrl = await PhotoUploader(userScopeData: userScope).uploadImageFile([File(photo.path)]);
+    return photoUrl.first;
+  }
+
+  void cancelStreams(){
     if (locationSubscription != null) {
       locationSubscription!.cancel();
     }
     if (positionStream != null) {
       positionStream!.cancel();
     }
+  }
+
+  @override
+  void dispose() {
+    cancelStreams();
     super.dispose();
   }
 }

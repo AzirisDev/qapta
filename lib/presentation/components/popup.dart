@@ -127,7 +127,7 @@ class Popups {
                     style: TextStyle(
                       fontSize: 18,
                       letterSpacing: 0.5,
-                      color: isColorFilled ? Colors.green : textColor,
+                      color: isColorFilled ? Colors.white : textColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
