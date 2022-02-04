@@ -2,6 +2,7 @@ import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/helper/bottom_nav_bar_provider.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
+import 'package:ad_drive/presentation/components/popup.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen_presenter.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_view_model.dart';
 import 'package:flutter/material.dart';
@@ -62,8 +63,16 @@ class _MainScreenState extends State<MainScreen> {
                         minWidth: 40,
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onPressed: () {
-                          provider.currentIndex = 0;
+                        onPressed: () async {
+                          if (_presenter.userScope.isRiding) {
+                            Popups.showPopup(
+                                title: "Завершите поездку, чтобы перейти на другие страницы",
+                                context: context,
+                                buttonText: "Ok",
+                            );
+                          } else {
+                            provider.currentIndex = 0;
+                          }
                         },
                         child: Stack(
                           children: <Widget>[
@@ -94,8 +103,16 @@ class _MainScreenState extends State<MainScreen> {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         minWidth: 40,
-                        onPressed: () {
-                          provider.currentIndex = 2;
+                        onPressed: () async {
+                          if (_presenter.userScope.isRiding) {
+                            Popups.showPopup(
+                                title: "Завершите поездку, чтобы перейти на другие страницы",
+                                context: context,
+                                buttonText: "Ok",
+                               );
+                          } else {
+                            provider.currentIndex = 2;
+                          }
                         },
                         child: Stack(
                           children: <Widget>[

@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:math' show cos, sqrt, asin;
-
 import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
+import 'package:ad_drive/presentation/components/popup.dart';
 import 'package:ad_drive/presentation/helpers/get_job_available.dart';
 import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
@@ -14,7 +13,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/rxdart.dart';
-
 import '../../../app_colors.dart';
 
 class MapPresenter extends BasePresenter<MapViewModel> {
@@ -28,7 +26,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   final Set<Polyline> lines = {};
   List<LatLng> locationListFromStream = [];
   int polylineIdCounter = 0;
-  CameraPosition initialLocation = const CameraPosition(target: LatLng(43, 76), zoom: 14);
+  CameraPosition initialLocation = const CameraPosition(target: LatLng(43.2385, 76.945656), zoom: 14);
   LatLng lastLocation = const LatLng(43, 76);
   double totalDistance = 0;
   bool isJobAvailable = false;
@@ -54,6 +52,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   void startTracking() {
+    getCurrentLocation();
     positionStream = Geolocator.getPositionStream().listen((Position position) {
       if (locationListFromStream.isNotEmpty) {
         totalDistance += Geolocator.distanceBetween(
@@ -109,14 +108,6 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     }
   }
 
-  double calculateDistance(lat1, lon1, lat2, lon2) {
-    var p = 0.017453292519943295;
-    var c = cos;
-    var a =
-        0.5 - c((lat2 - lat1) * p) / 2 + c(lat1 * p) * c(lat2 * p) * (1 - c((lon2 - lon1) * p)) / 2;
-    return 12742 * asin(sqrt(a));
-  }
-
   void updateMarker(LocationData newLocationData) {
     if (newLocationData.longitude != null &&
         newLocationData.latitude != null &&
@@ -138,12 +129,25 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   void endRide() async {
+    startLoading();
+    if (model.isLoading) {
+      Popups.showPopup(
+        title: "Сохраняем данные",
+        description: "Это займет не больше 30 секунд",
+        context: context,
+        isLoading: true,
+      );
+    }
+    userScope.isRiding = false;
     cancelStreams();
     final photoUrl = await getUploadPhoto();
-    await FireStoreInstance().sendFinishRide(userScope.userData.uid, photoUrl, totalDistance.toInt());
+    await FireStoreInstance()
+        .sendFinishRide(userScope.userData.uid, photoUrl, totalDistance.round());
+    Navigator.pop(context);
   }
 
   void takePhoto() async {
+    userScope.isRiding = true;
     final photoUrl = await getUploadPhoto();
     await FireStoreInstance().sendStartRide(userScope.userData.uid, photoUrl);
     startTracking();
@@ -155,13 +159,14 @@ class MapPresenter extends BasePresenter<MapViewModel> {
         context,
         MaterialPageRoute(
             builder: (context) => const TakePhotoScreen(
-              flag: 4,
-            )));
-    List<String> photoUrl = await PhotoUploader(userScopeData: userScope).uploadImageFile([File(photo.path)]);
+                  flag: 4,
+                )));
+    List<String> photoUrl =
+        await PhotoUploader(userScopeData: userScope).uploadImageFile([File(photo.path)]);
     return photoUrl.first;
   }
 
-  void cancelStreams(){
+  void cancelStreams() {
     if (locationSubscription != null) {
       locationSubscription!.cancel();
     }

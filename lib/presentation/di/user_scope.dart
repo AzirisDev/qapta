@@ -6,6 +6,7 @@ class UserScopeData {
   UserScopeWidgetState state;
 
   late UserData userData;
+  bool isRiding = false;
 
   UserScopeData({required this.state});
 
