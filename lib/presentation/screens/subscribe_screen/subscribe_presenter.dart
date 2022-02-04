@@ -104,6 +104,12 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
         textColor: AppColors.MONO_WHITE,
         context: context,
       );
+      Popups.showPopup(
+        title: "Спасибо!",
+        description: "Ваша заявка отправлена!\nМы с вами скоро свяжемся!",
+        buttonText: "Ok",
+        context: context,
+      );
     } else {
       notComplete = true;
       updateView();
