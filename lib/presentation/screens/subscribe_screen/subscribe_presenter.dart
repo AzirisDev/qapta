@@ -93,17 +93,6 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
         userScope.userData = userData;
       }
       Navigator.pop(context);
-      showPopup(
-        title: "Спасибо!",
-        text: "Ваша заявка отправлена!\nМы с вами скоро свяжемся!",
-        buttonText: "Ok",
-        onButtonTap: () {
-          Navigator.pop(context);
-        },
-        buttonColor: AppColors.PRIMARY_BLUE,
-        textColor: AppColors.MONO_WHITE,
-        context: context,
-      );
       Popups.showPopup(
         title: "Спасибо!",
         description: "Ваша заявка отправлена!\nМы с вами скоро свяжемся!",
