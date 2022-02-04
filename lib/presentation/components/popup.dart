@@ -21,6 +21,7 @@ class Popups {
     bool isLoading = false,
   }) async =>
       showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (_) => AlertDialog(
           contentPadding: EdgeInsets.zero,
