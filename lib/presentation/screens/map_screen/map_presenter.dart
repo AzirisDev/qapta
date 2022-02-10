@@ -14,6 +14,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../app_colors.dart';
+import 'dart:ui' as ui;
+import 'dart:typed_data';
 
 class MapPresenter extends BasePresenter<MapViewModel> {
   MapPresenter(MapViewModel model) : super(model);
@@ -26,10 +28,12 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   final Set<Polyline> lines = {};
   List<LatLng> locationListFromStream = [];
   int polylineIdCounter = 0;
-  CameraPosition initialLocation = const CameraPosition(target: LatLng(43.2385, 76.945656), zoom: 14);
+  CameraPosition initialLocation =
+      const CameraPosition(target: LatLng(43.2385, 76.945656), zoom: 14);
   LatLng lastLocation = const LatLng(43, 76);
   double totalDistance = 0;
   bool isJobAvailable = false;
+  Uint8List? customMarker;
 
   @override
   void onInitWithContext() async {
@@ -108,12 +112,16 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     }
   }
 
-  void updateMarker(LocationData newLocationData) {
+  void updateMarker(LocationData newLocationData) async {
     if (newLocationData.longitude != null &&
         newLocationData.latitude != null &&
         newLocationData.heading != null) {
       LatLng latLng = LatLng(newLocationData.latitude!, newLocationData.longitude!);
       updateView();
+      customMarker ??= await getBytesFromAsset(
+          path: 'assets/icons/marker.png', //paste the custom image path
+          width: 50 // size of custom image as marker
+      );
       marker = Marker(
           markerId: const MarkerId(
             "home",
@@ -124,7 +132,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
           zIndex: 2,
           flat: true,
           anchor: const Offset(0.5, 0.5),
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue));
+          icon: BitmapDescriptor.fromBytes(customMarker!));
     }
   }
 
@@ -173,6 +181,13 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     if (positionStream != null) {
       positionStream!.cancel();
     }
+  }
+
+  Future<Uint8List> getBytesFromAsset({required String path, required int width}) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
   @override
