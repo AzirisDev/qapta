@@ -133,7 +133,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 8,
                           ),
                           Text(
-                            _presenter.totalDistance.toStringAsFixed(2) + " километров",
+                            _presenter.totalDistance.toStringAsFixed(3) + " километров",
                             style: const TextStyle(
                               fontFamily: 'Raleway',
                               fontSize: 32,

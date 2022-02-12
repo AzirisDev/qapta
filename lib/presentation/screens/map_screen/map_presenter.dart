@@ -68,7 +68,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
               position.latitude,
               position.longitude,
             ) /
-            100;
+            1000;
       }
       locationListFromStream.add(LatLng(position.latitude, position.longitude));
     });
