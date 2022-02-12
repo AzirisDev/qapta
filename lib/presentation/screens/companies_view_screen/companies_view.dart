@@ -63,8 +63,9 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
                         TextFormField(
                           cursorColor: Colors.blue,
                           cursorHeight: 20,
-                          controller: TextEditingController(),
+                          controller: _presenter.searchController,
                           cursorWidth: 1.5,
+                          onChanged: _presenter.onSearchChanged,
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.search),
                             border: OutlineInputBorder(

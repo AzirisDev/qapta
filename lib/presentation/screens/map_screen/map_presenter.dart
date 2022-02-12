@@ -103,14 +103,6 @@ class MapPresenter extends BasePresenter<MapViewModel> {
               lastLocation.longitude.toStringAsFixed(4) != location.longitude?.toStringAsFixed(4)) {
             updateMarker(location);
             List<LatLng> list = locationListFromStream.toList();
-            controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-                target: LatLng(
-                  event.latitude!,
-                  event.longitude!,
-                ),
-                tilt: 0,
-                zoom: 18,
-                bearing: 192)));
             polylineIdCounter++;
             lines.add(Polyline(
               polylineId: PolylineId(polylineIdCounter.toString()),
@@ -151,6 +143,14 @@ class MapPresenter extends BasePresenter<MapViewModel> {
           flat: true,
           anchor: const Offset(0.5, 0.5),
           icon: BitmapDescriptor.fromBytes(customMarker!));
+      controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+          target: LatLng(
+            latLng.latitude,
+            latLng.longitude,
+          ),
+          tilt: 0,
+          zoom: 18,
+          bearing: 192)));
       updateView();
     }
   }
@@ -182,6 +182,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
 
   void takePhoto() async {
     userScope.isRiding = true;
+    updateView();
     final photoUrl = await getUploadPhoto();
     await FireStoreInstance().sendStartRide(uid: userScope.userData.uid, photoUrl: photoUrl);
     startTracking();

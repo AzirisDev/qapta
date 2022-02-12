@@ -27,61 +27,50 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
   @override
   Widget build(BuildContext context) {
     return GeneralScaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.MONO_WHITE,
-        elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: AppColors.PRIMARY_BLUE,
-          ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (widget.flag == 4)
+              const Text(
+                "Сфотографируйте автомобиль",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.PRIMARY_BLUE,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: 'Raleway',
+                ),
+              ),
+            const Spacer(),
+            Padding(
+                padding: const EdgeInsets.all(16),
+                child: Image.asset(widget.flag == 0
+                    ? "assets/main_images/id_front.jpg"
+                    : widget.flag == 1
+                        ? "assets/main_images/id_back.jpg"
+                        : widget.flag == 2
+                            ? "assets/main_images/driver_licence_front.jpg"
+                            : widget.flag == 3
+                                ? "assets/main_images/driver_licence_back.jpg"
+                                : "assets/main_images/ad_example.png")),
+            const Spacer(),
+            if (widget.flag == 4)
+              const Text(
+                "*нам нужно убедиться, что выездите с нашей рекламой и мы начислим вам деньги",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: AppColors.PRIMARY_BLUE,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontFamily: 'Raleway',
+                ),
+              ),
+            Padding(
+                padding: const EdgeInsets.all(16),
+                child: CustomButton(title: "Сфотографировать", onClick: _presenter.takePicture))
+          ],
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          if (widget.flag == 4)
-            const Text(
-              "Сфотографируйте автомобиль",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.PRIMARY_BLUE,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Raleway',
-              ),
-            ),
-          const Spacer(),
-          Padding(
-              padding: const EdgeInsets.all(16),
-              child: Image.asset(widget.flag == 0
-                  ? "assets/main_images/id_front.jpg"
-                  : widget.flag == 1
-                      ? "assets/main_images/id_back.jpg"
-                      : widget.flag == 2
-                          ? "assets/main_images/driver_licence_front.jpg"
-                          : widget.flag == 3
-                              ? "assets/main_images/driver_licence_back.jpg"
-                              : "assets/main_images/ad_example.png")),
-          const Spacer(),
-          if (widget.flag == 4)
-            const Text(
-              "*нам нужно убедиться, что выездите с нашей рекламой и мы начислим вам деньги",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: AppColors.PRIMARY_BLUE,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                fontFamily: 'Raleway',
-              ),
-            ),
-          Padding(
-              padding: const EdgeInsets.all(16),
-              child: CustomButton(title: "Сфотографировать", onClick: _presenter.takePicture))
-        ],
       ),
       backgroundColor: AppColors.MONO_WHITE,
     );

@@ -111,7 +111,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 8,
                           ),
                           Text(
-                            (_presenter.totalDistance * 100).toString() + " KZT",
+                            (_presenter.totalDistance * 100).round().toString() + " KZT",
                             style: const TextStyle(
                               fontFamily: 'Raleway',
                               fontSize: 32,
@@ -133,7 +133,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 8,
                           ),
                           Text(
-                            _presenter.totalDistance.toString() + " километров",
+                            _presenter.totalDistance.toStringAsFixed(2) + " километров",
                             style: const TextStyle(
                               fontFamily: 'Raleway',
                               fontSize: 32,
@@ -204,6 +204,7 @@ class _MapScreenState extends State<MapScreen> {
                       ),
                       child: _presenter.userScope.isRiding
                           ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Text(
                                   'Приятной поездки',
