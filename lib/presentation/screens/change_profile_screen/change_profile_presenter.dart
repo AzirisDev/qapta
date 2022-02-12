@@ -13,7 +13,7 @@ class ChangeProfilePresenter extends BasePresenter<ChangeProfileViewModel> {
 
   @override
   void onInitWithContext() async {
-    UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
+    UserData? userData = await FireStoreInstance().fetchUserData(uid: userScope.userData.uid);
     if (userData != null) {
       nameController.text = userData.username;
     }
@@ -24,7 +24,7 @@ class ChangeProfilePresenter extends BasePresenter<ChangeProfileViewModel> {
   void changeProfile() async {
     await FireStoreInstance().updateUserData(
         uid: userScope.userData.uid, newName: nameController.text);
-    UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
+    UserData? userData = await FireStoreInstance().fetchUserData(uid: userScope.userData.uid);
     if (userData != null) {
       userScope.userData = userData;
     }

@@ -76,7 +76,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
       final authCredential = await auth.signInWithCredential(phoneCredential);
       UserData? existingUserData;
       try {
-        existingUserData = await FireStoreInstance().fetchUserData(authCredential.user!.uid);
+        existingUserData = await FireStoreInstance().fetchUserData(uid: authCredential.user!.uid);
       } catch (e) {
         //ignore
       }

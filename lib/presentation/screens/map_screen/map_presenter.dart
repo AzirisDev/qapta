@@ -21,7 +21,8 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   MapPresenter(MapViewModel model) : super(model);
 
   StreamSubscription? locationSubscription;
-  StreamSubscription<Position>? positionStream;
+  StreamSubscription? pointsSubscription;
+  StreamSubscription<Position>? positionSubscription;
   final Location _locationTracker = Location();
   Marker? marker;
   GoogleMapController? controller;
@@ -39,7 +40,8 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   void onInitWithContext() async {
     super.onInitWithContext();
     if (getJobAvailable()) {
-      await getCurrentLocation();
+      var location = await _locationTracker.getLocation();
+      updateMarker(location);
     }
   }
 
@@ -56,21 +58,38 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   }
 
   void startTracking() {
-    getCurrentLocation();
-    positionStream = Geolocator.getPositionStream().listen((Position position) {
+    startLocationStream();
+    startStreamOfPoints();
+    positionSubscription = Geolocator.getPositionStream().listen((Position position) {
       if (locationListFromStream.isNotEmpty) {
         totalDistance += Geolocator.distanceBetween(
-          locationListFromStream.last.latitude,
-          locationListFromStream.last.longitude,
-          position.latitude,
-          position.longitude,
-        );
+              locationListFromStream.last.latitude,
+              locationListFromStream.last.longitude,
+              position.latitude,
+              position.longitude,
+            ) /
+            100;
       }
       locationListFromStream.add(LatLng(position.latitude, position.longitude));
     });
   }
 
-  Future getCurrentLocation() async {
+  void startStreamOfPoints() {
+    pointsSubscription =
+        _locationTracker.onLocationChanged.throttleTime(const Duration(minutes: 2)).listen((event) {
+      if (event.latitude != null && event.longitude != null) {
+        if ((userScope.latitude.isEmpty && userScope.longitude.isEmpty) ||
+            (userScope.latitude.last.toStringAsFixed(4) != event.latitude!.toStringAsFixed(4) &&
+                userScope.longitude.last.toStringAsFixed(4) !=
+                    event.longitude!.toStringAsFixed(4))) {
+          userScope.latitude.add(event.latitude!);
+          userScope.longitude.add(event.longitude!);
+        }
+      }
+    });
+  }
+
+  Future startLocationStream() async {
     var location = await _locationTracker.getLocation();
     updateMarker(location);
     lastLocation = LatLng(location.latitude!, location.longitude!);
@@ -80,8 +99,8 @@ class MapPresenter extends BasePresenter<MapViewModel> {
           .listen((event) async {
         if (controller != null) {
           var location = await _locationTracker.getLocation();
-          if (lastLocation.latitude != location.latitude &&
-              lastLocation.longitude != location.longitude) {
+          if (lastLocation.latitude.toStringAsFixed(4) != location.latitude?.toStringAsFixed(4) &&
+              lastLocation.longitude.toStringAsFixed(4) != location.longitude?.toStringAsFixed(4)) {
             updateMarker(location);
             List<LatLng> list = locationListFromStream.toList();
             controller!.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
@@ -117,11 +136,10 @@ class MapPresenter extends BasePresenter<MapViewModel> {
         newLocationData.latitude != null &&
         newLocationData.heading != null) {
       LatLng latLng = LatLng(newLocationData.latitude!, newLocationData.longitude!);
-      updateView();
       customMarker ??= await getBytesFromAsset(
           path: 'assets/icons/marker.png', //paste the custom image path
           width: 50 // size of custom image as marker
-      );
+          );
       marker = Marker(
           markerId: const MarkerId(
             "home",
@@ -133,6 +151,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
           flat: true,
           anchor: const Offset(0.5, 0.5),
           icon: BitmapDescriptor.fromBytes(customMarker!));
+      updateView();
     }
   }
 
@@ -146,18 +165,25 @@ class MapPresenter extends BasePresenter<MapViewModel> {
         isLoading: true,
       );
     }
-    userScope.isRiding = false;
     cancelStreams();
     final photoUrl = await getUploadPhoto();
-    await FireStoreInstance()
-        .sendFinishRide(userScope.userData.uid, photoUrl, totalDistance.round());
+    await FireStoreInstance().sendFinishRide(
+      uid: userScope.userData.uid,
+      photoUrl: photoUrl,
+      distance: totalDistance.round(),
+      latitude: userScope.latitude,
+      longitude: userScope.longitude,
+    );
+    userScope.isRiding = false;
+    userScope.latitude.clear();
+    userScope.longitude.clear();
     Navigator.pop(context);
   }
 
   void takePhoto() async {
     userScope.isRiding = true;
     final photoUrl = await getUploadPhoto();
-    await FireStoreInstance().sendStartRide(userScope.userData.uid, photoUrl);
+    await FireStoreInstance().sendStartRide(uid: userScope.userData.uid, photoUrl: photoUrl);
     startTracking();
     updateView();
   }
@@ -178,8 +204,11 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     if (locationSubscription != null) {
       locationSubscription!.cancel();
     }
-    if (positionStream != null) {
-      positionStream!.cancel();
+    if (positionSubscription != null) {
+      positionSubscription!.cancel();
+    }
+    if (pointsSubscription != null) {
+      pointsSubscription!.cancel();
     }
   }
 

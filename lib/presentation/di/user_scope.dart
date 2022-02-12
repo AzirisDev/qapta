@@ -7,6 +7,8 @@ class UserScopeData {
 
   late UserData userData;
   bool isRiding = false;
+  List<double> longitude = [];
+  List<double> latitude = [];
 
   UserScopeData({required this.state});
 

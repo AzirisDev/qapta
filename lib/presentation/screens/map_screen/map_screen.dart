@@ -1,6 +1,7 @@
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_presenter.dart';
 import 'package:ad_drive/presentation/screens/map_screen/map_view_model.dart';
+import 'package:ad_drive/presentation/screens/map_screen/widgets/not_working.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
@@ -53,47 +54,7 @@ class _MapScreenState extends State<MapScreen> {
                         onMapCreated: (controller) => _presenter.controller = controller,
                         polylines: _presenter.lines,
                       )
-                    : Container(
-                        color: Colors.white,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Center(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 64),
-                                child: Image.asset(
-                                  'assets/main_images/sleep.gif',
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                "Qapta в это время не работает. \n",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 24,
-                                  color: AppColors.PRIMARY_BLUE,
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16),
-                              child: Text(
-                                "Режим работы: \n09:00 - 20:00",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.PRIMARY_BLUE,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                    : const NotWorkingWidget(),
                 SlidingUpPanel(
                   minHeight: _presenter.isJobAvailable ? 160 : 0,
                   maxHeight: 420,
@@ -150,7 +111,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 8,
                           ),
                           Text(
-                            (_presenter.totalDistance.toInt() * 50).toString() + " KZT",
+                            (_presenter.totalDistance * 100).toString() + " KZT",
                             style: const TextStyle(
                               fontFamily: 'Raleway',
                               fontSize: 32,
@@ -172,7 +133,7 @@ class _MapScreenState extends State<MapScreen> {
                             height: 8,
                           ),
                           Text(
-                            _presenter.totalDistance.toInt().toString() + " километров",
+                            _presenter.totalDistance.toString() + " километров",
                             style: const TextStyle(
                               fontFamily: 'Raleway',
                               fontSize: 32,
@@ -182,50 +143,51 @@ class _MapScreenState extends State<MapScreen> {
                           const Divider(
                             color: AppColors.MONO_WHITE,
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Завершить поездку',
-                                style: TextStyle(
-                                  fontFamily: 'Raleway',
-                                  fontSize: 24,
-                                  color: AppColors.MONO_WHITE,
+                          if (_presenter.userScope.isRiding)
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Завершить поездку',
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
                                 ),
-                              ),
-                              GestureDetector(
-                                onTap: _presenter.endRide,
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppColors.PRIMARY_BLUE,
-                                    border: Border.all(color: AppColors.MONO_WHITE, width: 4),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.white,
-                                        blurRadius: 10.0,
-                                        spreadRadius: 0.0,
-                                        offset: Offset(
-                                          0.0,
-                                          0.0,
+                                GestureDetector(
+                                  onTap: _presenter.endRide,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.PRIMARY_BLUE,
+                                      border: Border.all(color: AppColors.MONO_WHITE, width: 4),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.white,
+                                          blurRadius: 10.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(
+                                            0.0,
+                                            0.0,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Text(
-                                    'X',
-                                    style: TextStyle(
-                                        fontFamily: 'Raleway',
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: AppColors.MONO_WHITE),
+                                      ],
+                                    ),
+                                    child: const Text(
+                                      'X',
+                                      style: TextStyle(
+                                          fontFamily: 'Raleway',
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.MONO_WHITE),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
+                              ],
+                            )
                         ],
                       ),
                     ),
@@ -240,47 +202,60 @@ class _MapScreenState extends State<MapScreen> {
                         color: AppColors.PRIMARY_BLUE,
                         borderRadius: radius,
                       ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Начать поездку',
-                            style: TextStyle(
-                              fontFamily: 'Raleway',
-                              fontSize: 24,
-                              color: AppColors.MONO_WHITE,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: _presenter.takePhoto,
-                            child: Container(
-                              padding: EdgeInsets.zero,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.PRIMARY_BLUE,
-                                border: Border.all(color: AppColors.MONO_WHITE, width: 4),
-                                boxShadow: const [
-                                  BoxShadow(
-                                    color: Colors.white,
-                                    blurRadius: 10.0,
-                                    spreadRadius: 0.0,
-                                    offset: Offset(
-                                      0.0,
-                                      0.0,
+                      child: _presenter.userScope.isRiding
+                          ? Row(
+                              children: const [
+                                Text(
+                                  'Приятной поездки',
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Начать поездку',
+                                  style: TextStyle(
+                                    fontFamily: 'Raleway',
+                                    fontSize: 24,
+                                    color: AppColors.MONO_WHITE,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: _presenter.takePhoto,
+                                  child: Container(
+                                    padding: EdgeInsets.zero,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppColors.PRIMARY_BLUE,
+                                      border: Border.all(color: AppColors.MONO_WHITE, width: 4),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.white,
+                                          blurRadius: 10.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(
+                                            0.0,
+                                            0.0,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: AppColors.MONO_WHITE,
+                                      size: 40,
                                     ),
                                   ),
-                                ],
-                              ),
-                              child: const Icon(
-                                Icons.play_arrow_rounded,
-                                color: AppColors.MONO_WHITE,
-                                size: 40,
-                              ),
-                            ),
-                          ),
-                        ],
-                      )),
+                                ),
+                              ],
+                            )),
                   borderRadius: radius,
                 ),
               ],

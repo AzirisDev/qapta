@@ -18,7 +18,7 @@ class ProfilePresenter extends BasePresenter<ProfileViewModel> {
 
   @override
   void onInitWithContext() async {
-    UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
+    UserData? userData = await FireStoreInstance().fetchUserData(uid: userScope.userData.uid);
     if (userData != null) {
       userScope.userData = userData;
     }

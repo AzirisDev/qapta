@@ -18,7 +18,7 @@ class FireStoreInstance {
     await users.doc(user.uid).set(user);
   }
 
-  Future<UserData?> fetchUserData(String uid) async {
+  Future<UserData?> fetchUserData({required String uid}) async {
     QuerySnapshot data = await users.where("uid", isEqualTo: uid).get();
     if (data.size != 0) {
       return data.docs.first.data() as UserData;
@@ -41,7 +41,8 @@ class FireStoreInstance {
     });
   }
 
-  Future<void> sendRequest(String uid, String company, String price) async {
+  Future<void> sendRequest(
+      {required String uid, required String company, required String price}) async {
     await requests.doc(uid).set({
       "id": uid,
       "company": company,
@@ -65,7 +66,7 @@ class FireStoreInstance {
     return documents;
   }
 
-  Future<void> sendStartRide(String uid, String photoUrl) async {
+  Future<void> sendStartRide({required String uid, required String photoUrl}) async {
     await rides.doc(uid).set({
       "uid": uid,
       "startPhoto": photoUrl,
@@ -73,11 +74,18 @@ class FireStoreInstance {
     });
   }
 
-  Future<void> sendFinishRide(String uid, String photoUrl, int distance) async {
+  Future<void> sendFinishRide(
+      {required String uid,
+      required String photoUrl,
+      required int distance,
+      required List<double> longitude,
+      required List<double> latitude}) async {
     await rides.doc(uid).update({
       "endPhoto": photoUrl,
       "endTime": Timestamp.fromDate(DateTime.now()),
       "distance": distance,
+      "longitude": longitude,
+      "latitude": latitude,
     });
   }
 

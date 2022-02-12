@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:ad_drive/app_colors.dart';
 import 'package:ad_drive/data/firestore.dart';
 import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/card.dart';
@@ -8,7 +7,6 @@ import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/components/popup.dart';
-import 'package:ad_drive/presentation/components/show_pop_up.dart';
 import 'package:ad_drive/presentation/helpers/photo_uploader.dart';
 import 'package:ad_drive/presentation/screens/link_card_screen/link_card_screen.dart';
 import 'package:ad_drive/presentation/screens/subscribe_screen/subscribe_view_model.dart';
@@ -74,9 +72,9 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
         await FireStoreInstance().updateUserData(uid: userScope.userData.uid, documents: urls);
       }
       await FireStoreInstance().sendRequest(
-        userScope.userData.uid,
-        model.company!.name,
-        model.campany!,
+        uid: userScope.userData.uid,
+        company: model.company!.name,
+        price: model.campany!,
       );
       if (userScope.userData.cardModel.cardNumber.isEmpty ||
           userScope.userData.cardModel.cardHolder.isEmpty) {
@@ -87,7 +85,7 @@ class SubscribePresenter extends BasePresenter<SubscribeViewModel> {
       }
       updateView();
       endLoading();
-      UserData? userData = await FireStoreInstance().fetchUserData(userScope.userData.uid);
+      UserData? userData = await FireStoreInstance().fetchUserData(uid: userScope.userData.uid);
       if (userData != null) {
         await SharedPreferencesRepository().addUserData(userData);
         userScope.userData = userData;
