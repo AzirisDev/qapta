@@ -2,7 +2,37 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string></string>
+	<key>CLIENT_ID</key>
+	<string>25055003280-mb2sg6d3ge8og441eo11r69gfs1arhgj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.25055003280-mb2sg6d3ge8og441eo11r69gfs1arhgj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>25055003280-j71pop26lq4qi6uss9pkp1j6aekgr77g.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBpgma7vNOeHl-tcOPEMXmytqwdtrb5_8I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>25055003280</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.adDrive.qapta</string>
+	<key>PROJECT_ID</key>
+	<string>ad-drive-fa549</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ad-drive-fa549.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:25055003280:ios:4ce57d15c03721bab68e15</string>
+	<key>DATABASE_URL</key>
+	<string>https://ad-drive-fa549-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

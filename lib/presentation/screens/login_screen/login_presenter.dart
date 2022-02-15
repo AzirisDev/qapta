@@ -44,7 +44,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
             phoneNumber: phoneNumberController.text,
             verificationCompleted: (phoneAuthCredential) async {},
             verificationFailed: (verificationFailed) async {
-              //ignore
+              print(verificationFailed);
             },
             codeSent: (verificationId, resendingToken) async {
               isCodeSent = true;
@@ -54,7 +54,7 @@ class LoginPresenter extends BasePresenter<LoginViewModel> {
             },
             codeAutoRetrievalTimeout: (verificationId) async {});
       } catch (e) {
-        //ignore
+        print(e.toString());
       }
       updateView();
     }
