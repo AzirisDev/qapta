@@ -55,6 +55,7 @@ dependencies:
   geolocator: ^8.0.3
   dio: ^4.0.3
   http: ^0.13.4
+  native_pdf_renderer: ^5.0.0
 
 dev_dependencies:
   flutter_test:

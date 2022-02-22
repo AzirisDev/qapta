@@ -149,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           height: 20,
                         ),
                         SettingTile(
-                          title: 'Договор с Qapta',
+                          title: 'Контракт с Qapta',
                           onClick: _presenter.agreement,
                         ),
                         SettingTile(
