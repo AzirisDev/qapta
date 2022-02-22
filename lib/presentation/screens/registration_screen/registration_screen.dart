@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/components/custom_textfield.dart';
@@ -8,7 +9,7 @@ import 'package:ad_drive/presentation/screens/registration_screen/registration_p
 import 'package:ad_drive/presentation/screens/registration_screen/registration_view_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../../app_colors.dart';
+import '../../../contants/app_colors.dart';
 
 class RegistrationScreen extends StatefulWidget {
   final String phoneNumber;
@@ -44,163 +45,167 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return StreamBuilder<RegistrationViewModel>(
         stream: _presenter.stream,
         builder: (context, snapshot) {
-          return GeneralScaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                elevation: 0,
-                backgroundColor: AppColors.MONO_WHITE.withOpacity(0.5),
-                automaticallyImplyLeading: false,
-                title: const Text(
-                  "Регистрация",
-                  style: TextStyle(
-                    color: AppColors.PRIMARY_BLUE,
-                    fontSize: 26,
-                    fontFamily: 'RaleWay',
-                    fontWeight: FontWeight.bold,
+          return WillPopScope(
+            onWillPop: () async => false,
+            child: GeneralScaffold(
+                appBar: AppBar(
+                  systemOverlayStyle: CustomTheme.darkStatusBarIcons(),
+                  centerTitle: true,
+                  elevation: 0,
+                  backgroundColor: AppColors.MONO_WHITE.withOpacity(0.5),
+                  automaticallyImplyLeading: false,
+                  title: const Text(
+                    "Регистрация",
+                    style: TextStyle(
+                      color: AppColors.PRIMARY_BLUE,
+                      fontSize: 26,
+                      fontFamily: 'RaleWay',
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: SingleChildScrollView(
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minWidth: MediaQuery.of(context).size.width,
-                      minHeight: MediaQuery.of(context).size.height,
-                    ),
-                    child: IntrinsicHeight(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _presenter.addPhoto();
-                            },
-                            child: Container(
-                              height: 230,
-                              width: 230,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: AppColors.MONO_WHITE,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.1),
-                                    spreadRadius: 1,
-                                    blurRadius: 7,
-                                    offset: const Offset(0, 0), // changes position of shadow
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: SingleChildScrollView(
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width,
+                        minHeight: MediaQuery.of(context).size.height,
+                      ),
+                      child: IntrinsicHeight(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                _presenter.addPhoto();
+                              },
+                              child: Container(
+                                height: 230,
+                                width: 230,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: AppColors.MONO_WHITE,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.1),
+                                      spreadRadius: 1,
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 0), // changes position of shadow
+                                    ),
+                                  ],
+                                ),
+                                child: _presenter.model.avatarUrl != null
+                                    ? ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Image.file(
+                                          File(_presenter.model.avatarUrl!),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      )
+                                    : Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.add_circle_outline_rounded,
+                                            color: AppColors.PRIMARY_BLUE,
+                                            size: 60,
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          ),
+                                          Text(
+                                            "Загрузить фото",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18,
+                                                fontFamily: 'Raleway',
+                                                color: AppColors.MONO_BLACK.withOpacity(0.5)),
+                                          )
+                                        ],
+                                      ),
+                              ),
+                            ),
+                            Form(
+                              key: _presenter.formKey,
+                              child: Column(
+                                children: [
+                                  CustomTextField(
+                                    controller: _presenter.fullNameController,
+                                    hint: "full name",
+                                    label: "Full name",
+                                    validator: (text) {
+                                      if (text == null || text.isEmpty) {
+                                        return "Enter your name";
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ],
                               ),
-                              child: _presenter.model.avatarUrl != null
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Image.file(
-                                        File(_presenter.model.avatarUrl!),
-                                        fit: BoxFit.cover,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15),
+                              child: FormField<String>(
+                                builder: (FormFieldState<String> state) {
+                                  return InputDecorator(
+                                    decoration: const InputDecoration(
+                                        labelStyle: TextStyle(
+                                            fontFamily: 'Raleway',
+                                            color: Colors.black,
+                                            fontSize: 17.0),
+                                        border: UnderlineInputBorder(
+                                          borderSide: BorderSide(color: Colors.grey),
+                                        )),
+                                    isEmpty: _presenter.selectedCity == '',
+                                    child: DropdownButtonHideUnderline(
+                                      child: DropdownButton<String>(
+                                        value: _presenter.selectedCity,
+                                        isDense: true,
+                                        onChanged: (value) {
+                                          if (value != null) _presenter.onChanged(value);
+                                        },
+                                        items: _presenter.cities.map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
                                       ),
-                                    )
-                                  : Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.add_circle_outline_rounded,
-                                          color: AppColors.PRIMARY_BLUE,
-                                          size: 60,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          "Загрузить фото",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 18,
-                                              fontFamily: 'Raleway',
-                                              color: AppColors.MONO_BLACK.withOpacity(0.5)),
-                                        )
-                                      ],
                                     ),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                          Form(
-                            key: _presenter.formKey,
-                            child: Column(
-                              children: [
-                                CustomTextField(
-                                  controller: _presenter.fullNameController,
-                                  hint: "full name",
-                                  label: "Full name",
-                                  validator: (text) {
-                                    if (text == null || text.isEmpty) {
-                                      return "Enter your name";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: FormField<String>(
-                              builder: (FormFieldState<String> state) {
-                                return InputDecorator(
-                                  decoration: const InputDecoration(
-                                      labelStyle: TextStyle(
-                                          fontFamily: 'Raleway',
-                                          color: Colors.black,
-                                          fontSize: 17.0),
-                                      border: UnderlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.grey),
-                                      )),
-                                  isEmpty: _presenter.selectedCity == '',
-                                  child: DropdownButtonHideUnderline(
-                                    child: DropdownButton<String>(
-                                      value: _presenter.selectedCity,
-                                      isDense: true,
-                                      onChanged: (value) {
-                                        if (value != null) _presenter.onChanged(value);
-                                      },
-                                      items: _presenter.cities.map((String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
+                            Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Spacer(),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: CustomButton(
+                                      title: "Регистрация",
+                                      onClick: _presenter.addUserToDatabase,
+                                      showLoading: _presenter.model.entering,
                                     ),
                                   ),
-                                );
-                              },
+                                  const Spacer(),
+                                ],
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                const Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 5),
-                                  child: CustomButton(
-                                    title: "Регистрация",
-                                    onClick: _presenter.addUserToDatabase,
-                                    showLoading: _presenter.model.entering,
-                                  ),
-                                ),
-                                const Spacer(),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              backgroundColor: AppColors.MONO_GREY);
+                backgroundColor: AppColors.MONO_GREY),
+          );
         });
   }
 }

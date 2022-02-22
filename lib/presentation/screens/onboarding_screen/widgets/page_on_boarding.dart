@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../styles.dart';
+import '../../../../contants/styles.dart';
 
 class PageOnBoarding extends StatelessWidget {
   final String text;

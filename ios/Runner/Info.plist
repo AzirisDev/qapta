@@ -40,8 +40,17 @@
 	<string>To verify the ride</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>location description</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+    <string>This application requires location services to work</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>This application requires location services to work</string>
 	<key>UIBackgroundModes</key>
 	<string>location</string>
+	<key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

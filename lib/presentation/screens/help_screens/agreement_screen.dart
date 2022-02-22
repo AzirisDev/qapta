@@ -1,4 +1,4 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
 import 'package:ad_drive/presentation/components/custom_app_bar.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:flutter/material.dart';

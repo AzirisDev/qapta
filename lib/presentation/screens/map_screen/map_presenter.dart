@@ -13,7 +13,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/rxdart.dart';
-import '../../../app_colors.dart';
+import '../../../contants/app_colors.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 
@@ -178,6 +178,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     userScope.latitude.clear();
     userScope.longitude.clear();
     Navigator.pop(context);
+    updateView();
   }
 
   void takePhoto() async {

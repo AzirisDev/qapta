@@ -1,4 +1,4 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
 import 'package:ad_drive/model/card.dart';
 import 'package:ad_drive/presentation/components/credit_card/credit_card_form.dart';
 import 'package:ad_drive/presentation/components/credit_card/credit_card_widget.dart';

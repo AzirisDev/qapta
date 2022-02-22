@@ -1,4 +1,4 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/components/custom_button.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';

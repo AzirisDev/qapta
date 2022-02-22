@@ -1,9 +1,10 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_presenter.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_view_model.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/widgets/setting_tile.dart';
-import 'package:ad_drive/styles.dart';
+import 'package:ad_drive/contants/styles.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -29,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context, snapshot) {
         return Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: CustomTheme.darkStatusBarIcons(),
             elevation: 0,
             automaticallyImplyLeading: false,
             centerTitle: true,

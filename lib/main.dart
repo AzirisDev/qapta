@@ -1,3 +1,4 @@
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/data/firebase.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/model/user_model.dart';
@@ -20,6 +21,7 @@ Future<void> main() async {
   initScreen = preferences.getInt("initScreen");
   await preferences.setInt("initScreen", 1);
   await Firebase.initializeApp();
+  CustomTheme.setupMobileUi();
   runApp(const MyApp());
 }
 
@@ -37,29 +39,31 @@ class MyApp extends StatelessWidget {
               create: (_) => BottomNavigationBarProvider(),
             ),
           ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: FutureBuilder(
-              future: UserScopeWidget.of(context).init(),
-              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return const Center(
-                    child: Text("data is null"),
-                  );
-                }
-                UserData user = snapshot.data;
-                final userLoggedIn = Provider.of<UserModel?>(context);
-                if (userLoggedIn == null || user.uid == "") {
-                  return initScreen == null ? const FirstPage() : const LoginScreen();
-                } else {
-                  return MainScreen(
-                    user: user,
-                  );
-                }
-              },
+          child: CustomTheme(
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: FutureBuilder(
+                future: UserScopeWidget.of(context).init(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return const Center(
+                      child: Text("data is null"),
+                    );
+                  }
+                  UserData user = snapshot.data;
+                  final userLoggedIn = Provider.of<UserModel?>(context);
+                  if (userLoggedIn == null || user.uid == "") {
+                    return initScreen == null ? const FirstPage() : const LoginScreen();
+                  } else {
+                    return MainScreen(
+                      user: user,
+                    );
+                  }
+                },
+              ),
             ),
           ),
         );

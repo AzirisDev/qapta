@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../app_colors.dart';
+import '../../../../contants/app_colors.dart';
 
 class NotWorkingWidget extends StatelessWidget {
   const NotWorkingWidget({Key? key}) : super(key: key);

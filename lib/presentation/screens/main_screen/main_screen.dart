@@ -1,4 +1,5 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/helper/bottom_nav_bar_provider.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';

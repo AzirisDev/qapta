@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../app_colors.dart';
+import '../../contants/app_colors.dart';
 
 Future<void> showPopup({
   required String text,

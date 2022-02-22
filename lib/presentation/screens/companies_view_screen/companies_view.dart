@@ -1,11 +1,12 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/model/company.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/general_scaffold.dart';
 import 'package:ad_drive/presentation/screens/companies_view_screen/widgets/company_list_item.dart';
 import 'package:flutter/material.dart';
 
-import '../../../styles.dart';
+import '../../../contants/styles.dart';
 import 'companies_presenter.dart';
 import 'companies_view_model.dart';
 
@@ -32,6 +33,7 @@ class _CompaniesScreenState extends State<CompaniesScreen> {
         builder: (context, snapshot) {
           return GeneralScaffold(
             appBar: AppBar(
+              systemOverlayStyle: CustomTheme.darkStatusBarIcons(),
               elevation: 0,
               automaticallyImplyLeading: false,
               centerTitle: true,

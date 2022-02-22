@@ -1,4 +1,5 @@
-import 'package:ad_drive/app_colors.dart';
+import 'package:ad_drive/contants/app_colors.dart';
+import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_presenter.dart';
 import 'package:ad_drive/presentation/screens/onboarding_screen/onboarding_view_model.dart';
@@ -27,7 +28,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       backgroundColor: AppColors.MONO_WHITE,
       body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
+        value: CustomTheme.darkStatusBarIcons(),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 40.0),
           child: Column(

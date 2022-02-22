@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import Firebase
+import FirebaseAuth
 import GoogleMaps
 
 @UIApplicationMain
