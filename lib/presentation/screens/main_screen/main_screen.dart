@@ -39,7 +39,44 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: provider.currentIndex == 1 && _presenter.isJobAvailable
                 ? AppColors.PRIMARY_BLUE
                 : null,
-            body: _presenter.currentTab[provider.currentIndex],
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                _presenter.currentTab[provider.currentIndex],
+                if (!_presenter.isConnected)
+                  Material(
+                    color: AppColors.MONO_BLACK.withOpacity(0.6),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                        decoration: BoxDecoration(
+                          color: AppColors.MONO_WHITE,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text(
+                              "Проверьте подключение\nк интернету",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 150,
+                              child: Image.asset(
+                                'assets/main_images/no_connection.gif',
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+              ],
+            ),
             floatingActionButton: FloatingActionButton(
               elevation: provider.currentIndex == 1 ? 0 : null,
               backgroundColor: AppColors.PRIMARY_BLUE,
@@ -67,9 +104,9 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () async {
                           if (_presenter.userScope.isRiding) {
                             Popups.showPopup(
-                                title: "Завершите поездку, чтобы перейти на другие страницы",
-                                context: context,
-                                buttonText: "Ok",
+                              title: "Завершите поездку, чтобы перейти на другие страницы",
+                              context: context,
+                              buttonText: "Ok",
                             );
                           } else {
                             provider.currentIndex = 0;
@@ -107,10 +144,10 @@ class _MainScreenState extends State<MainScreen> {
                         onPressed: () async {
                           if (_presenter.userScope.isRiding) {
                             Popups.showPopup(
-                                title: "Завершите поездку, чтобы перейти на другие страницы",
-                                context: context,
-                                buttonText: "Ok",
-                               );
+                              title: "Завершите поездку, чтобы перейти на другие страницы",
+                              context: context,
+                              buttonText: "Ok",
+                            );
                           } else {
                             provider.currentIndex = 2;
                           }
@@ -143,5 +180,11 @@ class _MainScreenState extends State<MainScreen> {
             ),
           );
         });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _presenter.userScope.dispose();
   }
 }

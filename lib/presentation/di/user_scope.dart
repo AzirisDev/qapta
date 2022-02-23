@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
 class UserScopeData {
@@ -9,10 +12,14 @@ class UserScopeData {
   bool isRiding = false;
   List<double> longitude = [];
   List<double> latitude = [];
+  bool isConnected = false;
+  late Stream connectionStream;
 
   UserScopeData({required this.state});
 
   Future<UserData> init() async {
+    isConnected = isConnected;
+    connectionStream = Connectivity().onConnectivityChanged;
     UserData userData = await SharedPreferencesRepository().init();
     return userData;
   }

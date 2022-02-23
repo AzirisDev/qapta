@@ -212,6 +212,9 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     if (pointsSubscription != null) {
       pointsSubscription!.cancel();
     }
+    if(controller != null){
+      controller!.dispose();
+    }
   }
 
   Future<Uint8List> getBytesFromAsset({required String path, required int width}) async {
