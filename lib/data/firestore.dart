@@ -89,6 +89,14 @@ class FireStoreInstance {
     });
   }
 
+  Future<void> sendFeedback({required String uid, required String text}) async {
+    await feedback.doc(uid).set({
+      "uid": uid,
+      "question": text,
+      "date": Timestamp.fromDate(DateTime.now()),
+    });
+  }
+
   late CollectionReference users = fireStore.collection("users").withConverter<UserData>(
       fromFirestore: (snapshot, _) => UserData.fromJson(snapshot.data()!),
       toFirestore: (userModel, _) => userModel.toJson());
@@ -100,4 +108,6 @@ class FireStoreInstance {
   late CollectionReference requests = fireStore.collection("requests");
 
   late CollectionReference rides = fireStore.collection("rides");
+
+  late CollectionReference feedback = fireStore.collection("feedback");
 }

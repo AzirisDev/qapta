@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final FocusNode? focusNode;
   final String hint;
   final String label;
   final String? Function(String?)? validator;
@@ -22,6 +23,7 @@ class CustomTextField extends StatelessWidget {
     this.textAlign,
     this.maxLength,
     this.minLines,
+    this.focusNode,
     required this.label,
   }) : super(key: key);
 
@@ -30,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: TextFormField(
+        focusNode: focusNode,
         maxLines: minLines != null ? minLines! + 3 : 1,
         minLines: minLines,
         maxLength: maxLength,

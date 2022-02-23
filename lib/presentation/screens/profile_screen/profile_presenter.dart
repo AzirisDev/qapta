@@ -4,7 +4,7 @@ import 'package:ad_drive/data/shared_preferences.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_presenter.dart';
 import 'package:ad_drive/presentation/screens/change_profile_screen/change_profile_screen.dart';
-import 'package:ad_drive/presentation/screens/help_screens/support_screen.dart';
+import 'package:ad_drive/presentation/screens/support_screen/support_screen.dart';
 import 'package:ad_drive/presentation/screens/link_card_screen/link_card_screen.dart';
 import 'package:ad_drive/presentation/screens/login_screen/login.dart';
 import 'package:ad_drive/presentation/screens/profile_screen/profile_view_model.dart';
