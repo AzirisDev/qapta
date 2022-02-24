@@ -32,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
     Timer(
       alarmTime.difference(DateTime.now()),
       () async {
-        // if (UserScopeWidget.of(context).isRiding) {
+        if (UserScopeWidget.of(context).isRiding) {
           await localNotificationManager.showNotification();
-        // }
+        }
       },
     );
   }
