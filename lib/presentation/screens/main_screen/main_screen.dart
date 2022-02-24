@@ -23,7 +23,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   DateTime alarmTime =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 19, 55, 0);
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 13, 0);
 
   @override
   void initState() {
@@ -32,9 +32,9 @@ class _MainScreenState extends State<MainScreen> {
     Timer(
       alarmTime.difference(DateTime.now()),
       () async {
-        if (UserScopeWidget.of(context).isRiding) {
+        // if (UserScopeWidget.of(context).isRiding) {
           await localNotificationManager.showNotification();
-        }
+        // }
       },
     );
   }

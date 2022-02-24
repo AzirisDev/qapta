@@ -28,8 +28,7 @@ class LocalNotificationManager {
   }
 
   Future<void> initializePlatform() async {
-    //TODO: Change icon to QAPTA icon
-    var initSettingsAndroid = const AndroidInitializationSettings('app_notification_icon');
+    var initSettingsAndroid = const AndroidInitializationSettings('qapta_notification_icon');
     var initSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -70,7 +69,7 @@ class LocalNotificationManager {
     await flutterLocalNotificationsPlugin.show(
       0,
       "Завершите поездку",
-      "Необходимо завершить поездку для записи данных в нашу базу.",
+      "Необходима загрузить данные в базу",
       platformChannel,
       payload: "New payload",
     );
