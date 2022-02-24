@@ -23,7 +23,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   DateTime alarmTime =
-      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 13, 0);
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 19, 55, 0);
 
   @override
   void initState() {
