@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:ad_drive/contants/app_colors.dart';
-import 'package:ad_drive/contants/theme.dart';
 import 'package:ad_drive/helper/bottom_nav_bar_provider.dart';
+import 'package:ad_drive/manager/notification_manager.dart';
 import 'package:ad_drive/model/user.dart';
 import 'package:ad_drive/presentation/base/base_screen_state.dart';
 import 'package:ad_drive/presentation/components/popup.dart';
+import 'package:ad_drive/presentation/di/user_scope.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_screen_presenter.dart';
 import 'package:ad_drive/presentation/screens/main_screen/main_view_model.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,23 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  DateTime alarmTime =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 19, 55, 0);
+
+  @override
+  void initState() {
+    super.initState();
+    localNotificationManager;
+    Timer(
+      alarmTime.difference(DateTime.now()),
+      () async {
+        if (UserScopeWidget.of(context).isRiding) {
+          await localNotificationManager.showNotification();
+        }
+      },
+    );
+  }
+
   final MainPresenter _presenter = MainPresenter(MainViewModel(ScreenState.none));
 
   @override

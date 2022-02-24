@@ -13,6 +13,9 @@ import GoogleMaps
     GMSServices.provideAPIKey("AIzaSyA1brj0p5fovQBgh5oEr9QgdHAPWZ0XJWE")
     FirebaseApp.configure()
     GeneratedPluginRegistrant.register(with: self)
+    if #available(iOS 10.0, *) {
+        UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

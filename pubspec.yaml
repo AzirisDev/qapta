@@ -57,6 +57,7 @@ dependencies:
   http: ^0.13.4
   native_pdf_renderer: ^5.0.0
   connectivity_plus: ^2.2.1
+  flutter_local_notifications: ^9.3.2
 
 dev_dependencies:
   flutter_test:
