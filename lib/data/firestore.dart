@@ -66,8 +66,9 @@ class FireStoreInstance {
     return documents;
   }
 
-  Future<void> sendStartRide({required String uid, required String photoUrl}) async {
-    await rides.doc(uid).set({
+  Future<void> sendStartRide(
+      {required String uid, required String photoUrl, required String dateTimeStamp}) async {
+    await rides.doc(uid + " " + dateTimeStamp).set({
       "uid": uid,
       "startPhoto": photoUrl,
       "startTime": Timestamp.fromDate(DateTime.now()),
@@ -76,11 +77,12 @@ class FireStoreInstance {
 
   Future<void> sendFinishRide(
       {required String uid,
+      required String dateTimeStamp,
       required String photoUrl,
       required int distance,
       required List<double> longitude,
       required List<double> latitude}) async {
-    await rides.doc(uid).update({
+    await rides.doc(uid + " " + dateTimeStamp).update({
       "endPhoto": photoUrl,
       "endTime": Timestamp.fromDate(DateTime.now()),
       "distance": distance,

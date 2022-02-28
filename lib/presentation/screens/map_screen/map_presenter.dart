@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:location/location.dart';
 import 'package:rxdart/rxdart.dart';
 import '../../../contants/app_colors.dart';
@@ -35,6 +36,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
   double totalDistance = 0;
   bool isJobAvailable = false;
   Uint8List? customMarker;
+  String dateTimeStamp = '';
 
   @override
   void onInitWithContext() async {
@@ -169,6 +171,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     final photoUrl = await getUploadPhoto();
     await FireStoreInstance().sendFinishRide(
       uid: userScope.userData.uid,
+      dateTimeStamp:  dateTimeStamp,
       photoUrl: photoUrl,
       distance: totalDistance.round(),
       latitude: userScope.latitude,
@@ -177,6 +180,7 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     userScope.isRiding = false;
     userScope.latitude.clear();
     userScope.longitude.clear();
+    lines.clear();
     Navigator.pop(context);
     updateView();
   }
@@ -185,7 +189,9 @@ class MapPresenter extends BasePresenter<MapViewModel> {
     userScope.isRiding = true;
     updateView();
     final photoUrl = await getUploadPhoto();
-    await FireStoreInstance().sendStartRide(uid: userScope.userData.uid, photoUrl: photoUrl);
+    DateFormat formatter = DateFormat("yyyy-MM-dd HH:mm:ss");
+    dateTimeStamp = formatter.format(DateTime.now());
+    await FireStoreInstance().sendStartRide(uid: userScope.userData.uid, photoUrl: photoUrl, dateTimeStamp: dateTimeStamp);
     startTracking();
     updateView();
   }
