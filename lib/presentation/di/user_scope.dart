@@ -12,13 +12,11 @@ class UserScopeData {
   bool isRiding = false;
   List<double> longitude = [];
   List<double> latitude = [];
-  bool isConnected = false;
   late Stream connectionStream;
 
   UserScopeData({required this.state});
 
   Future<UserData> init() async {
-    isConnected = isConnected;
     connectionStream = Connectivity().onConnectivityChanged;
     UserData userData = await SharedPreferencesRepository().init();
     return userData;

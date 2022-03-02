@@ -14,7 +14,7 @@ class MainPresenter extends BasePresenter<MainViewModel> {
 
   bool isJobAvailable = true;
 
-  bool isConnected = false;
+  bool isConnected = true;
 
   late StreamSubscription connectionSubscription;
 
