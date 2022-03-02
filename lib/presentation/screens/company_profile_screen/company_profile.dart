@@ -76,33 +76,38 @@ class _CompanyProfileState extends State<CompanyProfile> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        company.description,
-                        maxLines: _presenter.isExpand ? null : 4,
-                        overflow: TextOverflow.fade,
-                        style: const TextStyle(
-                          fontFamily: 'Raleway',
-                          fontSize: 16,
-                        ),
-                      ),
                       GestureDetector(
                         onTap: _presenter.expandText,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Row(
-                            children: [
-                              Text(
-                                _presenter.isExpand ? "Open" : "Close",
-                                style: const TextStyle(
-                                    fontFamily: 'Raleway',
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              company.description,
+                              maxLines: _presenter.isExpand ? null : 4,
+                              overflow: TextOverflow.fade,
+                              style: const TextStyle(
+                                fontFamily: 'Raleway',
+                                fontSize: 16,
                               ),
-                              Icon(_presenter.isExpand
-                                  ? Icons.arrow_upward_rounded
-                                  : Icons.arrow_downward_rounded),
-                            ],
-                          ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    _presenter.isExpand ? "Скрыть" : "Еще",
+                                    style: const TextStyle(
+                                        fontFamily: 'Raleway',
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(_presenter.isExpand
+                                      ? Icons.arrow_upward_rounded
+                                      : Icons.arrow_downward_rounded),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       const Divider(
@@ -171,7 +176,7 @@ class _CompanyProfileState extends State<CompanyProfile> {
                                     ),
                                   ),
                                   const Text(
-                                    ' KZT/час',
+                                    ' KZT/км',
                                     style: TextStyle(
                                       fontFamily: 'Raleway',
                                       fontSize: 20,
