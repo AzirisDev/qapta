@@ -11,7 +11,7 @@ class SettingTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onClick,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),

@@ -187,7 +187,7 @@ class _SubscribeScreenState extends State<SubscribeScreen> {
 }
 
 Widget subscribeTile(String title, void Function() onClick, CardModel? cardModel) {
-  return InkWell(
+  return GestureDetector(
     onTap: onClick,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
