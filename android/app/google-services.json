@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:25055003280:android:fd4f5e2f0b042c09b68e15",
+        "mobilesdk_app_id": "1:25055003280:android:68550cc1960e7c24b68e15",
         "android_client_info": {
-          "package_name": "com.example.ad_drive"
+          "package_name": "com.qapta"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "25055003280-j71pop26lq4qi6uss9pkp1j6aekgr77g.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.ad_drive",
-            "certificate_hash": "f9d9144f4bbfdc52092b306b038bfdd924a932c0"
-          }
-        },
         {
           "client_id": "25055003280-ntk37rrrpf241prcrc2vkeadm632ercu.apps.googleusercontent.com",
           "client_type": 3
@@ -29,7 +21,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBMQolYw_-RlKnWTPx0y84s-veOasVv5Z8"
+          "current_key": "AIzaSyBSSoGfbKi9RXFiQW1P1PxDWsmnyyciwZE"
         }
       ],
       "services": {
@@ -38,6 +30,13 @@
             {
               "client_id": "25055003280-ntk37rrrpf241prcrc2vkeadm632ercu.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "25055003280-a9itvoohc303t9q5da1jul6k4cd2govp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.adDrive"
+              }
             }
           ]
         }
