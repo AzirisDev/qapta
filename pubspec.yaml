@@ -59,6 +59,7 @@ dependencies:
   connectivity_plus: ^2.2.1
   flutter_local_notifications: ^9.3.2
   intl: ^0.17.0
+  app_tracking_transparency: ^2.0.2
 
 dev_dependencies:
   flutter_test:

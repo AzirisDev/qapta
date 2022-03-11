@@ -1,6 +1,7 @@
 import 'package:rxdart/rxdart.dart';
 import 'dart:io' show Platform;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 class LocalNotificationManager {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -28,6 +29,7 @@ class LocalNotificationManager {
   }
 
   Future<void> initializePlatform() async {
+    await AppTrackingTransparency.requestTrackingAuthorization();
     var initSettingsAndroid = const AndroidInitializationSettings('qapta_notification_icon');
     var initSettingsIOS = IOSInitializationSettings(
         requestAlertPermission: true,

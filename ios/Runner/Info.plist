@@ -37,15 +37,17 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>To verify the ride</string>
+	<string>Разрешите Qapta использовать камеру.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>location description</string>
+	<string>Разрешите Qapta получить доступ к вашей геолокации. Так мы будем тщательнее отслеживать ваш путь.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This application requires location services to work</string>
+	<string>Разрешите Qapta получить доступ к вашей геолокации. Так мы будем тщательнее отслеживать ваш путь.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application requires location services to work</string>
+	<string>Разрешите Qapta получить доступ к вашей геолокации. Так мы будем тщательнее отслеживать ваш путь.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs photo to verification</string>
+	<string>Qapta нужен доступ к фотографиям, чтобы перенапрвить ваши сфотографированные данные к нам.</string>
+	<key>NSUserTrackingUsageDescription</key>
+    <string>Разрешите Qapta получить доступа к данным, связанным с приложением, для отслеживания вашего устройства.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
