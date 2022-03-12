@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.adDrive.qapta</string>
+			<string>com.qapta</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>app-1-25055003280-ios-4ce57d15c03721bab68e15</string>
+				<string>app-1-25055003280-ios-6c9bf87635dc364cb68e15</string>
 			</array>
 		</dict>
 		<dict/>
@@ -47,7 +47,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Qapta нужен доступ к фотографиям, чтобы перенапрвить ваши сфотографированные данные к нам.</string>
 	<key>NSUserTrackingUsageDescription</key>
-    <string>Разрешите Qapta получить доступа к данным, связанным с приложением, для отслеживания вашего устройства.</string>
+	<string>Разрешите Qapta получить доступа к данным, связанным с приложением, для отслеживания вашего устройства.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
