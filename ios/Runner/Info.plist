@@ -37,7 +37,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Разрешите Qapta использовать камеру.</string>
+	<string>Вам нужно сфотографировать ваши данные и машину для дальней работы.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Разрешите Qapta получить доступ к вашей геолокации. Так мы будем тщательнее отслеживать ваш путь.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -47,7 +47,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Qapta нужен доступ к фотографиям, чтобы перенапрвить ваши сфотографированные данные к нам.</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Разрешите Qapta получить доступа к данным, связанным с приложением, для отслеживания вашего устройства.</string>
+	<string>Это поможет нам предлагать кампании с большей точностью соответствия.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
