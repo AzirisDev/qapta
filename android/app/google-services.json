@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "25055003280-ntuq23lin5gnjv7sj4h55p1vqm4e1kbo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qapta",
+            "certificate_hash": "f9d9144f4bbfdc52092b306b038bfdd924a932c0"
+          }
+        },
+        {
           "client_id": "25055003280-ntk37rrrpf241prcrc2vkeadm632ercu.apps.googleusercontent.com",
           "client_type": 3
         }

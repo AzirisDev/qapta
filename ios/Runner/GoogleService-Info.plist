@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>25055003280-mb2sg6d3ge8og441eo11r69gfs1arhgj.apps.googleusercontent.com</string>
+	<string>25055003280-buj2q7edqolj39o2e8a7shetsdtr2d5u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.25055003280-mb2sg6d3ge8og441eo11r69gfs1arhgj</string>
+	<string>com.googleusercontent.apps.25055003280-buj2q7edqolj39o2e8a7shetsdtr2d5u</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>25055003280-j71pop26lq4qi6uss9pkp1j6aekgr77g.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.adDrive.qapta</string>
+	<string>com.qapta</string>
 	<key>PROJECT_ID</key>
 	<string>ad-drive-fa549</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:25055003280:ios:4ce57d15c03721bab68e15</string>
+	<string>1:25055003280:ios:6c9bf87635dc364cb68e15</string>
 	<key>DATABASE_URL</key>
 	<string>https://ad-drive-fa549-default-rtdb.firebaseio.com</string>
 </dict>
