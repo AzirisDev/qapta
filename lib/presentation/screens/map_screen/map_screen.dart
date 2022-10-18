@@ -48,16 +48,16 @@ class _MapScreenState extends State<MapScreen> {
               body: Stack(
                 alignment: Alignment.center,
                 children: [
-                  _presenter.isJobAvailable
-                      ? GoogleMap(
+                  // _presenter.isJobAvailable
+                      GoogleMap(
                           zoomControlsEnabled: false,
                           mapType: MapType.hybrid,
                           initialCameraPosition: _presenter.initialLocation,
                           markers: Set.of(_presenter.marker != null ? [_presenter.marker!] : []),
                           onMapCreated: (controller) => _presenter.controller = controller,
                           polylines: _presenter.lines,
-                        )
-                      : const NotWorkingWidget(),
+                        ),
+                      // : const NotWorkingWidget(),
                   SlidingUpPanel(
                     minHeight: _presenter.isJobAvailable ? 180 : 0,
                     maxHeight: 440,
